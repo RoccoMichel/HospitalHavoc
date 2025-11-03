@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Items : MonoBehaviour
 {
-    public ScriptableObject itemInfo;
+    public ItemInfo itemInfo;
     void Update() {
         float sped = 100;
         if (transform.parent != null) {
