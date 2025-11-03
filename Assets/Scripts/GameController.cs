@@ -1,12 +1,41 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public bool debug;
+    public LevelDataObject levelData;
+    public static GameController gameController;
+    public List<GameObject> items;
+
+    [Header("Money")]
+    public bool drainMoney = true;
+    public float money;
+
+    private float time;
+    
+    [Space(40)] public bool debug;
+
+    private void Awake()
+    {
+        gameController = this;
+    }
+
+    private void Start()
+    {
+        if (levelData == null) { Debug.LogError("No Level Data assigned to GameController!"); Debug.Break(); }
+        money = levelData.startMoney;
+        time = levelData.GameLengthSeconds;
+    }
 
     private void Update()
     {
+        time -= Time.deltaTime;
+        money -= levelData.moneyDrainRate * Time.deltaTime;
+
+        if (money < 0) LevelFail();
+        if (time < 0) LevelClear();
+
         if (Input.GetKeyDown(KeyCode.F3)) debug = !debug;
     }
 
@@ -25,5 +54,26 @@ public class GameController : MonoBehaviour
         // Buttons
         if (GUI.Button(new Rect(10, 40, 100, 20), "Reload")) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         if (GUI.Button(new Rect(10, 70, 100, 20), "Exit")) Application.Quit(); ;
+    }
+
+
+    private void LevelEnd()
+    {
+        drainMoney = false;
+    }
+
+    /// <summary>
+    /// Level Failed by player(s)
+    /// </summary>
+    internal void LevelFail()
+    {
+        LevelEnd();
+    }
+    /// <summary>
+    /// Successful Level completion by player(s)
+    /// </summary>
+    internal void LevelClear()
+    {
+        LevelEnd();
     }
 }

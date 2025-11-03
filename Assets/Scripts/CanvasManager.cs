@@ -1,16 +1,20 @@
 using UnityEngine;
+using TMPro;
 
 public class CanvasManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("References")]
+    [SerializeField] private TMP_Text moneyDisplay;
+    private GameController gameController;
+
+
     void Start()
     {
-        
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        moneyDisplay.text = Mathf.Ceil(gameController.money).ToString();
     }
 }
