@@ -17,4 +17,10 @@ public class Interact : MonoBehaviour
     {
         GetComponent<SponeItem>().sponeItem();
     }
+
+    public void TryCure(PlayerController player)
+    {
+        if(player.currentHeldItem != null)
+            GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
+    }
 }
