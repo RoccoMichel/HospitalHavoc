@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemInfo : ScriptableObject {
     [Header("name/tag")]
     public string itemTag;
+    public GameObject item;
     [Header("setings")]
     public List<ItemInfo> ingrediants;
 }
