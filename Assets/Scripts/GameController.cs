@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Timeline.DirectorControlPlayable;
 
 public class GameController : MonoBehaviour
 {
@@ -10,9 +12,16 @@ public class GameController : MonoBehaviour
     private bool active = false;
 
     public List<GameObject> items;
+    public List<GameObject> interactables;
+
+    [Header("Stats")] // only public for debugging
+    public int deadPatientsCount;
+    public float averageCureTime = 0;
+    private float latestCureTime;
 
     [Space(40)] public bool debug;
 
+    private InputAction pauseAction;
     public static GameController gameController;
     internal CanvasManager canvasManager;
 
@@ -25,6 +34,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        pauseAction = InputSystem.actions.FindAction("Pause");
         if (levelData == null) { Debug.LogError("No Level Data assigned to GameController!"); Debug.Break(); }
 
         money = levelData.startMoney;
@@ -37,6 +47,13 @@ public class GameController : MonoBehaviour
 
         if (!active) return;
 
+        if (pauseAction.WasPressedThisFrame() && canvasManager.pauseMenu == null)
+        {
+            Pause();
+            canvasManager.pauseMenu = 
+                Instantiate((GameObject)Resources.Load("UI/Pause Menu"), canvasManager.gameObject.transform);
+        }
+
         time -= Time.deltaTime;
         money -= levelData.moneyDrainRate * Time.deltaTime;
 
@@ -44,6 +61,31 @@ public class GameController : MonoBehaviour
         if (time < 0) LevelClear();
 
     }
+
+    public void AddMoney(float amount)
+    {
+        money += amount;
+    }
+
+    public void RemoveMoney(float amount)
+    {
+        money -= amount;
+    }
+
+    public void PatientHeal(Patient patient)
+    {
+        AddMoney(patient.value);
+        if (averageCureTime == 0) averageCureTime = levelData.GameLengthSeconds - time;
+        else averageCureTime = (averageCureTime + latestCureTime) / 2;
+        latestCureTime = time;
+    }
+
+    public void PatientDie(Patient patient)
+    {
+        RemoveMoney(patient.value);
+        deadPatientsCount++;
+    }
+
     public void LevelStart()
     {
         active = true;
@@ -67,13 +109,14 @@ public class GameController : MonoBehaviour
     /// </summary>
     internal void LevelClear()
     {
-        int score = 0;
         char[] ranks = { 'D', 'C', 'B', 'A', 'S' };
         string rank = string.Empty;
 
         LevelEnd();
 
         // Calculate score
+        if (averageCureTime <= 0) averageCureTime = 1;
+        float score = (money / averageCureTime) - (deadPatientsCount * levelData.DeadPatientScorePenalty);
 
         Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
 
@@ -107,6 +150,16 @@ public class GameController : MonoBehaviour
         // Buttons
         if (GUI.Button(new Rect(10, 40, 100, 20), "Reload")) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         if (GUI.Button(new Rect(10, 70, 100, 20), "Exit")) Application.Quit(); ;
+    }
+
+    public void Pause()
+    {
+        active = false;
+    }
+
+    public void UnPause()
+    {
+        active = true;
     }
 
     private void Reset()

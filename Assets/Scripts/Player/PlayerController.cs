@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float pickUpFOV;
     public float pickUpRange;
     public Transform hand;
-    public GameObject currentHeldItem;
+    public Items currentHeldItem;
 
     void Update()
     {
@@ -29,12 +29,12 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHeldItem == null)
         {
-            GameObject itemToPickUp = GetClosestObject();
+            GameObject itemToPickUp = GetClosestObject(GameController.gameController.items);
 
             if (itemToPickUp != null)
             {
                 itemToPickUp.transform.parent = hand;
-                currentHeldItem = itemToPickUp;
+                currentHeldItem = itemToPickUp.GetComponent<Items>();
 
                 GameController.gameController.items.Remove(itemToPickUp);
             }
@@ -43,7 +43,12 @@ public class PlayerController : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext obj)
     {
+        GameObject interactable = GetClosestObject(GameController.gameController.interactables);
 
+        if (interactable != null)
+        {
+            interactable.GetComponent<Interact>().onInteract.Invoke(this);
+        }
     }
 
     void Awake()
@@ -51,12 +56,12 @@ public class PlayerController : MonoBehaviour
         cc = GetComponent<CharacterController>();
     }
 
-    public GameObject GetClosestObject()
+    public GameObject GetClosestObject(List<GameObject> search)
     {
         GameObject closest = null;
         float closestDist = pickUpRange;
 
-        foreach (GameObject item in GameController.gameController.items)
+        foreach (GameObject item in search)
         {
             if (Vector3.Dot(transform.forward, (item.transform.position - transform.position).normalized) >= Mathf.Cos(0.5f * pickUpFOV * Mathf.Deg2Rad))
             {

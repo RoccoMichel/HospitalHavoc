@@ -7,7 +7,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private TMP_Text moneyDisplay;
     [SerializeField] private TMP_Text timeDisplay;
     private GameController gameController;
-
+    internal GameObject pauseMenu;
 
     void Start()
     {
