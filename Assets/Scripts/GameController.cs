@@ -75,6 +75,8 @@ public class GameController : MonoBehaviour
 
         // Calculate score
 
+        Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
+
         if (ranks.Length != levelData.rankRequirements.Length) {
             Debug.LogError("Different amounts of Ranks in GameController and LevelData!\t"
                 + $"GameController: {ranks.Length} Elements | LevelData: {levelData.rankRequirements.Length} Elements");
