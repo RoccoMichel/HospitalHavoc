@@ -12,4 +12,9 @@ public class Interact : MonoBehaviour
         else
             Coldrin.inctanse.MixIngedents();
     }
+
+    public void SpawnItem()
+    {
+        GetComponent<SponeItem>().sponeItem();
+    }
 }
