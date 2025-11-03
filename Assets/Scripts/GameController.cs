@@ -10,6 +10,11 @@ public class GameController : MonoBehaviour
     private bool active = false;
 
     public List<GameObject> items;
+    public List<GameObject> interactables;
+
+    [Header("Stats")]
+    public int deadPatientsCount;
+    public float averageCureTime;
 
     [Space(40)] public bool debug;
 
@@ -44,6 +49,17 @@ public class GameController : MonoBehaviour
         if (time < 0) LevelClear();
 
     }
+
+    public void AddMoney(float amount)
+    {
+
+    }
+
+    public void RemoveMoney(float amount)
+    {
+
+    }
+
     public void LevelStart()
     {
         active = true;
