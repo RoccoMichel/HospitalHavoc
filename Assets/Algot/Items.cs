@@ -8,7 +8,7 @@ public class Items : MonoBehaviour
     void Update() {
         float sped = 100;
         if (transform.parent != null) {
-            transform.position = Vector3.Lerp(transform.position, transform.parent.position + transform.parent.forward, Time.deltaTime * sped);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * sped);
         }
     }
 }
