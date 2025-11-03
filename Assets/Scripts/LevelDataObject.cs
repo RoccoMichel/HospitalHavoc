@@ -7,6 +7,7 @@ public class LevelDataObject : ScriptableObject
     public int startMoney = 100;
     [Tooltip("In Seconds")] public float moneyDrainRate = 0.5f;
     [Range(0.001f, 1)] public float newPatientRate = 0.05f;
+    public float DeadPatientScorePenalty = 50;
     [Tooltip("IN ORDER: D, C, B, A, S")]
     public int[] rankRequirements = { 0, 50, 80, 120, 150 };
 }
