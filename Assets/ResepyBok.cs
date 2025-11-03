@@ -16,6 +16,5 @@ public class ResepyBok : MonoBehaviour
         upadeVisholes();
     }
     public static void upadeVisholes() { 
-        
     }
 }
