@@ -3,10 +3,11 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PashentMan : MonoBehaviour
-{
+public class PashentMan : MonoBehaviour {
     public Transform[] queuePonts;
     public Gradient queueColor;
+    public static List<GameObject> pashents;
+
     void Start() {
         queuePonts = transform.GetComponentsInChildren<Transform>();
         queuePonts = queuePonts.ToList().GetRange(1, queuePonts.Length).ToArray();
