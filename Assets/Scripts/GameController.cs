@@ -5,38 +5,89 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public LevelDataObject levelData;
-    public static GameController gameController;
+    public float money;
+    public float time;
+    private bool active = false;
+
     public List<GameObject> items;
 
-    [Header("Money")]
-    public bool drainMoney = true;
-    public float money;
-
-    private float time;
-    
     [Space(40)] public bool debug;
+
+    public static GameController gameController;
+    internal CanvasManager canvasManager;
+
 
     private void Awake()
     {
         gameController = this;
+        active = false;
     }
 
     private void Start()
     {
         if (levelData == null) { Debug.LogError("No Level Data assigned to GameController!"); Debug.Break(); }
+
         money = levelData.startMoney;
         time = levelData.GameLengthSeconds;
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F3)) debug = !debug;
+
+        if (!active) return;
+
         time -= Time.deltaTime;
         money -= levelData.moneyDrainRate * Time.deltaTime;
 
         if (money < 0) LevelFail();
         if (time < 0) LevelClear();
 
-        if (Input.GetKeyDown(KeyCode.F3)) debug = !debug;
+    }
+    public void LevelStart()
+    {
+        active = true;
+    }
+    private void LevelEnd()
+    {
+        active = false;
+    }
+
+    /// <summary>
+    /// Level Failed by player(s)
+    /// </summary>
+    internal void LevelFail()
+    {
+        LevelEnd();
+
+        Instantiate((GameObject)Resources.Load("UI/Level End Menu"), canvasManager.gameObject.transform);
+    }
+    /// <summary>
+    /// Successful Level completion by player(s)
+    /// </summary>
+    internal void LevelClear()
+    {
+        int score = 0;
+        char[] ranks = { 'D', 'C', 'B', 'A', 'S' };
+        string rank = string.Empty;
+
+        LevelEnd();
+
+        // Calculate score
+
+        if (ranks.Length != levelData.rankRequirements.Length) {
+            Debug.LogError("Different amounts of Ranks in GameController and LevelData!\t"
+                + $"GameController: {ranks.Length} Elements | LevelData: {levelData.rankRequirements.Length} Elements");
+            return;
+        }
+
+        for (int i = 0; i < levelData.rankRequirements.Length; i++)
+        {
+            rank = ranks[i].ToString();
+            if (score < levelData.rankRequirements[i]) break;
+        }
+        Debug.Log($"Player(s) achieved {rank} rank with a score of: {score}!");
+        PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", "A");
     }
 
     private void OnGUI()
@@ -56,24 +107,8 @@ public class GameController : MonoBehaviour
         if (GUI.Button(new Rect(10, 70, 100, 20), "Exit")) Application.Quit(); ;
     }
 
-
-    private void LevelEnd()
+    private void Reset()
     {
-        drainMoney = false;
-    }
-
-    /// <summary>
-    /// Level Failed by player(s)
-    /// </summary>
-    internal void LevelFail()
-    {
-        LevelEnd();
-    }
-    /// <summary>
-    /// Successful Level completion by player(s)
-    /// </summary>
-    internal void LevelClear()
-    {
-        LevelEnd();
+        gameObject.tag = "GameController";
     }
 }
