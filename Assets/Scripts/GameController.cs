@@ -52,12 +52,23 @@ public class GameController : MonoBehaviour
 
     public void AddMoney(float amount)
     {
-
+        money += amount;
     }
 
     public void RemoveMoney(float amount)
     {
+        money -= amount;
+    }
 
+    public void PatientHeal(Patient patient)
+    {
+        AddMoney(patient.value);
+    }
+
+    public void PatientDie(Patient patient)
+    {
+        RemoveMoney(patient.value);
+        deadPatientsCount++;
     }
 
     public void LevelStart()
