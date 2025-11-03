@@ -3,6 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuLogic : MonoBehaviour
 {
+    private GameController gameController;
+
+    private void Start()
+    {
+        try { gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>(); }
+        catch { Debug.LogError("Failed to Start Level because Scene is missing the GameController!"); }
+    }
     public void LoadSceneByString(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -30,8 +37,17 @@ public class MenuLogic : MonoBehaviour
 
     public void StartLevel()
     {
-        try { GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().LevelStart(); } 
-        catch { Debug.LogError("Failed to Start Level because Scene is missing the GameController!"); }
+        gameController.LevelStart();
+    }
+
+    public void Pause()
+    {
+        gameController.Pause();
+    }
+
+    public void UnPause()
+    {
+        gameController.UnPause();
     }
 
     public void ExitGame()
