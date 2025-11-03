@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed;
     Vector2 moveDir;
 
+    [Tooltip("0 = up, 1 = right, 2 = down, 3 = left")]
+    public List<GameObject> moveDirObjects;
+
     [Header("Item Settings")]
     public float pickUpFOV;
     public float pickUpRange;
@@ -23,6 +26,55 @@ public class PlayerController : MonoBehaviour
     public void SetMoveDir(InputAction.CallbackContext obj)
     {
         moveDir = obj.ReadValue<Vector2>();
+
+        float yRot = 0;
+
+        // up, down, left or right
+        if (moveDir.x > 0 && Mathf.Abs(moveDir.y) < 0.25f)
+            ActivateDirObj(1);
+        else if (moveDir.x < 0 && Mathf.Abs(moveDir.y) < 0.25f)
+            ActivateDirObj(3);
+        else if (Mathf.Abs(moveDir.x) < 0.25f && moveDir.y > 0)
+            ActivateDirObj(0);
+        else if (Mathf.Abs(moveDir.x) < 0.25f && moveDir.y < 0)
+            ActivateDirObj(2);
+
+        //diaginol
+        else if (moveDir.x > 0 && moveDir.y > 0)
+        {
+            yRot = 45;
+            ActivateDirObj(moveDir.x > moveDir.y ? 1 : 0);
+        }
+        else if (moveDir.x > 0 && moveDir.y < 0)
+        {
+            yRot = -45;
+            ActivateDirObj(moveDir.x > -moveDir.y ? 1 : 2);
+        }
+        else if (moveDir.x < 0 && moveDir.y > 0)
+        {
+            yRot = -45;
+            ActivateDirObj(-moveDir.x > moveDir.y ? 3 : 0);
+        }
+        else if (moveDir.x < 0 && moveDir.y < 0)
+        {
+            yRot = 45;
+            ActivateDirObj(moveDir.x > -moveDir.y ? 3 : 2);
+        }
+
+        transform.rotation = Quaternion.Euler(0, yRot, 0);
+
+        moveDir = Vector2.ClampMagnitude(moveDir, 1);
+    }
+
+    public void ActivateDirObj(int index)
+    {
+        foreach (GameObject obj in moveDirObjects)
+        {
+            if(obj != moveDirObjects[index])
+                obj.SetActive(false);
+        }
+
+        moveDirObjects[index].SetActive(true);
     }
 
     public void PickUp(InputAction.CallbackContext obj)

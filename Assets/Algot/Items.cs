@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -10,5 +11,10 @@ public class Items : MonoBehaviour
         if (transform.parent != null) {
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * sped);
         }
+    }
+
+    void Start()
+    {
+
     }
 }
