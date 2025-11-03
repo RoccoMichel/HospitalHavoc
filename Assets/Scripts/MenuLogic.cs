@@ -8,7 +8,7 @@ public class MenuLogic : MonoBehaviour
     private void Start()
     {
         try { gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>(); }
-        catch { Debug.LogError("Failed to Start Level because Scene is missing the GameController!"); }
+        catch { Debug.LogWarning("Failed to get a GameController from Scene!"); }
     }
     public void LoadSceneByString(string sceneName)
     {

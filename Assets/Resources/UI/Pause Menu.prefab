@@ -172,10 +172,10 @@ RectTransform:
   - {fileID: 7209274357007903931}
   m_Father: {fileID: 717347980584952873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.120000005}
-  m_AnchoredPosition: {x: 0, y: 130}
-  m_SizeDelta: {x: -108.4357, y: -7.178}
+  m_AnchorMin: {x: 0, y: 0.335}
+  m_AnchorMax: {x: 1, y: 0.43250003}
+  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_SizeDelta: {x: -108.4357, y: 1.821991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2431915461521672538
 CanvasRenderer:
@@ -676,16 +676,36 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4719185267140573006, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4719185267140573006, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.64750004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4719185267140573006, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4719185267140573006, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -108.4357
+      objectReference: {fileID: 0}
+    - target: {fileID: 4719185267140573006, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -0.17800903
+      objectReference: {fileID: 0}
+    - target: {fileID: 4719185267140573006, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4719185267140573006, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 215
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5180980884684023573, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_Name
-      value: Base Menu Variant
+      value: Pause Menu
       objectReference: {fileID: 0}
     - target: {fileID: 5912133918020412346, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_Pivot.x
