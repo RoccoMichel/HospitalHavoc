@@ -15,6 +15,6 @@ public class Items : MonoBehaviour
 
     void Start()
     {
-
+        GameController.gameController.items.Add(gameObject);
     }
 }
