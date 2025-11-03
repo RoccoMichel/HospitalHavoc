@@ -22,5 +22,9 @@ public class Patient : MonoBehaviour
             }
     }
 
+    void OnDestroy() {
+        PashentMan.pashents.Remove(gameObject);
+    }
+
 
 }

@@ -11,8 +11,8 @@ public class GameController : MonoBehaviour
     public float time;
     private bool active = false;
 
-    [HideInInspector] public List<GameObject> items;
-    [HideInInspector] public List<GameObject> interactables;
+    /*[HideInInspector]*/ public List<GameObject> items;
+    /*[HideInInspector]*/ public List<GameObject> interactables;
 
     [Header("Stats")] // only public for debugging
     public int deadPatientsCount;

@@ -6,14 +6,9 @@ public class Coldrin : MonoBehaviour
 {
     public static Coldrin inctanse;
 
-    public List<ItemInfo> allPosibolItems; // fore ez�er item adishen
-
     public List<ItemInfo> AllPosibolItems; // list of all posibol items
     public List<ItemInfo> Ingerdens = new List<ItemInfo>(); // all the items curenty in the coldrin
 
-    void Start() {
-        AllPosibolItems = allPosibolItems;
-    }
     // adds an igedent to the coldrin
     public void AddIngedent(ItemInfo info) {
         Ingerdens.Add(info);

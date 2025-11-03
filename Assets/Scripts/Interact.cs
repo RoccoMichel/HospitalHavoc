@@ -8,13 +8,18 @@ public class Interact : MonoBehaviour
     public void ColdrinInteract(PlayerController player)
     {
         if (player.currentHeldItem != null)
+        {
             Coldrin.inctanse.AddIngedent(player.currentHeldItem.itemInfo);
+            GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
+            Destroy(player.currentHeldItem);
+        }
         else
             Coldrin.inctanse.MixIngedents();
     }
 
     public void SpawnItem()
     {
+        Debug.Log("Spone item");
         GetComponent<SponeItem>().sponeItem();
     }
 

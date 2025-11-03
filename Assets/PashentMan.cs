@@ -6,11 +6,11 @@ using UnityEngine;
 public class PashentMan : MonoBehaviour {
     public Transform[] queuePonts;
     public Gradient queueColor;
-    public static List<GameObject> pashents;
+    public static List<GameObject> pashents = new List<GameObject>();
 
     void Start() {
-        queuePonts = transform.GetComponentsInChildren<Transform>();
-        queuePonts = queuePonts.ToList().GetRange(1, queuePonts.Length).ToArray();
+        //queuePonts = transform.GetComponentsInChildren<Transform>();
+        //queuePonts = queuePonts.ToList().GetRange(2, queuePonts.Length).ToArray();
     }
     void OnDrawGizmos(){
 
@@ -23,6 +23,12 @@ public class PashentMan : MonoBehaviour {
         }
     }
     void Update() {
-        
+        for (int i = 0; i < pashents.Count; i++) {
+            if (i < queuePonts.Length) 
+                pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts[i].position, Time.deltaTime * 25);
+
+            if (i >= queuePonts.Length)
+                pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts.Last().position, Time.deltaTime * 25);
+        }
     }
 }

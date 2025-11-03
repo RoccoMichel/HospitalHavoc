@@ -118,6 +118,8 @@ public class PlayerController : MonoBehaviour
 
         if (interactable != null)
         {
+            Debug.Log("Interacted");
+
             interactable.GetComponent<Interact>().onInteract.Invoke(this);
         }
     }
