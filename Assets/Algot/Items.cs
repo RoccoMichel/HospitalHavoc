@@ -1,0 +1,12 @@
+using UnityEngine;
+
+public class Items : MonoBehaviour
+{
+    public ScriptableObject itemInfo;
+    void Update() {
+        float sped = 100;
+        if (transform.parent != null) {
+            transform.position = Vector3.Lerp(transform.position, transform.parent.position + transform.parent.forward, Time.deltaTime * sped);
+        }
+    }
+}
