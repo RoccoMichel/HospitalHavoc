@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
 
     [Header("Walking")]
-    public float speed = 5;
+    public float speed = 2;
     [SerializeField] private float accelerationSpeed = 4;
     [SerializeField] private float decelerationSpeed = 2;
 
