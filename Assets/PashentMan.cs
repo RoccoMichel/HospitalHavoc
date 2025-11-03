@@ -22,4 +22,7 @@ public class PashentMan : MonoBehaviour {
                 Gizmos.DrawLine(queuePonts[i].position, queuePonts[i-1].position);
         }
     }
+    void Update() {
+        
+    }
 }
