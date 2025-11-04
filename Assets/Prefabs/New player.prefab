@@ -827,8 +827,8 @@ MonoBehaviour:
   - {fileID: 196391191701905495}
   - {fileID: 5884251834431689801}
   - {fileID: 8205452324654580394}
-  pickUpFOV: 90
-  pickUpRange: 2
+  pickUpFOV: 180
+  pickUpRange: 4
   throwForce: 50
   hand: {fileID: 5251872066316229118}
   currentHeldItem: {fileID: 0}
