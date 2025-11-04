@@ -30,13 +30,13 @@ public class Patient : MonoBehaviour
         for (int i = 0; i < sikneses.Count; i++) 
             if (sikneses[i].cure == posibolCure) { 
                 sikneses.RemoveAt(i);
+                if (sikneses.Count == 0)
+                {
+                    GameController.gameController.PatientHeal(this);
+                    Destroy(gameObject);
+                }
                 return;
             }
-
-        if (sikneses.Count == 0) {
-            GameController.gameController.PatientHeal(this);
-            Destroy(gameObject);
-        }
     }
 
     void OnDestroy() {

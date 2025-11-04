@@ -35,14 +35,16 @@ public class Interact : MonoBehaviour
 
     public void TryCure(PlayerController player)
     {
+        Debug.Log("da");
         if(player.currentHeldItem != null)
             GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
 
+        GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
         Destroy(player.currentHeldItem.gameObject);
         player.currentHeldItem = null;
     }
 
-    void OnValidate()
+    void Awake()
     {
         if (GameController.gameController != null)
         {

@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
             if (interactable != null)
             {
-                global::Interact theObject = interactable.GetComponent<Interact>();
+                Interact theObject = interactable.GetComponent<Interact>();
 
                 if (theObject.needsEmptyHand)
                 {
