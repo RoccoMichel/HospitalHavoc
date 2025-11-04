@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
         {
             pickup.transform.parent = hand;
             currentHeldItem = pickup.GetComponent<Items>();
+            currentHeldItem.owner = this;
             GameController.gameController.items.Remove(pickup);
         }
     }

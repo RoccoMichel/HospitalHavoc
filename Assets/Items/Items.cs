@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class Items : MonoBehaviour
     [Expandable]
     public ItemInfo itemInfo;
     public Rigidbody rb;
+
+    public PlayerController owner;
+
     void Update() {
         float sped = 100;
         if (transform.parent != null) {
@@ -16,6 +20,19 @@ public class Items : MonoBehaviour
         else rb.isKinematic = false;
 
         transform.LookAt(Camera.main.transform);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (transform.parent == null)
+        {
+            if(other.gameObject.CompareTag("Player"))
+                other.gameObject.GetComponent<PlayerController>().PickUpChosenItem(gameObject);
+            // else if ()
+            // {
+            //
+            // }
+        }
     }
 
     void Start()
@@ -28,5 +45,16 @@ public class Items : MonoBehaviour
 
         if(!isInList)
             GameController.gameController.items.Add(gameObject);
+    }
+
+    public bool CheckIfInList(List<GameObject> list, GameObject objectInList)
+    {
+        bool isInList = false;
+
+        foreach (GameObject obj in list)
+            if (obj == objectInList)
+                isInList = true;
+
+        return isInList;
     }
 }
