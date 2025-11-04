@@ -6,7 +6,7 @@ public class Interact : MonoBehaviour
 {
     public UnityEvent<PlayerController> onInteract;
 
-    public bool needsEmptyHand = true;
+    public bool needsEmptyHand = true, itemCanInteract = false;
 
     public void ColdrinInteract(PlayerController player)
     {
