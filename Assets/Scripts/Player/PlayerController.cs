@@ -81,7 +81,14 @@ public class PlayerController : MonoBehaviour
                     GameController.gameController.items.Remove(itemToPickUp);
                 }
             }
-            else
+        }
+    }
+
+    public void ThrowItem(InputAction.CallbackContext obj)
+    {
+        if (obj.started)
+        {
+            if (currentHeldItem != null)
             {
                 currentHeldItem.transform.SetParent(null);
                 currentHeldItem.rb.isKinematic = false;
