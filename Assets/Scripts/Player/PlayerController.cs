@@ -85,9 +85,15 @@ public class PlayerController : MonoBehaviour
 
         if (interactable != null)
         {
-            Debug.Log("Interacted");
+            global::Interact theObject = interactable.GetComponent<Interact>();
 
-            interactable.GetComponent<Interact>().onInteract.Invoke(this);
+            if (theObject.needsEmptyHand)
+            {
+                if(currentHeldItem == null)
+                    theObject.onInteract.Invoke(this);
+            }
+            else
+                theObject.onInteract.Invoke(this);
         }
     }
 
