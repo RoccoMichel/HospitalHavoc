@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,5 +28,11 @@ public class Interact : MonoBehaviour
     {
         if(player.currentHeldItem != null)
             GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
+    }
+
+    void OnValidate()
+    {
+        if(GameController.gameController != null)
+            GameController.gameController.interactables.Add(gameObject);
     }
 }
