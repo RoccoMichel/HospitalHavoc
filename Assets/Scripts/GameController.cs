@@ -28,7 +28,8 @@ public class GameController : MonoBehaviour
     public static GameController gameController;
     internal CanvasManager canvasManager;
 
-
+    // nextPasent spoe time
+    float nextPashntSpontTime = 0;
     private void Awake()
     {
         gameController = this;
@@ -42,6 +43,8 @@ public class GameController : MonoBehaviour
 
         money = levelData.startMoney;
         time = levelData.GameLengthSeconds;
+        nextPashntSpontTime = time - 1/levelData.newPatientRate;
+
     }
 
     private void Update()
@@ -64,10 +67,11 @@ public class GameController : MonoBehaviour
         if (time < 0) LevelClear();
 
         // spone a pashent "X" tims a sek
-        if (time % (1f / levelData.newPatientRate) == 0)
-        {
+        if (time < nextPashntSpontTime) {
             Debug.Log("Spone pashent");
             Instantiate(pashenst);
+            nextPashntSpontTime = time - 1 / levelData.newPatientRate;
+
         }
     }
 

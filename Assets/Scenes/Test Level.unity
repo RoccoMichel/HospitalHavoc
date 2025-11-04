@@ -7158,6 +7158,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2787402074652138179, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+      propertyPath: itemCanInteract
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
       propertyPath: m_Name
       value: Cauldron
