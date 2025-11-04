@@ -12,6 +12,7 @@ public class Coldrin : MonoBehaviour
     // adds an igedent to the coldrin
     public void AddIngedent(ItemInfo info) {
         Ingerdens.Add(info);
+
     }
 
     // mixes all ingedenst that ar in the coldrin
