@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     public float time;
     public bool active = false;
 
-    [Header("Bakend stats")]
+    [Header("Backend stats")]
     public List<GameObject> items;
     public List<GameObject> interactables;
     public List<Siknes> sikneses;
@@ -24,12 +24,11 @@ public class GameController : MonoBehaviour
 
     [Space(40)] public bool debug;
 
-    private InputAction pauseAction;
     public static GameController gameController;
+    private InputAction pauseAction;
     internal CanvasManager canvasManager;
+    private float nextPatientSpawnTime = 0;
 
-    // nextPasent spoe time
-    float nextPashntSpontTime = 0;
     private void Awake()
     {
         gameController = this;
@@ -43,7 +42,7 @@ public class GameController : MonoBehaviour
 
         money = levelData.startMoney;
         time = levelData.GameLengthSeconds;
-        nextPashntSpontTime = time - 1/levelData.newPatientRate;
+        nextPatientSpawnTime = time - 1/levelData.newPatientRate;
 
     }
 
@@ -54,11 +53,7 @@ public class GameController : MonoBehaviour
         if (!active) return;
 
         if (pauseAction.WasPressedThisFrame() && canvasManager.pauseMenu == null)
-        {
-            Pause();
-            canvasManager.pauseMenu = 
-                Instantiate((GameObject)Resources.Load("UI/Pause Menu"), canvasManager.gameObject.transform);
-        }
+            PauseMenu();
 
         time -= Time.deltaTime;
         money -= levelData.moneyDrainRate * Time.deltaTime;
@@ -66,13 +61,19 @@ public class GameController : MonoBehaviour
         if (money < 0) LevelFail();
         if (time < 0) LevelClear();
 
-        // spone a pashent "X" tims a sek
-        if (time < nextPashntSpontTime) {
-            Debug.Log("Spone pashent");
+        // Spawn a Patient "X" times a sec
+        if (time < nextPatientSpawnTime) {
+            Debug.Log("Spawn Patient");
             Instantiate(pashenst);
-            nextPashntSpontTime = time - 1 / levelData.newPatientRate;
-
+            nextPatientSpawnTime = time - 1 / levelData.newPatientRate;
         }
+    }
+
+    public static void PauseMenu()
+    {
+        gameController.active = false;
+        gameController.canvasManager.pauseMenu = 
+            Instantiate((GameObject)Resources.Load("UI/Pause Menu"), gameController.canvasManager.gameObject.transform);
     }
 
     public void AddMoney(float amount)
@@ -146,8 +147,6 @@ public class GameController : MonoBehaviour
         }
 
         StartCoroutine(ScoreDisplay(menu, rank));
-
-// DO NOT MOVE THE STRING WITH TABS OR SPACES!
 
         Debug.Log($"Player(s) achieved {rank} rank with a score of: {score}!");
         PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", "A");
