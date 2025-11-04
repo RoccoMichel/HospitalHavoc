@@ -94,19 +94,22 @@ public class PlayerController : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext obj)
     {
-        GameObject interactable = GetClosestObject(GameController.gameController.interactables);
-
-        if (interactable != null)
+        if (obj.started)
         {
-            global::Interact theObject = interactable.GetComponent<Interact>();
+            GameObject interactable = GetClosestObject(GameController.gameController.interactables);
 
-            if (theObject.needsEmptyHand)
+            if (interactable != null)
             {
-                if(currentHeldItem == null)
+                global::Interact theObject = interactable.GetComponent<Interact>();
+
+                if (theObject.needsEmptyHand)
+                {
+                    if (currentHeldItem == null)
+                        theObject.onInteract.Invoke(this);
+                }
+                else
                     theObject.onInteract.Invoke(this);
             }
-            else
-                theObject.onInteract.Invoke(this);
         }
     }
 
