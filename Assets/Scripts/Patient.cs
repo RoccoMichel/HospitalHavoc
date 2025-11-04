@@ -7,6 +7,7 @@ public class Patient : MonoBehaviour
     internal float value = 0;
     public List<Siknes> sikneses;
     public float hellf = 100;
+    public ParticleSystem munyRane;
     void Awake() {
         setUp();
         for (int i = 0; i < sikneses.Count; i++) 
@@ -26,15 +27,16 @@ public class Patient : MonoBehaviour
         }
     }
     public void TyrCure(ItemInfo posibolCure) {
-        Debug.Log("Tyrd cure");
         for (int i = 0; i < sikneses.Count; i++) 
             if (sikneses[i].cure == posibolCure) { 
                 sikneses.RemoveAt(i);
-                if (sikneses.Count == 0)
+                if (sikneses.Count == 1)
                 {
                     GameController.gameController.PatientHeal(this);
-                    Destroy(gameObject);
+                    Destroy(gameObject, 0.5f);
                 }
+                munyRane.Play();
+
                 return;
             }
     }
