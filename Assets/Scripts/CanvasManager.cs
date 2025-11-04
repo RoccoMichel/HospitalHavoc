@@ -24,7 +24,7 @@ public class CanvasManager : MonoBehaviour
         moneyDisplay.text = '$' + Mathf.Ceil(gameController.money).ToString();
     }
 
-    private string GetTimerText(float time)
+    public static string GetTimerText(float time)
     {
         if (time < 0) return "0:00";
 

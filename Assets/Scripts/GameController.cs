@@ -1,9 +1,8 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Timeline.DirectorControlPlayable;
 
 public class GameController : MonoBehaviour
 {
@@ -12,8 +11,8 @@ public class GameController : MonoBehaviour
     public float time;
     private bool active = false;
 
-    /*[HideInInspector]*/ public List<GameObject> items;
-    /*[HideInInspector]*/ public List<GameObject> interactables;
+    public List<GameObject> items;
+    public List<GameObject> interactables;
 
     [Header("Stats")] // only public for debugging
     public int deadPatientsCount;
@@ -116,10 +115,10 @@ public class GameController : MonoBehaviour
         LevelEnd();
 
         // Calculate score
-        if (averageCureTime <= 0) averageCureTime = 1;
+        if (averageCureTime <= 0) averageCureTime = levelData.GameLengthSeconds;
         float score = (money / averageCureTime) - (deadPatientsCount * levelData.DeadPatientScorePenalty);
 
-        Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
+        GameObject menu = Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
 
         if (ranks.Length != levelData.rankRequirements.Length) {
             Debug.LogError("Different amounts of Ranks in GameController and LevelData!\t"
@@ -132,8 +131,41 @@ public class GameController : MonoBehaviour
             rank = ranks[i].ToString();
             if (score < levelData.rankRequirements[i]) break;
         }
+
+        StartCoroutine(ScoreDisplay(menu, rank));
+
+// DO NOT MOVE THE STRING WITH TABS OR SPACES!
+
         Debug.Log($"Player(s) achieved {rank} rank with a score of: {score}!");
         PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", "A");
+    }
+
+    private IEnumerator ScoreDisplay(GameObject display, string rank)
+    {
+        float delayTime = 0.5f;
+        TMPro.TMP_Text description = display.transform.Find("Description").GetComponent<TMPro.TMP_Text>();
+        UnityEngine.UI.Image rankDisplay = display.transform.Find("Rank").GetComponent<UnityEngine.UI.Image>();
+
+        rankDisplay.enabled = false;
+        description.text = string.Empty;
+
+        yield return new WaitForSeconds(delayTime);
+        description.text += $"Money: ${Mathf.Ceil(money)}\n";
+
+        yield return new WaitForSeconds(delayTime);
+        description.text += $"Dead Patients: x{deadPatientsCount}\n";
+
+        yield return new WaitForSeconds(delayTime);
+        description.text += $"Avg. Cure Time: {CanvasManager.GetTimerText(averageCureTime)}\n\n";
+
+        yield return new WaitForSeconds(delayTime);
+        description.text += $"Rank:";
+
+        yield return new WaitForSeconds(delayTime * 2);
+        rankDisplay.enabled = true;
+        rankDisplay.sprite = Resources.Load<Sprite>("Ranks/" + rank);
+
+        yield break;
     }
 
     private void OnGUI()
