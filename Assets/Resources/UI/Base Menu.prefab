@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd810d9a29e9f0c448ded6b416df076a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstSelectedOverride: {fileID: 8761920871781116810}
 --- !u!1 &6093803653486639904
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

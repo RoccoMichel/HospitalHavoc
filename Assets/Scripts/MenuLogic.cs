@@ -1,14 +1,22 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MenuLogic : MonoBehaviour
 {
+    [SerializeField] GameObject firstSelectedOverride;
     private GameController gameController;
+    private EventSystem eventSystem;
 
     private void Start()
     {
         try { gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>(); }
         catch { Debug.LogWarning("Failed to get a GameController from Scene!"); }
+        try { eventSystem = FindFirstObjectByType<EventSystem>().GetComponent<EventSystem>(); }
+        catch { eventSystem = gameObject.AddComponent<EventSystem>().GetComponent<EventSystem>();
+            gameObject.AddComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>(); }
+
+        eventSystem.firstSelectedGameObject = firstSelectedOverride == null ? gameObject : firstSelectedOverride;
     }
     public void LoadSceneByString(string sceneName)
     {
