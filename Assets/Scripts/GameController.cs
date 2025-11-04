@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject pashenst;
     public LevelDataObject levelData;
     public float money;
     public float time;
-    private bool active = false;
+    public bool active = false;
 
+    [Header("Bakend stats")]
     public List<GameObject> items;
     public List<GameObject> interactables;
+    public List<Siknes> sikneses;
 
     [Header("Stats")] // only public for debugging
     public int deadPatientsCount;
@@ -60,6 +63,9 @@ public class GameController : MonoBehaviour
         if (money < 0) LevelFail();
         if (time < 0) LevelClear();
 
+        // spone a pashent "X" tims a sek
+        if (time % (1f / levelData.newPatientRate) == 0)
+            Instantiate(pashenst);
     }
 
     public void AddMoney(float amount)

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PashentMan : MonoBehaviour {
     public Transform[] queuePonts;
     public Gradient queueColor;
-    public static List<GameObject> pashents;
+    public static List<GameObject> pashents = new();
 
     void Start() {
         queuePonts = transform.GetComponentsInChildren<Transform>();

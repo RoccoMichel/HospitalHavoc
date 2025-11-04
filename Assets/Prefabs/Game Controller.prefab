@@ -44,8 +44,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e250508dec50eff419501c99e477c564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pashenst: {fileID: 4565465082035426404, guid: a856e3b93e889b4409a36ae7ed75f415, type: 3}
   levelData: {fileID: 11400000, guid: 54522dc32211b854abcf81b98bda5506, type: 2}
-  items: []
   money: 0
   time: 0
+  items: []
+  interactables:
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  sikneses: []
+  deadPatientsCount: 0
+  averageCureTime: 0
   debug: 0

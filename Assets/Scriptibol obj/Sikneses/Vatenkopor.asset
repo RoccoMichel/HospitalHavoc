@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878d482835656c34ebae33c9e05783fc, type: 3}
-  m_Name: Posen 1
+  m_Script: {fileID: 11500000, guid: 00390d33bcd58fb42a69094842ebda51, type: 3}
+  m_Name: Vatenkopor
   m_EditorClassIdentifier: 
-  itemTag: Posen 1
-  item: {fileID: 5303791434255046055, guid: a1493f5deaf11894fbcc7fe34f78f6cb, type: 3}
-  ingrediants: []
+  name: Vatencopor
+  cure: {fileID: 11400000, guid: e638c86b1255a6d44a33910ed814ba2e, type: 2}
+  difecoltyAndMuny: 50
+  hellfInpackt: 0.1
