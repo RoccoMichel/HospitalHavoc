@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("Item Settings")]
     public float pickUpFOV;
     public float pickUpRange;
+    public float throwForce;
     public Transform hand;
     public Items currentHeldItem;
 
@@ -65,16 +66,27 @@ public class PlayerController : MonoBehaviour
 
     public void PickUp(InputAction.CallbackContext obj)
     {
-        if (currentHeldItem == null)
+        if (obj.started)
         {
-            GameObject itemToPickUp = GetClosestObject(GameController.gameController.items);
-
-            if (itemToPickUp != null)
+            if (currentHeldItem == null)
             {
-                itemToPickUp.transform.parent = hand;
-                currentHeldItem = itemToPickUp.GetComponent<Items>();
+                GameObject itemToPickUp = GetClosestObject(GameController.gameController.items);
 
-                GameController.gameController.items.Remove(itemToPickUp);
+                if (itemToPickUp != null)
+                {
+                    itemToPickUp.transform.parent = hand;
+                    currentHeldItem = itemToPickUp.GetComponent<Items>();
+
+                    GameController.gameController.items.Remove(itemToPickUp);
+                }
+            }
+            else
+            {
+                currentHeldItem.transform.SetParent(null);
+                currentHeldItem.rb.isKinematic = false;
+                currentHeldItem.rb.AddForce(transform.forward * throwForce);
+                GameController.gameController.items.Add(currentHeldItem.gameObject);
+                currentHeldItem = null;
             }
         }
     }

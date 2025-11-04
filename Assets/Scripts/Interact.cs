@@ -33,7 +33,16 @@ public class Interact : MonoBehaviour
 
     void OnValidate()
     {
-        if(GameController.gameController != null)
-            GameController.gameController.interactables.Add(gameObject);
+        if (GameController.gameController != null)
+        {
+            bool isInlist = false;
+
+            foreach (GameObject inter in GameController.gameController.interactables)
+                if (inter == gameObject)
+                    isInlist = true;
+
+            if(!isInlist)
+                GameController.gameController.interactables.Add(gameObject);
+        }
     }
 }
