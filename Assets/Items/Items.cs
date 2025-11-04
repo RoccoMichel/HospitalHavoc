@@ -15,6 +15,13 @@ public class Items : MonoBehaviour
 
     void Start()
     {
-        GameController.gameController.items.Add(gameObject);
+        bool isInList = false;
+
+        for(int i = 0; i < GameController.gameController.items.Count; i++)
+            if (GameController.gameController.items[i] == gameObject)
+                isInList = true;
+
+        if(!isInList)
+            GameController.gameController.items.Add(gameObject);
     }
 }

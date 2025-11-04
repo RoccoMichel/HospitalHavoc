@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -165,5 +166,10 @@ public class GameController : MonoBehaviour
     private void Reset()
     {
         gameObject.tag = "GameController";
+    }
+
+    void OnValidate()
+    {
+        gameController = this;
     }
 }
