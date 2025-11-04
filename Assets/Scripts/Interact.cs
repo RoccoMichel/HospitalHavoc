@@ -18,11 +18,7 @@ public class Interact : MonoBehaviour
             player.currentHeldItem = null;
         }
         else
-        {
-            GameObject newItem = Coldrin.inctanse.MixIngedents();
-
-            player.PickUpChosenItem(newItem);
-        }
+            Coldrin.inctanse.MixIngedents();
     }
 
     public void SpawnItem(PlayerController player)

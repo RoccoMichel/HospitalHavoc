@@ -36,7 +36,7 @@ public class Items : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
         bool isInList = false;
 

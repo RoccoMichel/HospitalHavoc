@@ -7,5 +7,6 @@ public class ItemInfo : ScriptableObject {
     public string itemTag;
     public GameObject item;
     [Header("setings")]
+    public float mixTime = 5;
     public List<ItemInfo> ingrediants;
 }
