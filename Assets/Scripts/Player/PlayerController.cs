@@ -128,12 +128,14 @@ public class PlayerController : MonoBehaviour
 
     public void PickUpChosenItem(GameObject pickup)
     {
-        if (currentHeldItem == null)
+        if (currentHeldItem == null && pickup != null)
         {
             pickup.transform.parent = hand;
             currentHeldItem = pickup.GetComponent<Items>();
             currentHeldItem.owner = this;
             GameController.gameController.items.Remove(pickup);
+
+            pickedUpItem = true;
         }
     }
 
@@ -160,6 +162,12 @@ public class PlayerController : MonoBehaviour
         }
 
         return closest;
+    }
+
+    public void ControllerDisconected(PlayerInput obj)
+    {
+        print("Player: <color=red>" + (obj.playerIndex + 1) + "<color=white> Has Disconnected");
+        Destroy(gameObject);
     }
 
     void OnDrawGizmos()
