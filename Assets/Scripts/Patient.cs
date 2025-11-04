@@ -8,9 +8,9 @@ public class Patient : MonoBehaviour
     public List<Siknes> sikneses;
     public float hellf = 100;
     void Awake() {
+        setUp();
         for (int i = 0; i < sikneses.Count; i++) 
             value += sikneses[i].difecoltyAndMuny;
-        setUp();
         PashentMan.pashents.Add(gameObject);
     }
     public void setUp() {
@@ -21,7 +21,7 @@ public class Patient : MonoBehaviour
             if (Random.Range(0, 5 * nuberOfSiknese) == 0)
                 nuberOfSiknese++;
 
-        for (int i = 0; i < nuberOfSiknese; i++) {
+        for (int i = 0; i <= nuberOfSiknese; i++) {
             sikneses.Add(sik[Random.Range(0, sik.Count-1)]);
         }
     }

@@ -8,10 +8,6 @@ public class PashentMan : MonoBehaviour {
     public Gradient queueColor;
     public static List<GameObject> pashents = new();
 
-    void Start() {
-        queuePonts = transform.GetComponentsInChildren<Transform>();
-        queuePonts = queuePonts.ToList().GetRange(1, queuePonts.Length).ToArray();
-    }
     void OnDrawGizmos(){
 
         for (int i = 0; i < queuePonts.Length; i++) {

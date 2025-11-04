@@ -123,4 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcf4831087354a4f807792f04338689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sikneses: []
+  sikneses:
+  - {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
+  hellf: 100

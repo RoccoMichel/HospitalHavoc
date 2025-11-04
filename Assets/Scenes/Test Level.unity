@@ -7867,7 +7867,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: interactables.Array.size
-      value: 12
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: 'interactables.Array.data[0]'

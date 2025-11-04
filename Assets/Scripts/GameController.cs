@@ -65,7 +65,10 @@ public class GameController : MonoBehaviour
 
         // spone a pashent "X" tims a sek
         if (time % (1f / levelData.newPatientRate) == 0)
+        {
+            Debug.Log("Spone pashent");
             Instantiate(pashenst);
+        }
     }
 
     public void AddMoney(float amount)
