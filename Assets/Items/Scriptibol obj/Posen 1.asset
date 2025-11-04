@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878d482835656c34ebae33c9e05783fc, type: 3}
   m_Name: Posen 1
   m_EditorClassIdentifier: 
-  itemTag: 
+  itemTag: Posen 1
   item: {fileID: 5303791434255046055, guid: a1493f5deaf11894fbcc7fe34f78f6cb, type: 3}
   ingrediants: []
