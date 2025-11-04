@@ -11,6 +11,8 @@ public class Items : MonoBehaviour
         if (transform.parent != null) {
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * sped);
         }
+
+        transform.LookAt(Camera.main.transform);
     }
 
     void Start()
