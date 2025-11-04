@@ -41,8 +41,10 @@ public class Patient : MonoBehaviour
             }
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         PashentMan.pashents.Remove(gameObject);
+        GameController.gameController.interactables.Remove(gameObject);
     }
 
     private void Update()
