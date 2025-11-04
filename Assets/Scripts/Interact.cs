@@ -19,10 +19,12 @@ public class Interact : MonoBehaviour
         else Coldrin.inctanse.MixIngedents();
     }
 
-    public void SpawnItem()
+    public void SpawnItem(PlayerController player)
     {
         Debug.Log("Spone item");
-        GetComponent<SponeItem>().sponeItem();
+        GameObject spawnedItem = GetComponent<SponeItem>().sponeItem();
+
+        player.PickUpChosenItem(spawnedItem);
     }
 
     public void TryCure(PlayerController player)
@@ -33,7 +35,16 @@ public class Interact : MonoBehaviour
 
     void OnValidate()
     {
-        if(GameController.gameController != null)
-            GameController.gameController.interactables.Add(gameObject);
+        if (GameController.gameController != null)
+        {
+            bool isInlist = false;
+
+            foreach (GameObject inter in GameController.gameController.interactables)
+                if (inter == gameObject)
+                    isInlist = true;
+
+            if(!isInlist)
+                GameController.gameController.interactables.Add(gameObject);
+        }
     }
 }

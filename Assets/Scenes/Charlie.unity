@@ -400,16 +400,6 @@ MonoBehaviour:
   items: []
   interactables:
   - {fileID: 970319974}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
-  - {fileID: 970319974}
-  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
-  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
-  - {fileID: 970319974}
   deadPatientsCount: 0
   averageCureTime: 0
   debug: 0
