@@ -39,6 +39,10 @@ public class Interact : MonoBehaviour
         player.currentHeldItem = null;
     }
 
+    public void TrowAwayItem(PlayerController player) {
+        Destroy(player.currentHeldItem.gameObject);
+        player.currentHeldItem = null;
+    } 
     void Awake()
     {
         if (GameController.gameController != null)

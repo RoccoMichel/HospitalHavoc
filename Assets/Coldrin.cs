@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -28,7 +29,15 @@ public class Coldrin : MonoBehaviour
         Ingerdens.Add(info);
         visseModel.addItemToColdrin(info);
     }
+    bool AreListsEqual(List<ItemInfo> a, List<ItemInfo> b)
+    {
+        // Null checks first
+        if (a == null || b == null)
+            return a == b;
 
+        // Compare using SequenceEqual (compares object references by default)
+        return a.SequenceEqual(b);
+    }
     // mixes all ingedenst that ar in the coldrin
     public void MixIngedents()
     {
@@ -37,10 +46,9 @@ public class Coldrin : MonoBehaviour
             isMixing = true;
             bool hasValiedItems = false;
 
-            for (int i = 0; i < AllPosibolItems.Count; i++)
-            {
-                if (AllPosibolItems[i].ingrediants == Ingerdens)
-                {
+            for (int i = 0; i < AllPosibolItems.Count; i++) {
+                if (AreListsEqual(AllPosibolItems[i].ingrediants, Ingerdens)) {
+                    Debug.Log("Suksefuly mix");
                     hasValiedItems = true;
                     timeToWait = AllPosibolItems[i].mixTime;
                     StartCoroutine(MixAllItems(true, i));
@@ -51,9 +59,11 @@ public class Coldrin : MonoBehaviour
 
             if (!hasValiedItems)
             {
+                Debug.Log("Unsusefuly mix ):");
                 timeToWait = AllPosibolItems[0].mixTime;
                 StartCoroutine(MixAllItems(false));
             }
+            Ingerdens.Clear();
             visseModel.clerAll();
         }
     }
