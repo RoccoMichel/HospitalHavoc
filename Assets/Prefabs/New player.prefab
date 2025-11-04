@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2599382914326229390}
   - component: {fileID: 4940813853063312920}
   - component: {fileID: 2840968121150017046}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBody (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,37 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1463128158560222690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5158736147868471078}
-  m_Layer: 0
-  m_Name: Orentation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5158736147868471078
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463128158560222690}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.0000014156103, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3739718362542233307}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3928756093483038044
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +99,7 @@ GameObject:
   - component: {fileID: 1464436213743476985}
   - component: {fileID: 3407359641356384694}
   - component: {fileID: 8401547041694092999}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: classes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +207,7 @@ GameObject:
   - component: {fileID: 1159566108683264456}
   - component: {fileID: 1564281494590883086}
   - component: {fileID: 1237381380692313987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: classes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5251872066316229118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -376,7 +345,7 @@ GameObject:
   - component: {fileID: 1067091964879692645}
   - component: {fileID: 7354549458565200588}
   - component: {fileID: 5691242961122742560}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +432,7 @@ GameObject:
   - component: {fileID: 3044656600487753008}
   - component: {fileID: 7408635731673472509}
   - component: {fileID: 3178791953791877558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBody (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +519,7 @@ GameObject:
   - component: {fileID: 8063689218247704116}
   - component: {fileID: 6424887412409673674}
   - component: {fileID: 8281427088767989496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +641,7 @@ GameObject:
   - component: {fileID: 50460247597541866}
   - component: {fileID: 7796182684545890084}
   - component: {fileID: 7380269661633299001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: classes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,9 +749,9 @@ GameObject:
   - component: {fileID: 5672424396096202557}
   - component: {fileID: 4235169567928001221}
   - component: {fileID: 8516004879048267686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: New player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -805,7 +774,6 @@ Transform:
   - {fileID: 3044656600487753008}
   - {fileID: 5283742833414591402}
   - {fileID: 5251872066316229118}
-  - {fileID: 5158736147868471078}
   - {fileID: 8063689218247704116}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -999,7 +967,7 @@ GameObject:
   - component: {fileID: 5741419620011016460}
   - component: {fileID: 5152633683834367166}
   - component: {fileID: 4455152413867358291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: classes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1106,7 +1074,7 @@ GameObject:
   - component: {fileID: 5283742833414591402}
   - component: {fileID: 4870820885944147650}
   - component: {fileID: 3154228888900384935}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBody (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

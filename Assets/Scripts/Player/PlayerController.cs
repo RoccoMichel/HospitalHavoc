@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public Transform hand;
     public Items currentHeldItem;
 
+    bool pickedUpItem;
+
     void Update()
     {
         if (!GameController.gameController.active) return; // Freeze the player when paused
@@ -79,6 +81,8 @@ public class PlayerController : MonoBehaviour
                     currentHeldItem = itemToPickUp.GetComponent<Items>();
 
                     GameController.gameController.items.Remove(itemToPickUp);
+
+                    pickedUpItem = true;
                 }
             }
         }
@@ -88,7 +92,7 @@ public class PlayerController : MonoBehaviour
     {
         if (obj.started)
         {
-            if (currentHeldItem != null)
+            if (currentHeldItem != null && !pickedUpItem)
             {
                 currentHeldItem.transform.SetParent(null);
                 currentHeldItem.rb.isKinematic = false;
@@ -96,6 +100,8 @@ public class PlayerController : MonoBehaviour
                 GameController.gameController.items.Add(currentHeldItem.gameObject);
                 currentHeldItem = null;
             }
+
+            pickedUpItem = false;
         }
     }
 
