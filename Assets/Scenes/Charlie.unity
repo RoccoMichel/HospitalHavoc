@@ -398,7 +398,18 @@ MonoBehaviour:
   money: 0
   time: 0
   items: []
-  interactables: []
+  interactables:
+  - {fileID: 970319974}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 970319974}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 334290573347776792, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
+  - {fileID: 970319974}
   deadPatientsCount: 0
   averageCureTime: 0
   debug: 0
@@ -595,6 +606,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+--- !u!1 &970319974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  m_PrefabInstance: {fileID: 970319973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6147583597464695079
 PrefabInstance:
   m_ObjectHideFlags: 0
