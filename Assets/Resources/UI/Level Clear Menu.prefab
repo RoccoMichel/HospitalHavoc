@@ -95,6 +95,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Main Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 3416851369877986131, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416851369877986131, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5db4c115fd76ed341924cbaa75cc9b68, type: 3}
     - target: {fileID: 5180980884684023573, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_Name
       value: Level Clear Menu
@@ -229,7 +237,8 @@ PrefabInstance:
       value: Continue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6093803653486639904, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5912133918020412346, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       insertIndex: -1

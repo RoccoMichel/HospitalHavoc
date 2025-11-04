@@ -8,8 +8,8 @@ public class MainMenu : MonoBehaviour
     public float playerCount = 1;
     public List<LevelData> levels = new();
 
-    [SerializeField] private float progressIncreaseSpeed = 0.1f;
-    [SerializeField] private float progressDecreaseSpeed = 0.3f;
+    [SerializeField] private float progressIncreaseSpeed = 0.3f;
+    [SerializeField] private float progressDecreaseSpeed = 0.5f;
     private float loadProgress;
     private int waitingPlayers;
     private int levelIndex;
@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
 
     public void IncreaseLevelIndex(int amount)
     {
+        print("Level Select Interaction");
         levelIndex = Mathf.Clamp(levelIndex + amount, 0, levels.Count - 1);
         UpdateBoard();
     }
@@ -55,6 +56,7 @@ public class MainMenu : MonoBehaviour
         else loadProgress += progressIncreaseSpeed * Time.deltaTime;
         loadProgress = Mathf.Clamp01(loadProgress);
 
+        progressSlider.value = loadProgress;
         if (loadProgress >= 1) LoadLevel();
     }
 
@@ -66,10 +68,18 @@ public class MainMenu : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) waitingPlayers++;
+        playerCount = GetPlayerCount();
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player")) waitingPlayers--;
+        playerCount = GetPlayerCount();
+    }
+
+    private int GetPlayerCount()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        return players.Length;
     }
 }

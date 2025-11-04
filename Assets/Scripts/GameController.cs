@@ -132,6 +132,7 @@ public class GameController : MonoBehaviour
         // Calculate score
         if (averageCureTime <= 0) averageCureTime = levelData.GameLengthSeconds;
         float score = (money / averageCureTime) - (deadPatientsCount * levelData.DeadPatientScorePenalty);
+        score *= 10;
 
         GameObject menu = Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
 
@@ -150,7 +151,21 @@ public class GameController : MonoBehaviour
         StartCoroutine(ScoreDisplay(menu, rank));
 
         Debug.Log($"Player(s) achieved {rank} rank with a score of: {score}!");
-        PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
+
+
+        // Setting High-scores |     DO NOT WRITE CODE BELOW ALWAYS ABOVE!
+        string bestRank = PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_score", string.Empty);
+        if (bestRank == string.Empty) 
+        { 
+            PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank); 
+            return; 
+        }
+
+        foreach (char rankChar in ranks)
+        {
+            if (rankChar == char.Parse(bestRank)) PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
+            else if (rankChar == char.Parse(rank)) return;
+        }        
     }
 
     private IEnumerator ScoreDisplay(GameObject display, string rank)
