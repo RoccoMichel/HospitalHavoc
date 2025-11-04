@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
     public void ControllerDisconected(PlayerInput obj)
     {
-        print("Player: <color=red>" + (obj.playerIndex + 1) + "<color=white> Has Disconnected");
+        print("Player: <color=red>" + (obj.playerIndex + 1) + "</color> Has Disconnected");
         Destroy(gameObject);
     }
 
