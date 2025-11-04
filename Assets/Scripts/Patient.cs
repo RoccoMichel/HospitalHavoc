@@ -8,6 +8,7 @@ public class Patient : MonoBehaviour
     public List<Siknes> sikneses;
     public float hellf = 100;
     public ParticleSystem munyRane;
+    public ParticleSystem fellMedesin;
     void Awake() {
         setUp();
         for (int i = 0; i < sikneses.Count; i++) 
@@ -39,6 +40,8 @@ public class Patient : MonoBehaviour
 
                 return;
             }
+
+        fellMedesin.Play();
     }
 
     void OnDestroy()
