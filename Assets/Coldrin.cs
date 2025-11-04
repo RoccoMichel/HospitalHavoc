@@ -22,7 +22,7 @@ public class Coldrin : MonoBehaviour
                 return Instantiate(AllPosibolItems[i].item, Vector3.zero, Quaternion.identity);
         }
 
-        return AllPosibolItems[0].item; // If resepy dusent exist
+        return Instantiate(AllPosibolItems[0].item); // If resepy dusent exist
     }
 
     void Awake()

@@ -26,18 +26,20 @@ public class Patient : MonoBehaviour
         }
     }
     public void TyrCure(ItemInfo posibolCure) {
+        Debug.Log("Tyrd cure");
         for (int i = 0; i < sikneses.Count; i++) 
             if (sikneses[i].cure == posibolCure) { 
                 sikneses.RemoveAt(i);
                 return;
             }
 
-        if (sikneses.Count == 0)
+        if (sikneses.Count == 0) {
             GameController.gameController.PatientHeal(this);
+            Destroy(gameObject);
+        }
     }
 
     void OnDestroy() {
-        GameController.gameController.PatientDie(this);
         PashentMan.pashents.Remove(gameObject);
     }
 
@@ -45,5 +47,10 @@ public class Patient : MonoBehaviour
     {
         for (int i = 0; i < sikneses.Count; i++)
             hellf -= sikneses[i].hellfInpackt * Time.deltaTime;
+
+        if (hellf < 0) { 
+            GameController.gameController.PatientDie(this);
+            Destroy(gameObject);
+        }
     }
 }

@@ -17,7 +17,12 @@ public class Interact : MonoBehaviour
             Destroy(player.currentHeldItem.gameObject);
             player.currentHeldItem = null;
         }
-        else player.PickUpChosenItem(Coldrin.inctanse.MixIngedents());
+        else
+        {
+            GameObject newItem = Coldrin.inctanse.MixIngedents();
+
+            player.PickUpChosenItem(newItem);
+        }
     }
 
     public void SpawnItem(PlayerController player)
@@ -32,6 +37,9 @@ public class Interact : MonoBehaviour
     {
         if(player.currentHeldItem != null)
             GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
+
+        Destroy(player.currentHeldItem.gameObject);
+        player.currentHeldItem = null;
     }
 
     void OnValidate()
