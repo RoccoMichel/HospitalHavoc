@@ -513,6 +513,7 @@ MonoBehaviour:
   - {fileID: 5884251834431689801}
   - {fileID: 9042206053382704457}
   - {fileID: 8205452324654580394}
+  wakingpartiols: {fileID: 0}
   pickUpFOV: 180
   pickUpRange: 4
   throwForce: 50

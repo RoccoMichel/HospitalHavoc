@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     float deadZone = 0.05f;
     [Tooltip("0 = up, 1 = right, 2 = down, 3 = left")]
     public List<GameObject> moveDirObjects;
-
+    public ParticleSystem wakingpartiols;
     [Header("Item Settings")]
     public float pickUpFOV;
     public float pickUpRange;
@@ -139,8 +139,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
+    void Awake() {
         cc = GetComponent<CharacterController>();
     }
 

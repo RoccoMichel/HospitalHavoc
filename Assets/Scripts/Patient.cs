@@ -31,10 +31,10 @@ public class Patient : MonoBehaviour
         for (int i = 0; i < sikneses.Count; i++) 
             if (sikneses[i].cure == posibolCure) { 
                 sikneses.RemoveAt(i);
-                if (sikneses.Count == 1)
+                if (sikneses.Count == 2)
                 {
                     GameController.gameController.PatientHeal(this);
-                    Destroy(gameObject, 0.5f);
+                    Destroy(gameObject, 1.5f);
                 }
                 munyRane.Play();
 

@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class Coldrin : MonoBehaviour
 {
     public static Coldrin inctanse;
-
+    public VisuleseModels visseModel;
     public Transform itemExit;
     public Vector3 maxItemAngle = new Vector3(40, 40, 40);
     public float itemExitForce = 50;
@@ -26,6 +26,7 @@ public class Coldrin : MonoBehaviour
     // adds an igedent to the coldrin
     public void AddIngedent(ItemInfo info) {
         Ingerdens.Add(info);
+        visseModel.addItemToColdrin(info);
     }
 
     // mixes all ingedenst that ar in the coldrin
@@ -53,6 +54,7 @@ public class Coldrin : MonoBehaviour
                 timeToWait = AllPosibolItems[0].mixTime;
                 StartCoroutine(MixAllItems(false));
             }
+            visseModel.clerAll();
         }
     }
 
