@@ -627,6 +627,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4711831873624108579}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseBook
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RecipeBook, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MenuLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971657735578358988, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3565643365596234333, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000030517578
@@ -661,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180980884684023573, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_Name
-      value: Recipe Book Variant
+      value: Recipe Book
       objectReference: {fileID: 0}
     - target: {fileID: 5912133918020412346, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_Pivot.x
@@ -755,6 +787,14 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 6094954965673366682, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6094954965673366682, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7953888182838642314, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_text
       value: Close

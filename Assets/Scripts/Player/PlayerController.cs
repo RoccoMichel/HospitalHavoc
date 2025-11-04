@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!GameController.gameController.active) return; // Freeze the player when paused
         cc.Move(new Vector3(moveDir.x, 0, moveDir.y) * movementSpeed * Time.deltaTime);
     }
 
