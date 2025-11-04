@@ -151,8 +151,8 @@ public class PlayerController : MonoBehaviour
         Vector3 forward = transform.forward;
         Vector3 up = transform.up;
 
-        float radius = Mathf.Tan(pickUpFOV * 0.5f * Mathf.Deg2Rad) * pickUpRange;
-
+        float radius = /*Mathf.Tan(pickUpFOV * 0.5f * Mathf.Deg2Rad) */ pickUpRange;
+            
         float linDis = Mathf.Sqrt(Mathf.Pow(pickUpRange, 2) + Mathf.Pow(radius, 2));
 
         Vector3 sideRight = Quaternion.AngleAxis(pickUpFOV * 0.5f, up) * forward;

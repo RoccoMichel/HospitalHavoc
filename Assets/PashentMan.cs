@@ -20,7 +20,7 @@ public class PashentMan : MonoBehaviour {
     }
     void Update() {
         for (int i = 0; i < pashents.Count; i++) {
-            pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts[i < queuePonts.Length ? queuePonts.Length : i].position, Time.deltaTime * 25);
+            pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts[i >= queuePonts.Length ? queuePonts.Length-1 : i].position, Time.deltaTime * 25);
         }
     }
 }

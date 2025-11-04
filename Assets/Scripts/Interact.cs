@@ -15,8 +15,9 @@ public class Interact : MonoBehaviour
             Coldrin.inctanse.AddIngedent(player.currentHeldItem.itemInfo);
             GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
             Destroy(player.currentHeldItem.gameObject);
+            player.currentHeldItem = null;
         }
-        else Coldrin.inctanse.MixIngedents();
+        else player.PickUpChosenItem(Coldrin.inctanse.MixIngedents());
     }
 
     public void SpawnItem(PlayerController player)

@@ -16,6 +16,7 @@ public class Coldrin : MonoBehaviour
 
     // mixes all ingedenst that ar in the coldrin
     public GameObject MixIngedents() {
+        print("wtf");
         for (int i = 0; i < AllPosibolItems.Count; i++) {
             if (AllPosibolItems[i].ingrediants == Ingerdens)
                 return Instantiate(AllPosibolItems[i].item, Vector3.zero, Quaternion.identity);
