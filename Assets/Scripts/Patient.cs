@@ -42,6 +42,7 @@ public class Patient : MonoBehaviour
             }
 
         fellMedesin.Play();
+        hellf -= 50; // mavy difert on dirfetnt medesin ?
     }
 
     void OnDestroy()
