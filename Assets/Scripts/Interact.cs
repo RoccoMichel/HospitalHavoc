@@ -31,7 +31,6 @@ public class Interact : MonoBehaviour
 
     public void TryCure(PlayerController player)
     {
-        Debug.Log("da");
         if(player.currentHeldItem != null)
             GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
 

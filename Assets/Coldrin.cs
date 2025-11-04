@@ -12,7 +12,7 @@ public class Coldrin : MonoBehaviour
     public Transform itemExit;
     public Vector3 maxItemAngle = new Vector3(40, 40, 40);
     public float itemExitForce = 50;
-
+    public ParticleSystem itemCoplit;
     public GameObject loadingCanvis;
     public Image loadingImage;
 
@@ -69,6 +69,8 @@ public class Coldrin : MonoBehaviour
 
         newItem.transform.rotation = Quaternion.Euler(Random.Range(0, maxItemAngle.x) - 90, Random.Range(0, maxItemAngle.y), Random.Range(0, maxItemAngle.z));
         newItem.GetComponent<Rigidbody>().AddForce(newItem.transform.forward * itemExitForce);
+        itemCoplit.Play();
+        //STX
     }
 
     IEnumerator MixAllItems(bool valiedItem, int index = 0)
