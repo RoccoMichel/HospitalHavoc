@@ -19,10 +19,12 @@ public class Interact : MonoBehaviour
         else Coldrin.inctanse.MixIngedents();
     }
 
-    public void SpawnItem()
+    public void SpawnItem(PlayerController player)
     {
         Debug.Log("Spone item");
-        GetComponent<SponeItem>().sponeItem();
+        GameObject spawnedItem = GetComponent<SponeItem>().sponeItem();
+
+        player.PickUpChosenItem(spawnedItem);
     }
 
     public void TryCure(PlayerController player)

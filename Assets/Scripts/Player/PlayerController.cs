@@ -109,6 +109,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PickUpChosenItem(GameObject pickup)
+    {
+        if (currentHeldItem == null)
+        {
+            pickup.transform.parent = hand;
+            currentHeldItem = pickup.GetComponent<Items>();
+            GameController.gameController.items.Remove(pickup);
+        }
+    }
+
     void Awake()
     {
         cc = GetComponent<CharacterController>();
