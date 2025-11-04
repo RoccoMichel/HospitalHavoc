@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F3)) debug = !debug;
 
-        if (!active) return;
+        if (!active || canvasManager == null) return;
 
         if (pauseAction.WasPressedThisFrame() && canvasManager.pauseMenu == null)
             PauseMenu();
@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
 
     public static void PauseMenu()
     {
+        if (!gameController.active) return;
         gameController.active = false;
         gameController.canvasManager.pauseMenu = 
             Instantiate((GameObject)Resources.Load("UI/Pause Menu"), gameController.canvasManager.gameObject.transform);
@@ -149,7 +150,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(ScoreDisplay(menu, rank));
 
         Debug.Log($"Player(s) achieved {rank} rank with a score of: {score}!");
-        PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", "A");
+        PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
     }
 
     private IEnumerator ScoreDisplay(GameObject display, string rank)
