@@ -5121,7 +5121,7 @@ MonoBehaviour:
   canDash: 1
   dashEfect: {fileID: 2295767503208547424}
   DashColdown: {fileID: 98226076967240295}
-  pickUpFOV: 100
+  pickUpFOV: 200
   pickUpRange: 4
   throwForce: 50
   hand: {fileID: 5251872066316229118}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class VisuleseModels : MonoBehaviour
 {
     public float scaleFactor = 0.5f;
-    public Vector3 offset = new (0, 3, -5);
+    public Vector3 offset = new (0, 1, 10);
     public List<GameObject> objectInColdrin = new();
     public void addItemToColdrin(ItemInfo item) {
         objectInColdrin.Add(Instantiate(item.item.transform.GetChild(0).gameObject));
