@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878d482835656c34ebae33c9e05783fc, type: 3}
-  m_Name: Posen 2
+  m_Name: Flower
   m_EditorClassIdentifier: 
   itemTag: Posen 1
-  item: {fileID: 162002675693078638, guid: e3ccdc25421917b4ebd29e2175b09256, type: 3}
+  item: {fileID: 4342852337027944567, guid: 55f309994fb42e241a0bf577a9e5bc3c, type: 3}
   mixTime: 5
   ingrediants:
-  - {fileID: 11400000, guid: e638c86b1255a6d44a33910ed814ba2e, type: 2}
-  - {fileID: 11400000, guid: 56e64d019b859484cb55bee2d2344394, type: 2}
-  - {fileID: 11400000, guid: e69845ef58a03f047aca78e1442ccbe8, type: 2}
+  - {fileID: 11400000, guid: 31476911c01bb67428c6a2fc052c95c0, type: 2}
