@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878d482835656c34ebae33c9e05783fc, type: 3}
-  m_Name: Mukys pha
+  m_Name: Monkys pwa
   m_EditorClassIdentifier: 
   itemTag: Monky pha
   item: {fileID: 2767361735357363593, guid: f1f7b1edb42f33349ae08253eb240048, type: 3}

@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878d482835656c34ebae33c9e05783fc, type: 3}
-  m_Name: Eys
+  m_Name: Pilerbs
   m_EditorClassIdentifier: 
-  itemTag: Eys
-  item: {fileID: 5899841149099875144, guid: 2dd344daa326d614a8635db28bf30dca, type: 3}
-  ingrediants: []
+  itemTag: Pllerbs
+  item: {fileID: 1751372158313899787, guid: 2dcfe994f074b6646a73cc1f33bca7b5, type: 3}
+  mixTime: 5
+  ingrediants:
+  - {fileID: 11400000, guid: 31476911c01bb67428c6a2fc052c95c0, type: 2}
+  - {fileID: 11400000, guid: f2958cc3c8591ff45b408d2202e23638, type: 2}
