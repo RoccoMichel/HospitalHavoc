@@ -4900,11 +4900,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6430418519950547142}
-  - component: {fileID: 1717681247332926356}
-  - component: {fileID: 6508458947117726601}
-  - component: {fileID: 9130771921840506190}
   - component: {fileID: 5904249581499942002}
   - component: {fileID: 842589115628789611}
+  - component: {fileID: 3834694779590130114}
+  - component: {fileID: 9130771921840506190}
+  - component: {fileID: 6508458947117726601}
+  - component: {fileID: 1717681247332926356}
   m_Layer: 0
   m_Name: Pashent
   m_TagString: Untagged
@@ -4929,14 +4930,102 @@ Transform:
   - {fileID: 6698536354558527138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1717681247332926356
-MeshFilter:
+--- !u!114 &5904249581499942002
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565465082035426404}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcf4831087354a4f807792f04338689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sikneses:
+  - {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
+  hellf: 100
+  munyRane: {fileID: 7042361197163569340}
+  fellMedesin: {fileID: 4011436895506142343}
+--- !u!114 &842589115628789611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565465082035426404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5582bc421caca42489c8f092354a2e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 842589115628789611}
+        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
+        m_MethodName: TryCure
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5904249581499942002}
+        m_TargetAssemblyTypeName: Patient, Assembly-CSharp
+        m_MethodName: DisplayMedicine
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  needsEmptyHand: 0
+  itemCanInteract: 0
+--- !u!114 &3834694779590130114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565465082035426404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456a915fc1fdd38459bed51cd260f840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleFactor: 0.85
+  offset: {x: 0, y: 2.5, z: -1}
+  objectInColdrin: []
+--- !u!136 &9130771921840506190
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565465082035426404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &6508458947117726601
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4982,75 +5071,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &9130771921840506190
-CapsuleCollider:
+--- !u!33 &1717681247332926356
+MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565465082035426404}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5904249581499942002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4565465082035426404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bcf4831087354a4f807792f04338689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sikneses:
-  - {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
-  hellf: 100
-  munyRane: {fileID: 7042361197163569340}
-  fellMedesin: {fileID: 4011436895506142343}
---- !u!114 &842589115628789611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4565465082035426404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5582bc421caca42489c8f092354a2e59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 842589115628789611}
-        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
-        m_MethodName: TryCure
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  needsEmptyHand: 0
-  itemCanInteract: 0
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &9087399601047614956
 GameObject:
   m_ObjectHideFlags: 0
