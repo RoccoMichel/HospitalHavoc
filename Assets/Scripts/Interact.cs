@@ -10,7 +10,7 @@ public class Interact : MonoBehaviour
 
     public void ColdrinInteract(PlayerController player)
     {
-        if (GetComponent<Coldrin>().isMixing)
+        if (!GetComponent<Coldrin>().isMixing)
         {
             if (player.currentHeldItem != null)
             {
