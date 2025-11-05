@@ -11,7 +11,8 @@ public class HiliteObj : MonoBehaviour
             
             if (i < hilitedObj.Count) {
                 hilitVisols[i].gameObject.SetActive(true);
-                hilitVisols[i].position = Camera.main.WorldToScreenPoint(hilitedObj[i].position);
+                Vector3 Npos = Camera.main.WorldToViewportPoint(hilitedObj[i].position);
+                hilitVisols[i].localPosition = new Vector3(Npos.x * Screen.width/2, Npos.y * Screen.height/2, 0);
             }
             else hilitVisols[i].gameObject.SetActive(false);
     }
