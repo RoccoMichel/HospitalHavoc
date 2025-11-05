@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Throw Item
-            if (!interacted)
+            if (!interacted && !pickUpItem)
             {
                 if (currentHeldItem != null)
                 {
