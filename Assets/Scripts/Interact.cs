@@ -10,15 +10,18 @@ public class Interact : MonoBehaviour
 
     public void ColdrinInteract(PlayerController player)
     {
-        if (player.currentHeldItem != null)
+        if (GetComponent<Coldrin>().isMixing)
         {
-            GetComponent<Coldrin>().AddIngedent(player.currentHeldItem.itemInfo);
-            GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
-            Destroy(player.currentHeldItem.gameObject);
-            player.currentHeldItem = null;
+            if (player.currentHeldItem != null)
+            {
+                GetComponent<Coldrin>().AddIngedent(player.currentHeldItem.itemInfo);
+                GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
+                Destroy(player.currentHeldItem.gameObject);
+                player.currentHeldItem = null;
+            }
+            else
+                GetComponent<Coldrin>().MixIngedents();
         }
-        else
-            GetComponent<Coldrin>().MixIngedents();
     }
 
     public void SpawnItem(PlayerController player)
