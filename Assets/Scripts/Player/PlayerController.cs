@@ -26,6 +26,13 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameController.gameController.active) return; // Freeze the player when paused
         cc.Move(new Vector3(moveDir.x, 0, moveDir.y) * movementSpeed * Time.deltaTime);
+
+        GameObject clossestItem = GetClosestObject(GameController.gameController.items);
+        GameObject clossestInteractable = GetClosestObject(GameController.gameController.interactables);
+        GameObject clossest = Vector3.Distance(transform.position, clossestItem.transform.position) <
+                              Vector3.Distance(transform.position, clossestInteractable.transform.position)
+                                  ? clossestItem
+                                  : clossestInteractable;
     }
 
     public void SetMoveDir(InputAction.CallbackContext obj)
