@@ -36,7 +36,7 @@ public class CanvasManager : MonoBehaviour
     public Highlight RequestPlayerHighlight(PlayerController player)
     {
         Highlight newHighlight = Instantiate((GameObject)Resources.Load("UI/Highlight"), gameController.canvasManager.transform).GetComponent<Highlight>();
-//  !!!!try { newHighlight.gameObject.GetComponent<Image>().color = highlightColorPerPlayer[player.index]; } catch { }
+        try { newHighlight.gameObject.GetComponent<Image>().color = highlightColorPerPlayer[player.playerInt - 1]; } catch { }
         newHighlight.player = player;
         return newHighlight;
     }
