@@ -17,5 +17,5 @@ MonoBehaviour:
   mixTime: 5
   ingrediants:
   - {fileID: 11400000, guid: e638c86b1255a6d44a33910ed814ba2e, type: 2}
-  - {fileID: 11400000, guid: 56e64d019b859484cb55bee2d2344394, type: 2}
+  - {fileID: 11400000, guid: e6d94633a737452489a8f5f298115b5c, type: 2}
   - {fileID: 11400000, guid: e69845ef58a03f047aca78e1442ccbe8, type: 2}

@@ -15,6 +15,7 @@ public class Patient : MonoBehaviour
     public ParticleSystem fellMedesin;
     public Image Hellfbar;
     internal VisuleseModels visualizer;
+    bool ded = false;
 
     void Start() {
         setUp();
@@ -104,12 +105,13 @@ public class Patient : MonoBehaviour
 
         for (int i = 0; i < sikneses.Count; i++)
             hellf -= sikneses[i].hellfInpackt * Time.deltaTime;
-
-        if (hellf < 0) { 
+        if (hellf < 0 && !ded) { 
             GameController.gameController.PatientDie(this);
             transform.DOMoveY(transform.position.y - 5, 1.5f);
             transform.DORotate(new Vector3(1, 0, 0), 1.5f);
             Destroy(gameObject, 1.5f);
+            ded = true;
+            hellf = 1;
         }
     }
 }
