@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4942,8 +4942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcf4831087354a4f807792f04338689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sikneses:
-  - {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
+  sikneses: []
   hellf: 100
   munyRane: {fileID: 7042361197163569340}
   fellMedesin: {fileID: 4011436895506142343}
@@ -5185,7 +5184,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
