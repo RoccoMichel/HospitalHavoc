@@ -34,7 +34,9 @@ public class Coldrin : MonoBehaviour
     {
         // Null checks first
         if (a == null || b == null)
+        {
             return a == b;
+        }
 
         // Compare using SequenceEqual (compares object references by default)
         return a.SequenceEqual(b);

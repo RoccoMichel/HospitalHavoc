@@ -5657,22 +5657,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1408679612213657184, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
-      propertyPath: itemExitForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408679612213657184, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
-      propertyPath: AllPosibolItems.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408679612213657184, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
-      propertyPath: 'AllPosibolItems.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: b97fcd54e9b137a4e8fe981245a4fa1b, type: 2}
-    - target: {fileID: 1408679612213657184, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
-      propertyPath: 'AllPosibolItems.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: e638c86b1255a6d44a33910ed814ba2e, type: 2}
     - target: {fileID: 2787402074652138179, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
       propertyPath: itemCanInteract
       value: 1
