@@ -5080,12 +5080,13 @@ MonoBehaviour:
   itemExit: {fileID: 552567200001268910}
   maxItemAngle: {x: 40, y: 40, z: 40}
   minItemAngle: {x: 10, y: 10, z: 10}
-  itemExitForce: 50
+  itemExitForce: 5
   itemCoplit: {fileID: 843739700434755688}
   loadingImage: {fileID: 7165574529747045818}
   AllPosibolItems:
   - {fileID: 11400000, guid: b97fcd54e9b137a4e8fe981245a4fa1b, type: 2}
   Ingerdens: []
+  mixiMisxi: {fileID: 5928425495752271325}
 --- !u!114 &2787402074652138179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5318,7 +5319,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

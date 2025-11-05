@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Mixing
+    m_ConditionEvent: Mix
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4247287380898687318}
@@ -59,7 +59,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Mixing
+    m_ConditionEvent: Mix
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1129386551284932754}
@@ -84,7 +84,7 @@ AnimatorController:
   m_Name: Coldrin
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Mixing
+  - m_Name: Mix
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
