@@ -17,7 +17,7 @@ public class Coldrin : MonoBehaviour
     public ParticleSystem itemCoplit;
     public Image loadingImage;
 
-    bool isMixing;
+    public bool isMixing;
     float timeToWait = 5;
     float timeWaited;
 
