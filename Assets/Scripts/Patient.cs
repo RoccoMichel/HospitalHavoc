@@ -1,20 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(VisuleseModels))]
 public class Patient : MonoBehaviour
 {
-
     internal float value = 0;
     public List<Siknes> sikneses;
     public float hellf = 100;
     public ParticleSystem munyRane;
     public ParticleSystem fellMedesin;
-    void Awake() {
+    internal VisuleseModels visualizer;
+
+    void Start() {
         setUp();
+        visualizer = GetComponent<VisuleseModels>();
+
         for (int i = 0; i < sikneses.Count; i++) 
             value += sikneses[i].difecoltyAndMuny;
         PashentMan.pashents.Add(gameObject);
+
+        if (PashentMan.pashents[0] == gameObject) DisplayMedicine();
+
     }
+
     public void setUp() {
         int nuberOfSiknese = 1;
         List<Siknes> sik = GameController.gameController.sikneses;
@@ -27,6 +35,7 @@ public class Patient : MonoBehaviour
             sikneses.Add(sik[Random.Range(0, sik.Count-1)]);
         }
     }
+
     public void TyrCure(ItemInfo posibolCure) {
         for (int i = 0; i < sikneses.Count; i++) 
             if (sikneses[i].cure == posibolCure) { 
@@ -45,10 +54,19 @@ public class Patient : MonoBehaviour
         hellf -= 50; // mavy difert on dirfetnt medesin ?
     }
 
+    public void DisplayMedicine()
+    {
+        visualizer.clerAll();
+        foreach (Siknes siknes in sikneses)
+            visualizer.addItemToColdrin(siknes.cure);
+    }
+
     void OnDestroy()
     {
         PashentMan.pashents.Remove(gameObject);
         GameController.gameController.interactables.Remove(gameObject);
+        try { PashentMan.pashents[0].GetComponent<Patient>().DisplayMedicine(); } 
+        catch { /*No other patients queue*/ };
     }
 
     private void Update()
