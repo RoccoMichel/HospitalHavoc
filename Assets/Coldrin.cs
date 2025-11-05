@@ -33,8 +33,7 @@ public class Coldrin : MonoBehaviour
     bool AreListsEqual(List<ItemInfo> a, List<ItemInfo> b)
     {
         // Null checks first
-        if (a == null || b == null)
-        {
+        if (a == null || b == null) {
             return a == b;
         }
 
