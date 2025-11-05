@@ -30,7 +30,7 @@ public class Items : MonoBehaviour
                 other.gameObject.GetComponent<PlayerController>().PickUpChosenItem(gameObject);
             else if (CheckIfInList(GameController.gameController.interactables, other.gameObject))
             {
-                if(other.gameObject.GetComponent<Interact>().itemCanInteract)
+                if(other.gameObject.GetComponent<Interact>().itemCanInteract && owner)
                     other.gameObject.GetComponent<Interact>().onInteract.Invoke(owner);
             }
         }

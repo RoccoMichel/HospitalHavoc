@@ -24,6 +24,7 @@ public class Coldrin : MonoBehaviour
 
     public List<ItemInfo> AllPosibolItems; // list of all posibol items
     public List<ItemInfo> Ingerdens = new List<ItemInfo>(); // all the items curenty in the coldrin
+    public Animator mixiMisxi;
 
     // adds an igedent to the coldrin
     public void AddIngedent(ItemInfo info) {
@@ -106,6 +107,8 @@ public class Coldrin : MonoBehaviour
 
     void Update()
     {
+        mixiMisxi.SetBool("Mix", isMixing);
+
         if (isMixing)
         {
             timeWaited += Time.deltaTime;

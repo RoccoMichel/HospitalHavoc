@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,19 +31,22 @@ public class Patient : MonoBehaviour
         for (int i = 1; i < sik.Count; i++)
             if (Random.Range(0, 5 * nuberOfSiknese) == 0)
                 nuberOfSiknese++;
-
-        for (int i = 0; i <= nuberOfSiknese; i++) {
+        Debug.Log(nuberOfSiknese);
+        
+        for (int i = 0; i < nuberOfSiknese; i++) {
             sikneses.Add(sik[Random.Range(0, sik.Count-1)]);
         }
     }
 
     public void TyrCure(ItemInfo posibolCure) {
+
         for (int i = 0; i < sikneses.Count; i++) 
             if (sikneses[i].cure == posibolCure) { 
                 sikneses.RemoveAt(i);
-                if (sikneses.Count == 2)
+                if (sikneses.Count == 0)
                 {
                     GameController.gameController.PatientHeal(this);
+                    transform.DOMoveX(transform.position.x - 15, 1.5f);
                     Destroy(gameObject, 1.5f);
                 }
                 munyRane.Play();
@@ -76,7 +80,8 @@ public class Patient : MonoBehaviour
 
         if (hellf < 0) { 
             GameController.gameController.PatientDie(this);
-            Destroy(gameObject);
+            transform.DOMoveY(transform.position.y - 5, 1.5f);
+            Destroy(gameObject, 1.5f);
         }
     }
 }

@@ -5561,6 +5561,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1408679612213657184, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+      propertyPath: itemExitForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408679612213657184, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
       propertyPath: AllPosibolItems.Array.size
       value: 2
       objectReference: {fileID: 0}
