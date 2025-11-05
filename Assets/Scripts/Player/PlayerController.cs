@@ -12,15 +12,15 @@ public class PlayerController : MonoBehaviour
     float deadZone = 0.05f;
     [Tooltip("0 = up, 1 = right, 2 = down, 3 = left")]
     public List<GameObject> moveDirObjects;
+
     public ParticleSystem wakingpartiols;
+
     [Header("Item Settings")]
     public float pickUpFOV;
     public float pickUpRange;
     public float throwForce;
     public Transform hand;
     public Items currentHeldItem;
-
-    bool pickedUpItem;
 
     void Update()
     {
@@ -67,10 +67,14 @@ public class PlayerController : MonoBehaviour
         if(moveDirObjects[index].activeSelf != active) moveDirObjects[index].SetActive(active);
     }
 
-    public void PickUp(InputAction.CallbackContext obj)
+    public void Interact(InputAction.CallbackContext obj)
     {
         if (obj.started)
         {
+            bool pickUpItem = false;
+            bool interacted = false;
+
+            //Pick Up Item
             if (currentHeldItem == null)
             {
                 GameObject itemToPickUp = GetClosestObject(GameController.gameController.items);
@@ -82,46 +86,46 @@ public class PlayerController : MonoBehaviour
 
                     GameController.gameController.items.Remove(itemToPickUp);
 
-                    pickedUpItem = true;
+                    pickUpItem = true;
                 }
             }
-        }
-    }
 
-    public void ThrowItem(InputAction.CallbackContext obj)
-    {
-        if (obj.started)
-        {
-            if (currentHeldItem != null && !pickedUpItem)
+            //Interact
+            if (!pickUpItem)
             {
-                currentHeldItem.transform.SetParent(null);
-                currentHeldItem.rb.isKinematic = false;
-                currentHeldItem.rb.AddForce(transform.forward * throwForce);
-                GameController.gameController.items.Add(currentHeldItem.gameObject);
-                currentHeldItem = null;
-            }
+                GameObject interactable = GetClosestObject(GameController.gameController.interactables);
 
-            pickedUpItem = false;
-        }
-    }
-
-    public void Interact(InputAction.CallbackContext obj)
-    {
-        if (obj.started)
-        {
-            GameObject interactable = GetClosestObject(GameController.gameController.interactables);
-
-            if (interactable != null)
-            {
-                Interact theObject = interactable.GetComponent<Interact>();
-
-                if (theObject.needsEmptyHand)
+                if (interactable != null)
                 {
-                    if (currentHeldItem == null)
+                    Interact theObject = interactable.GetComponent<Interact>();
+
+                    if (theObject.needsEmptyHand)
+                    {
+                        if (currentHeldItem == null)
+                        {
+                            theObject.onInteract.Invoke(this);
+                            interacted = true;
+                        }
+                    }
+                    else
+                    {
                         theObject.onInteract.Invoke(this);
+                        interacted = true;
+                    }
                 }
-                else
-                    theObject.onInteract.Invoke(this);
+            }
+
+            //Throw Item
+            if (!interacted)
+            {
+                if (currentHeldItem != null)
+                {
+                    currentHeldItem.transform.SetParent(null);
+                    currentHeldItem.rb.isKinematic = false;
+                    currentHeldItem.rb.AddForce(transform.forward * throwForce);
+                    GameController.gameController.items.Add(currentHeldItem.gameObject);
+                    currentHeldItem = null;
+                }
             }
         }
     }
@@ -134,8 +138,6 @@ public class PlayerController : MonoBehaviour
             currentHeldItem = pickup.GetComponent<Items>();
             currentHeldItem.owner = this;
             GameController.gameController.items.Remove(pickup);
-
-            pickedUpItem = true;
         }
     }
 
