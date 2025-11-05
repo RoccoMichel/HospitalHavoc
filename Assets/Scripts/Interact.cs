@@ -42,7 +42,40 @@ public class Interact : MonoBehaviour
     public void TrowAwayItem(PlayerController player) {
         Destroy(player.currentHeldItem.gameObject);
         player.currentHeldItem = null;
-    } 
+    }
+
+    public void Bench(PlayerController player)
+    {
+        BenchController bc = GetComponent<BenchController>();
+
+        if (player.currentHeldItem != null)
+        {
+            if (bc.itemsOnBench.Count < bc.itemPlaces.Count)
+            {
+                bc.itemsOnBench.Add(player.currentHeldItem.gameObject);
+                player.currentHeldItem.transform.parent = bc.itemPlaces[bc.itemsOnBench.Count - 1];
+                player.currentHeldItem = null;
+            }
+            else
+            {
+                GameObject itemToGivePlayer = bc.itemsOnBench[0];
+                GameObject itemToPutOnBench = player.currentHeldItem.gameObject;
+
+                bc.itemsOnBench[0] = itemToPutOnBench;
+                itemToPutOnBench.transform.parent = bc.itemPlaces[0];
+                player.currentHeldItem = null;
+                player.PickUpChosenItem(itemToGivePlayer);
+            }
+        }
+        else if (bc.itemsOnBench.Count > 0)
+        {
+            GameObject itemToGivePlayer = bc.itemsOnBench[bc.itemsOnBench.Count - 1];
+            bc.itemsOnBench.Remove(itemToGivePlayer);
+
+            player.PickUpChosenItem(itemToGivePlayer);
+        }
+    }
+
     void Awake()
     {
         if (GameController.gameController != null)

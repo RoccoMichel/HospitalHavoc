@@ -11,10 +11,11 @@ public class Coldrin : MonoBehaviour
     public static Coldrin inctanse;
     public VisuleseModels visseModel;
     public Transform itemExit;
-    public Vector3 maxItemAngle = new Vector3(40, 40, 40);
+
+    public Vector3 maxItemAngle = new Vector3(40, 40, 40),
+                   minItemAngle = new Vector3(10, 10, 10);
     public float itemExitForce = 50;
     public ParticleSystem itemCoplit;
-    public GameObject loadingCanvis;
     public Image loadingImage;
 
     bool isMixing;
@@ -79,20 +80,23 @@ public class Coldrin : MonoBehaviour
         else
             newItem = Instantiate(AllPosibolItems[index].item, itemExit.position, Quaternion.identity);
 
-        newItem.transform.rotation = Quaternion.Euler(Random.Range(0, maxItemAngle.x) - 90, Random.Range(0, maxItemAngle.y), Random.Range(0, maxItemAngle.z));
-        newItem.GetComponent<Rigidbody>().AddForce(newItem.transform.forward * itemExitForce);
+        Vector3 exitDir = new Vector3(Random.Range(minItemAngle.x, maxItemAngle.x) - 90, Random.Range(minItemAngle.y, maxItemAngle.y),
+                                      Random.Range(minItemAngle.z, maxItemAngle.z));
+        newItem.GetComponent<Rigidbody>().AddForce(exitDir * itemExitForce);
         itemCoplit.Play();
-        //STX
+        //SFX
     }
 
     IEnumerator MixAllItems(bool valiedItem, int index = 0)
     {
+        loadingImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeToWait);
         ItemDoneMixing(valiedItem, index);
 
         isMixing = false;
         timeWaited = 0;
-        loadingCanvis.SetActive(false);
+        loadingImage.fillAmount = 0;
+        loadingImage.gameObject.SetActive(false);
     }
 
     void Awake()
@@ -104,7 +108,6 @@ public class Coldrin : MonoBehaviour
     {
         if (isMixing)
         {
-            loadingCanvis.SetActive(true);
             timeWaited += Time.deltaTime;
             loadingImage.fillAmount = Mathf.Lerp(0, 1, timeWaited / timeToWait);
         }

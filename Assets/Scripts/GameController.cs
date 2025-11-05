@@ -42,8 +42,7 @@ public class GameController : MonoBehaviour
 
         money = levelData.startMoney;
         time = levelData.GameLengthSeconds;
-        nextPatientSpawnTime = time - 1/levelData.newPatientRate;
-
+        nextPatientSpawnTime = time;
     }
 
     private void Update()
@@ -63,7 +62,6 @@ public class GameController : MonoBehaviour
 
         // Spawn a Patient "X" times a sec
         if (time < nextPatientSpawnTime) {
-            Debug.Log("Spawn Patient");
             Instantiate(pashenst);
             nextPatientSpawnTime = time - 1 / levelData.newPatientRate;
         }
@@ -89,6 +87,7 @@ public class GameController : MonoBehaviour
 
     public void PatientHeal(Patient patient)
     {
+        patient.visualizer.clerAll();
         AddMoney(patient.value);
         if (averageCureTime == 0) averageCureTime = levelData.GameLengthSeconds - time;
         else averageCureTime = (averageCureTime + latestCureTime) / 2;
@@ -97,6 +96,7 @@ public class GameController : MonoBehaviour
 
     public void PatientDie(Patient patient)
     {
+        patient.visualizer.clerAll();
         RemoveMoney(patient.value);
         deadPatientsCount++;
     }
