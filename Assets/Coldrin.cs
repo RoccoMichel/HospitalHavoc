@@ -43,7 +43,7 @@ public class Coldrin : MonoBehaviour
     // mixes all ingedenst that ar in the coldrin
     public void MixIngedents()
     {
-        if (!isMixing)
+        if (!isMixing && Ingerdens.Count != 0)
         {
             isMixing = true;
             bool hasValiedItems = false;

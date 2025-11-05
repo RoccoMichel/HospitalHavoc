@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public float dashDuration = 0.2f;
     public float dashCooldown = 1;
     public bool canDash = true;
+    public ParticleSystem dashEfect;
+    public Image DashColdown;
 
     [Header("Item Settings")]
     public float pickUpFOV;
@@ -31,8 +34,14 @@ public class PlayerController : MonoBehaviour
     public Transform hand;
     public Items currentHeldItem;
 
+
+    float timeTillDash = 0;
     void Update()
     {
+        if (!canDash) {
+            timeTillDash += Time.deltaTime;
+            DashColdown.fillAmount = timeTillDash / dashCooldown;
+        }
         if (!GameController.gameController.active) return; // Freeze the player when paused
 
         if (canMove)
@@ -173,6 +182,8 @@ public class PlayerController : MonoBehaviour
     {
         if (obj.started && canDash)
         {
+            timeTillDash = 0;
+            dashEfect.Play();
             canMove = false;
             canDash = false;
 
@@ -185,11 +196,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         canMove = true;
-        moveDir = Vector2.zero;
+        //moveDir = Vector2.zero;
 
         yield return new WaitForSeconds(dashCooldown);
-
+        
         canDash = true;
+        DashColdown.fillAmount = 0;
     }
 
     void Awake() {

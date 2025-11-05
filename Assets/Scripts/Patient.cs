@@ -67,6 +67,7 @@ public class Patient : MonoBehaviour
 
     void OnDestroy()
     {
+        visualizer.clerAll();
         PashentMan.pashents.Remove(gameObject);
         GameController.gameController.interactables.Remove(gameObject);
         try { PashentMan.pashents[0].GetComponent<Patient>().DisplayMedicine(); } 
