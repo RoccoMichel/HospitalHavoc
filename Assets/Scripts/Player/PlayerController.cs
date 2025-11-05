@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController cc;
 
+    public int playerInt = 0;
+
     [Header("Movement Settings")]
     public float movementSpeed;
     public bool canMove = true;
@@ -236,6 +238,9 @@ public class PlayerController : MonoBehaviour
     public void ControllerDisconected(PlayerInput obj)
     {
         print("Player: <color=red>" + (obj.playerIndex + 1) + "</color> Has Disconnected");
+
+        OnPlayerJoin.intance.OnPlayerLeave(obj);
+
         Destroy(gameObject);
     }
 
