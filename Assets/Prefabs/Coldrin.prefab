@@ -5239,6 +5239,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: RondLodingBar
       objectReference: {fileID: 0}
+    - target: {fileID: 7234411874740971362, guid: abc4068e68f56f44688d67abb04ff39b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791243235596140333, guid: abc4068e68f56f44688d67abb04ff39b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

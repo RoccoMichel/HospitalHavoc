@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(VisuleseModels))]
 public class Patient : MonoBehaviour
@@ -8,8 +9,10 @@ public class Patient : MonoBehaviour
     internal float value = 0;
     public List<Siknes> sikneses;
     public float hellf = 100;
+    [Header("Efects")]
     public ParticleSystem munyRane;
     public ParticleSystem fellMedesin;
+    public Image Hellfbar;
     internal VisuleseModels visualizer;
 
     void Start() {
@@ -43,6 +46,9 @@ public class Patient : MonoBehaviour
         for (int i = 0; i < sikneses.Count; i++) 
             if (sikneses[i].cure == posibolCure) { 
                 sikneses.RemoveAt(i);
+
+                hellf = Mathf.Clamp(hellf + 10, 0, 100);
+                
                 if (sikneses.Count == 0)
                 {
                     GameController.gameController.PatientHeal(this);
@@ -76,6 +82,8 @@ public class Patient : MonoBehaviour
 
     private void Update()
     {
+        Hellfbar.fillAmount = hellf/100; // hellf/maxhellf
+
         for (int i = 0; i < sikneses.Count; i++)
             hellf -= sikneses[i].hellfInpackt * Time.deltaTime;
 

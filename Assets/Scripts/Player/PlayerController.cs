@@ -38,10 +38,14 @@ public class PlayerController : MonoBehaviour
     float timeTillDash = 0;
     void Update()
     {
-        if (!canDash) {
+        if (!canDash)
+        {
+            DashColdown.gameObject.SetActive(true);
             timeTillDash += Time.deltaTime;
             DashColdown.fillAmount = timeTillDash / dashCooldown;
         }
+        else
+            DashColdown.gameObject.SetActive(false);
         if (!GameController.gameController.active) return; // Freeze the player when paused
 
         if (canMove)
