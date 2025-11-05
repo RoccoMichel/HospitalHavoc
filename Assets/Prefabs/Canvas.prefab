@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28066ac578326eb44944a8f8922f86f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightColorPerPlayer: []
   moneyDisplay: {fileID: 1056851496176051024}
   timeDisplay: {fileID: 4096685280696081942}
 --- !u!223 &9181716369905817220

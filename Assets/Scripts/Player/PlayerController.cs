@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Awake() {
+        GameController.gameController.canvasManager.RequestPlayerHighlight(this);
         cc = GetComponent<CharacterController>();
     }
 

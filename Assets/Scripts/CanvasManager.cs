@@ -1,8 +1,10 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    public Color[] highlightColorPerPlayer;
     [Header("References")]
     [SerializeField] private TMP_Text moneyDisplay;
     [SerializeField] private TMP_Text timeDisplay;
@@ -29,6 +31,14 @@ public class CanvasManager : MonoBehaviour
     {
         if (recipeBook != null) return;
         recipeBook = Instantiate((GameObject)Resources.Load("UI/Recipe Book"), GameController.gameController.canvasManager.transform);
+    }
+
+    public Highlight RequestPlayerHighlight(PlayerController player)
+    {
+        Highlight newHighlight = Instantiate((GameObject)Resources.Load("UI/Highlight"), gameController.canvasManager.transform).GetComponent<Highlight>();
+//  !!!!try { newHighlight.gameObject.GetComponent<Image>().color = highlightColorPerPlayer[player.index]; } catch { }
+        newHighlight.player = player;
+        return newHighlight;
     }
 
     public static string GetTimerText(float time)
