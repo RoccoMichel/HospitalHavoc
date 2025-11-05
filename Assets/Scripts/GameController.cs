@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
     public void PatientDie(Patient patient)
     {
         patient.visualizer.clerAll();
-        RemoveMoney(patient.value);
+        RemoveMoney(patient.value/2);
         deadPatientsCount++;
     }
 
@@ -165,7 +165,8 @@ public class GameController : MonoBehaviour
         {
             if (rankChar == char.Parse(bestRank)) PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
             else if (rankChar == char.Parse(rank)) return;
-        }        
+        }
+        Debug.Log("yure score is " + score);
     }
 
     private IEnumerator ScoreDisplay(GameObject display, string rank)

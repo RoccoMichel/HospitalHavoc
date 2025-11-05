@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class PashentMan : MonoBehaviour {
     public Transform[] queuePonts;
+    public static PashentMan instance;
     public Gradient queueColor;
     public static List<GameObject> pashents = new();
-
+    void Awake()
+    {
+        instance = this;
+    }
     void OnDrawGizmos(){
 
         for (int i = 0; i < queuePonts.Length; i++) {

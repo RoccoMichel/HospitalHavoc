@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,7 +41,22 @@ public class Patient : MonoBehaviour
             sikneses.Add(sik[Random.Range(0, sik.Count-1)]);
         }
     }
-
+    IEnumerator GoToPont(Vector3 orgPos, Vector3 pos, float time) { 
+        for (float t = time; t > 0; t -= Time.deltaTime) {
+            transform.position = Vector3.Lerp(orgPos, pos, t/time);
+            yield return new WaitForEndOfFrame();
+            Debug.Log(Vector3.Lerp(orgPos, pos, t / time));
+        }
+    }
+    IEnumerator RunAway() {
+        Transform[] quePonts = PashentMan.instance.queuePonts;
+        for (int i = 1; i < quePonts.Length; i++) {
+            StartCoroutine(GoToPont(quePonts[i].position, quePonts[i-1].position, 1.5f / quePonts.Length));
+            Debug.Log(quePonts[i].position);  
+            yield return new WaitForSeconds(1.5f/ quePonts.Length);
+        }
+      
+    }
     public void TyrCure(ItemInfo posibolCure) {
 
         for (int i = 0; i < sikneses.Count; i++) 
@@ -51,9 +67,11 @@ public class Patient : MonoBehaviour
                 
                 if (sikneses.Count == 0)
                 {
+                    PashentMan.pashents.Remove(gameObject);
+                    GameController.gameController.interactables.Remove(gameObject);
                     GameController.gameController.PatientHeal(this);
-                    transform.DOMoveX(transform.position.x - 15, 1.5f);
                     Destroy(gameObject, 1.5f);
+                    StartCoroutine(RunAway());
                 }
                 munyRane.Play();
 
@@ -90,6 +108,7 @@ public class Patient : MonoBehaviour
         if (hellf < 0) { 
             GameController.gameController.PatientDie(this);
             transform.DOMoveY(transform.position.y - 5, 1.5f);
+            transform.DORotate(new Vector3(1, 0, 0), 1.5f);
             Destroy(gameObject, 1.5f);
         }
     }
