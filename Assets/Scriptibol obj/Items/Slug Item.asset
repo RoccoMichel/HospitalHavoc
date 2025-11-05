@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Slug Item
   m_EditorClassIdentifier: 
   itemTag: v
-  item: {fileID: 8274634750848284492, guid: ddd0b709be1ba2c43bfaf2d138bf6826, type: 3}
+  item: {fileID: 8274634750848284492, guid: 670a632006c71a14ba36846dd60e742e, type: 3}
   mixTime: 5
   ingrediants: []
