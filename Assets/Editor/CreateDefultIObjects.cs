@@ -3,24 +3,25 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectsToSpawn : ScriptableObject
 {
     public List<GameObject> toSpawn;
+
+    public Vector3 camPos = new Vector3(0, 6.25f, -10),
+                   camRot = new Vector3(30, 0, 0);
 }
 
 public class SpawnObjects : EditorWindow
 {
     ObjectsToSpawn scriptableObject;
     SerializedObject serializedData;
-    SerializedProperty objectsProperty;
+    SerializedProperty listProperty;
 
-    bool showList,
-         showingList;
+    bool showingList;
 
     string path = "Assets/Editor/ObjectsNeeded.asset";
-
-    bool listExsists = false;
 
     [MenuItem("Tools/BoltsTools/Spawn Needed Objects")]
     public static void OpenWindow()
@@ -30,13 +31,13 @@ public class SpawnObjects : EditorWindow
 
     void OnGUI()
     {
-        if(!listExsists)
-            CheckIfScriptableObjectExsists();
+        ShowList();
 
-        showList = EditorGUILayout.Toggle("Show List", showList);
-
-        if(showList)
-            ShowList();
+        if (showingList)
+        {
+            scriptableObject.camPos = EditorGUILayout.Vector3Field("Camera Position", scriptableObject.camPos);
+            scriptableObject.camRot = EditorGUILayout.Vector3Field("Camera Rotation", scriptableObject.camRot);
+        }
 
         if(GUILayout.Button("Spawn Objects"))
             SpawnTheObjects();
@@ -49,6 +50,32 @@ public class SpawnObjects : EditorWindow
         int undoGroup = Undo.GetCurrentGroup();
         Undo.SetCurrentGroupName("Spawn Needed Objects");
 
+        Transform cam = Camera.main.transform;
+
+        Undo.RecordObject(cam, "Setting The Camera Position And Rotation");
+
+        cam.position = scriptableObject.camPos;
+        cam.rotation = Quaternion.Euler(scriptableObject.camRot);
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        string scenePath = currentScene.path;
+        string sceneName = Path.GetFileNameWithoutExtension(scenePath);
+        string folderName = Path.GetDirectoryName(scenePath);
+
+        string folderPath = Path.Combine(folderName, sceneName);
+
+        if(!AssetDatabase.IsValidFolder(folderPath))
+            AssetDatabase.CreateFolder(folderName, sceneName);
+
+        LevelDataObject newDataObject = CreateInstance<LevelDataObject>();
+
+        if (File.Exists(folderPath + "/" + sceneName + "Data.asset"))
+            AssetDatabase.DeleteAsset(folderPath + "/" + sceneName + "Data.asset");
+
+        AssetDatabase.CreateAsset(newDataObject, folderPath + "/" + sceneName + "Data.asset");
+
+        newDataObject = AssetDatabase.LoadAssetAtPath<LevelDataObject>(folderPath + "/" + sceneName + "Data.asset");
+
         while (timesDone < scriptableObject.toSpawn.Count)
         {
             GameObject newOjbect = PrefabUtility.InstantiatePrefab(scriptableObject.toSpawn[timesDone]).GameObject();
@@ -57,6 +84,9 @@ public class SpawnObjects : EditorWindow
 
             Undo.RegisterCreatedObjectUndo(newOjbect, "Spawned Prefab");
         }
+
+        GameController controller = GameObject.FindFirstObjectByType<GameController>();
+        controller.levelData = newDataObject;
 
         Undo.CollapseUndoOperations(undoGroup);
     }
@@ -79,22 +109,15 @@ public class SpawnObjects : EditorWindow
             if (scriptableObject != false)
             {
                 serializedData = new SerializedObject(scriptableObject);
-                objectsProperty = serializedData.FindProperty("toSpawn");
+                listProperty = serializedData.FindProperty("toSpawn");
             }
 
             showingList = true;
         }
 
         serializedData.Update();
-        EditorGUILayout.PropertyField(objectsProperty, true);
+        EditorGUILayout.PropertyField(listProperty, true);
 
         serializedData.ApplyModifiedProperties();
-    }
-
-    void CheckIfScriptableObjectExsists()
-    {
-
-
-        listExsists = true;
     }
 }
