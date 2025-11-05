@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController cc;
 
+    [Header("Movement Settings")]
     public float movementSpeed;
+    public bool canMove = true;
     Vector2 moveDir;
     Vector3 lastDir;
     float deadZone = 0.05f;
@@ -14,6 +17,12 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> moveDirObjects;
 
     public ParticleSystem wakingpartiols;
+
+    [Header("Dash Settings")]
+    public float dashForce = 15;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1;
+    public bool canDash = true;
 
     [Header("Item Settings")]
     public float pickUpFOV;
@@ -25,7 +34,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (!GameController.gameController.active) return; // Freeze the player when paused
-        cc.Move(new Vector3(moveDir.x, 0, moveDir.y) * movementSpeed * Time.deltaTime);
+
+        if (canMove)
+            cc.Move(new Vector3(moveDir.x, 0, moveDir.y) * movementSpeed * Time.deltaTime);
+        else
+            cc.Move(lastDir * dashForce * Time.deltaTime);
 
         GameObject clossestItem = GetClosestObject(GameController.gameController.interactables);
         if (GameController.gameController.items.Count > 0)
@@ -42,19 +55,22 @@ public class PlayerController : MonoBehaviour
 
     public void SetMoveDir(InputAction.CallbackContext obj)
     {
-        moveDir = obj.ReadValue<Vector2>();
+        if (canMove)
+        {
+            moveDir = obj.ReadValue<Vector2>();
 
-        Vector3 dir = new Vector3(moveDir.x, 0, moveDir.y).normalized;
+            Vector3 dir = new Vector3(moveDir.x, 0, moveDir.y).normalized;
 
-        moveDir = Vector2.ClampMagnitude(moveDir, 1);
+            moveDir = Vector2.ClampMagnitude(moveDir, 1);
 
-        if (dir.sqrMagnitude < deadZone * deadZone)
-            return;
+            if (dir.sqrMagnitude < deadZone * deadZone)
+                return;
 
-        dir.Normalize();
-        lastDir = dir;
+            dir.Normalize();
+            lastDir = dir;
 
-        RotatePlayer(lastDir);
+            RotatePlayer(lastDir);
+        }
     }
 
     public void RotatePlayer(Vector3 dir)
@@ -151,6 +167,29 @@ public class PlayerController : MonoBehaviour
             currentHeldItem.owner = this;
             GameController.gameController.items.Remove(pickup);
         }
+    }
+
+    public void StartDash(InputAction.CallbackContext obj)
+    {
+        if (obj.started && canDash)
+        {
+            canMove = false;
+            canDash = false;
+
+            StartCoroutine(StopDashing());
+        }
+    }
+
+    IEnumerator StopDashing()
+    {
+        yield return new WaitForSeconds(dashDuration);
+
+        canMove = true;
+        moveDir = Vector2.zero;
+
+        yield return new WaitForSeconds(dashCooldown);
+
+        canDash = true;
     }
 
     void Awake() {

@@ -205,12 +205,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
+  canMove: 1
   moveDirObjects:
   - {fileID: 6648209221667298226}
   - {fileID: 7663942810065241718}
   - {fileID: 9042206053382704457}
   - {fileID: 1654715828956155900}
   wakingpartiols: {fileID: 0}
+  dashForce: 15
+  dashDuration: 0.2
+  dashCooldown: 1
+  canDash: 1
   pickUpFOV: 180
   pickUpRange: 4
   throwForce: 50
@@ -354,6 +359,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 95107960-58cc-4aa8-af4d-5180711b466f
     m_ActionName: 'Player/Pause[/Keyboard/escape,/DualSenseGamepadHID/select]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5672424396096202557}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: StartDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c9e1afcf-cf43-4f41-a8d8-298cf40a7f49
+    m_ActionName: 'Player/Dash[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -381,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c42c8a58eed3f34c80ca86454b82150, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c42c8a58eed3f34c80ca86454b82150, type: 3}
       propertyPath: m_LocalRotation.x
@@ -389,11 +410,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c42c8a58eed3f34c80ca86454b82150, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c42c8a58eed3f34c80ca86454b82150, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c42c8a58eed3f34c80ca86454b82150, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -401,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c42c8a58eed3f34c80ca86454b82150, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 270
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c42c8a58eed3f34c80ca86454b82150, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
