@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c38a2f48f9fe394dbec9a75369b8f63, type: 3}
   m_Name: ObjectsNeeded
   m_EditorClassIdentifier: 
-  toSpawn: []
+  toSpawn:
+  - {fileID: 1147424080598636252, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+  - {fileID: 2068023462748037967, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+  - {fileID: 6759739616760821483, guid: ff748feec805f744b8d0a33cf8edd9d4, type: 3}
+  - {fileID: 3428344893302931954, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
+  - {fileID: 6032752511132113882, guid: 0559c5a86fab11443a92fabacf1274d4, type: 3}
+  - {fileID: 4480582738583006467, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
+  - {fileID: 5998346186491512131, guid: dd4239a58aff7c84da44f705534f619a, type: 3}
+  camPos: {x: 0, y: 6.25, z: -10}
+  camRot: {x: 30, y: 0, z: 0}

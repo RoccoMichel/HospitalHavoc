@@ -5106,6 +5106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3cf45e05e2cc84babdf496859fa879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInt: 0
   movementSpeed: 8
   canMove: 1
   moveDirObjects:

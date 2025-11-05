@@ -12,18 +12,17 @@ public class Interact : MonoBehaviour
     {
         if (player.currentHeldItem != null)
         {
-            Coldrin.inctanse.AddIngedent(player.currentHeldItem.itemInfo);
+            GetComponent<Coldrin>().AddIngedent(player.currentHeldItem.itemInfo);
             GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
             Destroy(player.currentHeldItem.gameObject);
             player.currentHeldItem = null;
         }
         else
-            Coldrin.inctanse.MixIngedents();
+            GetComponent<Coldrin>().MixIngedents();
     }
 
     public void SpawnItem(PlayerController player)
     {
-        Debug.Log("Spone item");
         GameObject spawnedItem = GetComponent<SponeItem>().sponeItem();
 
         player.PickUpChosenItem(spawnedItem);

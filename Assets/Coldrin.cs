@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 
 public class Coldrin : MonoBehaviour
 {
-    public static Coldrin inctanse;
     public VisuleseModels visseModel;
     public Transform itemExit;
 
@@ -98,11 +97,6 @@ public class Coldrin : MonoBehaviour
         timeWaited = 0;
         loadingImage.fillAmount = 0;
         loadingImage.gameObject.SetActive(false);
-    }
-
-    void Awake()
-    {
-        inctanse = this;
     }
 
     void Update()
