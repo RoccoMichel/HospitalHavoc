@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetMoveDir(InputAction.CallbackContext obj)
     {
-        if (canMove && obj.ReadValue<Vector2>().sqrMagnitude >= deadZone * deadZone)
+        if (canMove)
         {
             moveDir = obj.ReadValue<Vector2>();
 
