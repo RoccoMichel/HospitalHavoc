@@ -28,9 +28,16 @@ public class Items : MonoBehaviour
         {
             if(other.gameObject.CompareTag("Player"))
                 other.gameObject.GetComponent<PlayerController>().PickUpChosenItem(gameObject);
-            else if (CheckIfInList(GameController.gameController.interactables, other.gameObject))
+            else if (other.gameObject.GetComponent<Interact>() != null)
             {
-                if(other.gameObject.GetComponent<Interact>().itemCanInteract && owner)
+                if (other.gameObject.GetComponent<Coldrin>() != null)
+                {
+                    other.gameObject.GetComponent<Coldrin>().AddIngedent(itemInfo);
+                    GameController.gameController.items.Remove(gameObject);
+                    Destroy(gameObject);
+                }
+
+                else if (other.gameObject.GetComponent<Interact>().itemCanInteract && owner)
                     other.gameObject.GetComponent<Interact>().onInteract.Invoke(owner);
             }
         }
@@ -50,12 +57,12 @@ public class Items : MonoBehaviour
 
     public bool CheckIfInList(List<GameObject> list, GameObject objectInList)
     {
-        bool isInList = false;
-
         foreach (GameObject obj in list)
-            if (obj == objectInList)
-                isInList = true;
+        {
+            if (objectInList == obj)
+                return true;
+        }
 
-        return isInList;
+        return false;
     }
 }
