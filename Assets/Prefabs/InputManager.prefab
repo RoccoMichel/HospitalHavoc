@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 2
-  m_AllowJoining: 0
-  m_JoinBehavior: 0
+  m_AllowJoining: 1
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -76,7 +76,23 @@ MonoBehaviour:
       m_Id: b803f33e-2043-4b5c-bcf3-399949591f12
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 2251d700-dbdb-421b-bd57-fd59bb8b7bb3
+        m_Path: <Gamepad>/start
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 1f92b12c-0dc1-4994-b7e0-834ed3c7c823
+        m_Path: <Keyboard>/space
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 8001164492991008200, guid: 0f44747c1d8217f4aa2d2dac904f723b, type: 3}
