@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -210,8 +211,10 @@ public class PlayerController : MonoBehaviour
         DashColdown.fillAmount = 0;
     }
 
-    void Awake() {
-        GameController.gameController.canvasManager.RequestPlayerHighlight(this);
+    void Awake()
+    {
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+            GameController.gameController.canvasManager.RequestPlayerHighlight(this);
         cc = GetComponent<CharacterController>();
     }
 
