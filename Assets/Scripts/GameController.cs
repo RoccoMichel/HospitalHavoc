@@ -110,6 +110,11 @@ public class GameController : MonoBehaviour
         active = false;
     }
 
+    public void SetPlayerCanJoin()
+    {
+        OnPlayerJoin.intance.GetComponent<PlayerInputManager>().joiningEnabled.Equals(true);
+    }
+
     /// <summary>
     /// Level Failed by player(s)
     /// </summary>
