@@ -63,7 +63,8 @@ public class Patient : MonoBehaviour
                 sikneses.RemoveAt(i);
 
                 hellf = Mathf.Clamp(hellf + 10, 0, 100);
-                
+                DisplayMedicine();
+
                 if (sikneses.Count == 0)
                 {
                     PashentMan.pashents.Remove(gameObject);
@@ -100,6 +101,8 @@ public class Patient : MonoBehaviour
     private void Update()
     {
         Hellfbar.fillAmount = hellf/100; // hellf/maxhellf
+
+        if (!GameController.gameController.active) return; // Freeze when game is Paused
 
         for (int i = 0; i < sikneses.Count; i++)
             hellf -= sikneses[i].hellfInpackt * Time.deltaTime;

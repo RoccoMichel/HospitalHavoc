@@ -24,7 +24,7 @@ public class Items : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (transform.parent == null)
+        if (transform.parent == null && owner != null)
         {
             if(other.gameObject.CompareTag("Player"))
                 other.gameObject.GetComponent<PlayerController>().PickUpChosenItem(gameObject);
@@ -37,7 +37,7 @@ public class Items : MonoBehaviour
                     Destroy(gameObject);
                 }
 
-                else if (other.gameObject.GetComponent<Interact>().itemCanInteract && owner)
+                else if (other.gameObject.GetComponent<Interact>().itemCanInteract)
                     other.gameObject.GetComponent<Interact>().onInteract.Invoke(owner);
             }
         }

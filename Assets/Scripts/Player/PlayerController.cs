@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     float timeTillDash = 0;
     void Update()
     {
+        if (!GameController.gameController.active) return; // Freeze the player when paused
+
         if (!canDash)
         {
             DashColdown.gameObject.SetActive(true);
@@ -49,7 +51,6 @@ public class PlayerController : MonoBehaviour
         }
         else
             DashColdown.gameObject.SetActive(false);
-        if (!GameController.gameController.active) return; // Freeze the player when paused
 
         if (canMove)
             cc.Move(new Vector3(moveDir.x, 0, moveDir.y) * movementSpeed * Time.deltaTime);
