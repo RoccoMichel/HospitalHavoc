@@ -9,7 +9,7 @@ public class Coldrin : MonoBehaviour
 {
     public VisuleseModels visseModel;
     public Transform itemExit;
-
+    public GameObject FlowidIncoldrin;
     public Vector3 maxItemAngle = new Vector3(40, 40, 40),
                    minItemAngle = new Vector3(10, 10, 10);
     public float itemExitForce = 50;
@@ -115,6 +115,11 @@ public class Coldrin : MonoBehaviour
         if (!GameController.gameController.active) return; // Freeze the Cauldron when paused
 
         mixiMisxi.SetBool("Mix", isMixing);
+
+        if (Ingerdens.Count != 0 || isMixing)
+            FlowidIncoldrin.SetActive(true);
+        else FlowidIncoldrin.SetActive(false);
+
 
         if (isMixing)
         {

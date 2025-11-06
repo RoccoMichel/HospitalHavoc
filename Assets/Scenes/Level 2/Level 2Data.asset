@@ -17,4 +17,4 @@ MonoBehaviour:
   moneyDrainRate: 1
   newPatientRate: 0.05
   DeadPatientScorePenalty: 50
-  rankRequirements: 0000000032000000500000007800000096000000
+  rankRequirements: 00000000640000007d00000096000000c8000000

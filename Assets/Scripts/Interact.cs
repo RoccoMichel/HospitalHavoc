@@ -8,12 +8,9 @@ public class Interact : MonoBehaviour
 
     public bool needsEmptyHand = true, itemCanInteract = false;
 
-    public void ColdrinInteract(PlayerController player)
-    {
-        if (!GetComponent<Coldrin>().isMixing)
-        {
-            if (player.currentHeldItem != null)
-            {
+    public void ColdrinInteract(PlayerController player) {
+        if (!GetComponent<Coldrin>().isMixing) {
+            if (player.currentHeldItem != null) {
                 GetComponent<Coldrin>().AddIngedent(player.currentHeldItem.itemInfo);
                 GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
                 Destroy(player.currentHeldItem.gameObject);
@@ -24,15 +21,13 @@ public class Interact : MonoBehaviour
         }
     }
 
-    public void SpawnItem(PlayerController player)
-    {
+    public void SpawnItem(PlayerController player) {
         GameObject spawnedItem = GetComponent<SponeItem>().sponeItem();
 
         player.PickUpChosenItem(spawnedItem);
     }
 
-    public void TryCure(PlayerController player)
-    {
+    public void TryCure(PlayerController player) {
         if(player.currentHeldItem != null)
             GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
 
@@ -44,6 +39,7 @@ public class Interact : MonoBehaviour
     public void TrowAwayItem(PlayerController player) {
         Destroy(player.currentHeldItem.gameObject);
         player.currentHeldItem = null;
+        GetComponent<Animator>().SetTrigger("TroweItem");
     }
 
     public void Bench(PlayerController player)
