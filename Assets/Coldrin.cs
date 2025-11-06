@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -104,6 +102,7 @@ public class Coldrin : MonoBehaviour
     {
         loadingImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeToWait);
+        while (!GameController.gameController.active) yield return new WaitForEndOfFrame();
         ItemDoneMixing(valiedItem, index);
 
         isMixing = false;
@@ -113,6 +112,8 @@ public class Coldrin : MonoBehaviour
     }
     void Update()
     {
+        if (!GameController.gameController.active) return; // Freeze the Cauldron when paused
+
         mixiMisxi.SetBool("Mix", isMixing);
 
         if (isMixing)
