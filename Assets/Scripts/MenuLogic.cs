@@ -45,7 +45,7 @@ public class MenuLogic : MonoBehaviour
 
     public void StartLevel()
     {
-        gameController.LevelStart();
+        gameController.SetPlayerCanJoin();
     }
 
     public void Pause()

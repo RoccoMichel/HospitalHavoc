@@ -15,6 +15,8 @@ public class OnPlayerJoin : MonoBehaviour
         obj.gameObject.GetComponent<PlayerController>().SetPlayerModel();
 
         players.Add(obj.gameObject.GetComponent<PlayerController>());
+
+        GameController.gameController.LevelStart();
     }
 
     public void OnPlayerLeave(PlayerInput obj)
@@ -30,5 +32,7 @@ public class OnPlayerJoin : MonoBehaviour
     void Awake()
     {
         intance = this;
+
+        GetComponent<PlayerInputManager>().joiningEnabled.Equals(false);
     }
 }
