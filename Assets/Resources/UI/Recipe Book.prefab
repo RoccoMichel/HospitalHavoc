@@ -862,7 +862,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 06cb03a31740b3444a2e339e89760048, type: 3}
   - {fileID: 21300000, guid: 4fb1233adfb61564bab27f84d78cdfad, type: 3}
   - {fileID: 21300000, guid: d6a42cebd460ffd44ae7024f4131e0e9, type: 3}
-  - {fileID: 21300000, guid: 5ebf793941c927940a88b24e44236467, type: 3}
+  - {fileID: 21300000, guid: 0fa57c6cd34bab44395ebb2aab75e0c1, type: 3}
   pageDisplay: {fileID: 4655201096985427887}
 --- !u!224 &6491476669992718517 stripped
 RectTransform:

@@ -576,8 +576,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[tutorial]'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
+  m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2612,15 +2612,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1439872575535271342, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.924
+      value: -5.4
       objectReference: {fileID: 0}
     - target: {fileID: 1439872575535271342, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1439872575535271342, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.419
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1439872575535271342, guid: 14525cd426d91cf4fbc57d6ec13a8e21, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2855,19 +2855,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialStage: 0
   tutorial:
-  - arrowLocation: {x: 4, y: 2.4, z: 4}
+  - arrowLocation: {x: 4, y: 4, z: 4}
     explanation: 'This is your Cauldron!
 
       Walk to it!'
-  - arrowLocation: {x: -6, y: 2.4, z: 11}
+  - arrowLocation: {x: -4, y: 4, z: 11}
     explanation: You got a customer!
-  - arrowLocation: {x: 7.5, y: 2.4, z: -1}
+  - arrowLocation: {x: 7.5, y: 4, z: -1}
     explanation: Check your Recipe Book by the Bookshelf
-  - arrowLocation: {x: -8.1, y: 2.4, z: -1.4}
+  - arrowLocation: {x: -5.4, y: 4, z: -1.5}
     explanation: 'Grab a Mushroom from the Crate!
 
       Press the interact key'
-  - arrowLocation: {x: 4, y: 2.4, z: 4}
+  - arrowLocation: {x: 4, y: 4, z: 4}
     explanation: 'Put it in the Couldron!
 
       And Mix!'
@@ -3105,7 +3105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7504485017539279683, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.755
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7504485017539279683, guid: 84c637c715902b1499b4d0d214999cbd, type: 3}
       propertyPath: m_LocalPosition.z
