@@ -125,7 +125,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     internal void LevelClear()
     {
-        char[] ranks = { 'F', 'D', 'C', 'B', 'A', 'S' };
+        char[] ranks = { 'D', 'C', 'B', 'A', 'S' };
         string rank = string.Empty;
 
         LevelEnd();
@@ -156,7 +156,7 @@ public class GameController : MonoBehaviour
 
         // Setting High-scores |     DO NOT WRITE CODE BELOW ALWAYS ABOVE!
         string bestRank = PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_score", string.Empty);
-        if (bestRank == string.Empty) 
+        if (bestRank == string.Empty || bestRank == "F") 
         { 
             PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank); 
             return; 
