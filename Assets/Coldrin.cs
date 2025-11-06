@@ -30,15 +30,26 @@ public class Coldrin : MonoBehaviour
         Ingerdens.Add(info);
         visseModel.addItemToColdrin(info);
     }
-    bool AreListsEqual(List<ItemInfo> a, List<ItemInfo> b)
-    {
-        // Null checks first
-        if (a == null || b == null) {
-            return a == b;
+    bool surtshListAndDestroy(ItemInfo item, List<ItemInfo> list) {
+
+        Debug.Log(list.Count);
+
+        for (int i = 0; i < list.Count; i++) 
+            if (item == list[i]) {
+                list.RemoveAt(i); return true; }
+
+        return false;
+    }
+    bool AreListsEqual(List<ItemInfo> a, List<ItemInfo> b){
+        
+        bool ListArIdetikol = a.Count > 0;
+
+        for (int i = 0; i < a.Count; i++) {
+            if (!surtshListAndDestroy(a[i], b))
+                ListArIdetikol = false;
         }
 
-        // Compare using SequenceEqual (compares object references by default)
-        return a.SequenceEqual(b);
+        return ListArIdetikol;
     }
     // mixes all ingedenst that ar in the coldrin
     public void MixIngedents()
@@ -69,7 +80,6 @@ public class Coldrin : MonoBehaviour
             visseModel.clerAll();
         }
     }
-
     public void ItemDoneMixing(bool valiedItem, int index = 0)
     {
         GameObject newItem = null;
@@ -87,7 +97,6 @@ public class Coldrin : MonoBehaviour
         itemCoplit.Play();
         //SFX
     }
-
     IEnumerator MixAllItems(bool valiedItem, int index = 0)
     {
         loadingImage.gameObject.SetActive(true);
@@ -99,7 +108,6 @@ public class Coldrin : MonoBehaviour
         loadingImage.fillAmount = 0;
         loadingImage.gameObject.SetActive(false);
     }
-
     void Update()
     {
         mixiMisxi.SetBool("Mix", isMixing);

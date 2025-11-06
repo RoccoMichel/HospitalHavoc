@@ -46,14 +46,12 @@ public class Patient : MonoBehaviour
         for (float t = time; t > 0; t -= Time.deltaTime) {
             transform.position = Vector3.Lerp(orgPos, pos, t/time);
             yield return new WaitForEndOfFrame();
-            Debug.Log(Vector3.Lerp(orgPos, pos, t / time));
         }
     }
     IEnumerator RunAway() {
         Transform[] quePonts = PashentMan.instance.queuePonts;
         for (int i = 1; i < quePonts.Length; i++) {
             StartCoroutine(GoToPont(quePonts[i].position, quePonts[i-1].position, 1.5f / quePonts.Length));
-            Debug.Log(quePonts[i].position);  
             yield return new WaitForSeconds(1.5f/ quePonts.Length);
         }
       
@@ -105,13 +103,13 @@ public class Patient : MonoBehaviour
 
         for (int i = 0; i < sikneses.Count; i++)
             hellf -= sikneses[i].hellfInpackt * Time.deltaTime;
-        if (hellf < 0 && !ded) { 
-            GameController.gameController.PatientDie(this);
+
+        if (hellf < 0) { 
+            if(!ded) GameController.gameController.PatientDie(this);
             transform.DOMoveY(transform.position.y - 5, 1.5f);
             transform.DORotate(new Vector3(1, 0, 0), 1.5f);
             Destroy(gameObject, 1.5f);
             ded = true;
-            hellf = 1;
         }
     }
 }
