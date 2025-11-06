@@ -5078,6 +5078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visseModel: {fileID: 6032182764516311908}
   itemExit: {fileID: 552567200001268910}
+  FlowidIncoldrin: {fileID: 7749096720144438251}
   maxItemAngle: {x: 40, y: 40, z: 40}
   minItemAngle: {x: 10, y: 10, z: 10}
   itemExitForce: 5
