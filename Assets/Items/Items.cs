@@ -30,8 +30,12 @@ public class Items : MonoBehaviour
                 other.gameObject.GetComponent<PlayerController>().PickUpChosenItem(gameObject);
             else if (other.gameObject.GetComponent<Interact>() != null)
             {
-                if(other.gameObject.GetComponent<Coldrin>() != null)
+                if (other.gameObject.GetComponent<Coldrin>() != null)
+                {
                     other.gameObject.GetComponent<Coldrin>().AddIngedent(itemInfo);
+                    GameController.gameController.items.Remove(gameObject);
+                    Destroy(gameObject);
+                }
 
                 else if (other.gameObject.GetComponent<Interact>().itemCanInteract && owner)
                     other.gameObject.GetComponent<Interact>().onInteract.Invoke(owner);
