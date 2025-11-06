@@ -61,7 +61,7 @@ public class Coldrin : MonoBehaviour
             bool hasValiedItems = false;
 
             for (int i = 0; i < AllPosibolItems.Count; i++) {
-                if (AreListsEqual(AllPosibolItems[i].ingrediants, Ingerdens.ToArray().ToList())) {
+                if (AllPosibolItems[i].ingrediants.Count == Ingerdens.Count && AreListsEqual(AllPosibolItems[i].ingrediants, Ingerdens.ToArray().ToList())) {
                     Debug.Log("Suksefuly mix");
                     hasValiedItems = true;
                     timeToWait = AllPosibolItems[i].mixTime;

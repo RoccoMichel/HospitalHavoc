@@ -3133,6 +3133,10 @@ PrefabInstance:
       propertyPath: 'sikneses.Array.data[4]'
       value: 
       objectReference: {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: 'sikneses.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
     - target: {fileID: 5398035656085730263, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
