@@ -116,7 +116,8 @@ public class GameController : MonoBehaviour
     internal void LevelFail()
     {
         LevelEnd();
-
+        if (PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_score", string.Empty) == string.Empty)
+            PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", "F");
         Instantiate((GameObject)Resources.Load("UI/Level End Menu"), canvasManager.gameObject.transform);
     }
     /// <summary>
@@ -124,7 +125,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     internal void LevelClear()
     {
-        char[] ranks = { 'D', 'C', 'B', 'A', 'S' };
+        char[] ranks = { 'F', 'D', 'C', 'B', 'A', 'S' };
         string rank = string.Empty;
 
         LevelEnd();
@@ -166,7 +167,6 @@ public class GameController : MonoBehaviour
             if (rankChar == char.Parse(bestRank)) PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
             else if (rankChar == char.Parse(rank)) return;
         }
-        Debug.Log("yure score is " + score);
     }
 
     private IEnumerator ScoreDisplay(GameObject display, string rank)
