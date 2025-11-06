@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: IyeIenutus
   cure: {fileID: 11400000, guid: e6d94633a737452489a8f5f298115b5c, type: 2}
-  difecoltyAndMuny: 100
+  difecoltyAndMuny: 25
   hellfInpackt: 0.5

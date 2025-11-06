@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878d482835656c34ebae33c9e05783fc, type: 3}
   m_Name: Posen 2
   m_EditorClassIdentifier: 
-  itemTag: Posen 1
+  itemTag: Posen 2
   item: {fileID: 162002675693078638, guid: e3ccdc25421917b4ebd29e2175b09256, type: 3}
   mixTime: 5
   ingrediants:
