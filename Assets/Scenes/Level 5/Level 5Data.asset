@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00390d33bcd58fb42a69094842ebda51, type: 3}
-  m_Name: Vatenkopor
+  m_Script: {fileID: 11500000, guid: a74dc0c03e9b6014599d9c95a6fd90b4, type: 3}
+  m_Name: Level 5Data
   m_EditorClassIdentifier: 
-  name: Vatencopor
-  cure: {fileID: 11400000, guid: e638c86b1255a6d44a33910ed814ba2e, type: 2}
-  difecoltyAndMuny: 75
-  hellfInpackt: 0.5
+  GameLengthSeconds: 300
+  startMoney: 500
+  moneyDrainRate: 5
+  newPatientRate: 0.025
+  DeadPatientScorePenalty: 5
+  rankRequirements: 000000003200000096000000c80000002c010000

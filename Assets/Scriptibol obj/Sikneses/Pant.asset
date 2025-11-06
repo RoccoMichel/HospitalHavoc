@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Vatencopor
   cure: {fileID: 11400000, guid: 56e64d019b859484cb55bee2d2344394, type: 2}
-  difecoltyAndMuny: 50
+  difecoltyAndMuny: 25
   hellfInpackt: 0.5
