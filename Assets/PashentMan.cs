@@ -25,6 +25,7 @@ public class PashentMan : MonoBehaviour {
             pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts[i >= queuePonts.Length ? queuePonts.Length-1 : i].position, Time.deltaTime * 25);
         }
 
-        pashents[0].GetComponent<Interact>().enabled = true;
+        if (pashents.Count != 0) 
+            pashents[0].GetComponent<Interact>().enabled = true;
     }
 }
