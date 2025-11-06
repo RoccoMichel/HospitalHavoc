@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -36,7 +37,9 @@ public class Coldrin : MonoBehaviour
 
         for (int i = 0; i < list.Count; i++) 
             if (item == list[i]) {
-                list.RemoveAt(i); return true; }
+                list.RemoveAt(i); 
+                return true; 
+            }
 
         return false;
     }
@@ -60,7 +63,7 @@ public class Coldrin : MonoBehaviour
             bool hasValiedItems = false;
 
             for (int i = 0; i < AllPosibolItems.Count; i++) {
-                if (AreListsEqual(AllPosibolItems[i].ingrediants, Ingerdens)) {
+                if (AreListsEqual(AllPosibolItems[i].ingrediants, Ingerdens.ToArray().ToList())) {
                     Debug.Log("Suksefuly mix");
                     hasValiedItems = true;
                     timeToWait = AllPosibolItems[i].mixTime;

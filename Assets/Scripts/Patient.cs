@@ -39,7 +39,7 @@ public class Patient : MonoBehaviour
         Debug.Log(nuberOfSiknese);
         
         for (int i = 0; i < nuberOfSiknese; i++) {
-            sikneses.Add(sik[Random.Range(0, sik.Count-1)]);
+            sikneses.Add(sik[Random.Range(0, sik.Count)]);
         }
     }
     IEnumerator GoToPont(Vector3 orgPos, Vector3 pos, float time) { 
