@@ -48,7 +48,7 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: 54522dc32211b854abcf81b98bda5506, type: 2}
   money: 0
   time: 0
-  active: 0
+  active: 1
   items: []
   interactables: []
   sikneses: []

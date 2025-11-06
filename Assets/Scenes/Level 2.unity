@@ -10060,6 +10060,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock For Eveline
       objectReference: {fileID: 0}
+    - target: {fileID: 6433026054003438734, guid: 0fe9da03c3db6264da17df00ace0c733, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cf410b862788a144eabcc0cf1b871b99, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10365,6 +10369,10 @@ PrefabInstance:
       propertyPath: 'sikneses.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: interactables.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5398035656085730263, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

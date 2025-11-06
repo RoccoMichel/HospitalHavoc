@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     float timeTillDash = 0;
     void Update()
     {
+        SnapY();
         if (!GameController.gameController.active) return; // Freeze the player when paused
 
         if (!canDash)
@@ -68,6 +70,25 @@ public class PlayerController : MonoBehaviour
                        Vector3.Distance(transform.position, clossestInteractable.transform.position)
                            ? clossestItem
                            : clossestInteractable;
+    }
+    public void SnapY()
+    {
+        if (cc != null)
+        {
+            // Keep current X and Z, set Y to snapY
+            Vector3 pos = transform.position;
+            pos.y = 1;
+            cc.enabled = false;   // Disable temporarily to avoid fighting physics
+            transform.position = pos;
+            cc.enabled = true;
+        }
+        else
+        {
+            // Works even if you’re not using a CharacterController
+            Vector3 pos = transform.position;
+            pos.y = 1;
+            transform.position = pos;
+        }
     }
 
     public void SetMoveDir(InputAction.CallbackContext obj)
