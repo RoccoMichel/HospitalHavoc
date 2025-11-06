@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a74dc0c03e9b6014599d9c95a6fd90b4, type: 3}
-  m_Name: Level 3Data
+  m_Name: Level 4Data
   m_EditorClassIdentifier: 
   GameLengthSeconds: 120
-  startMoney: 150
+  startMoney: 100
   moneyDrainRate: 0.5
-  newPatientRate: 0.025
+  newPatientRate: 0.1
   DeadPatientScorePenalty: 50
-  rankRequirements: 0000000032000000500000007800000096000000
+  rankRequirements: 00000000280000003c0000005000000064000000
