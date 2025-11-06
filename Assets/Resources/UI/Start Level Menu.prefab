@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180980884684023573, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_Name
-      value: Base Menu Variant
+      value: Start Level Menu
       objectReference: {fileID: 0}
     - target: {fileID: 5912133918020412346, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_Pivot.x
@@ -126,8 +126,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982627458063161422, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_text
-      value: DO wizard shit and safe yo patiens without running out of money or you
-        will get shot in the head lmao
+      value: '
+
+        Your Shop is Open!
+
+
+        Sell the correct medicine before
+        they loss their die!'
       objectReference: {fileID: 0}
     - target: {fileID: 5982627458063161422, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_fontSize
