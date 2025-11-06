@@ -128,6 +128,8 @@ public class PlayerController : MonoBehaviour
                     itemToPickUp.transform.parent = hand;
                     currentHeldItem = itemToPickUp.GetComponent<Items>();
 
+                    currentHeldItem.owner = this;
+
                     GameController.gameController.items.Remove(itemToPickUp);
 
                     pickUpItem = true;
