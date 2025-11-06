@@ -12,6 +12,8 @@ public class OnPlayerJoin : MonoBehaviour
     public void PlayerJoined(PlayerInput obj)
     {
         obj.gameObject.GetComponent<PlayerController>().playerInt = obj.playerIndex + 1;
+        obj.gameObject.GetComponent<PlayerController>().SetPlayerModel();
+
         players.Add(obj.gameObject.GetComponent<PlayerController>());
     }
 

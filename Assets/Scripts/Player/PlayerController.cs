@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     Vector3 lastDir;
     float deadZone = 0.05f;
     [Tooltip("0 = up, 1 = right, 2 = down, 3 = left")]
-    public List<GameObject> moveDirObjects;
+    public List<GameObject> moveDirObjects, player2MoveDirObjects;
 
     public ParticleSystem wakingpartiols;
 
@@ -215,7 +215,19 @@ public class PlayerController : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex != 0)
             GameController.gameController.canvasManager.RequestPlayerHighlight(this);
+
         cc = GetComponent<CharacterController>();
+    }
+
+    public void SetPlayerModel()
+    {
+        if (playerInt == 2)
+        {
+            moveDirObjects[0].SetActive(false);
+            player2MoveDirObjects[0].SetActive(true);
+
+            moveDirObjects = player2MoveDirObjects;
+        }
     }
 
     public GameObject GetClosestObject(List<GameObject> search)
