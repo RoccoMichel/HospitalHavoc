@@ -14,18 +14,21 @@ public class Patient : MonoBehaviour
     public ParticleSystem munyRane;
     public ParticleSystem fellMedesin;
     public Image Hellfbar;
-    internal VisuleseModels visualizer;
+    public MeshRenderer[] Ilneses;
+    public GameObject Spitshbubol;
+    //internal VisuleseModels visualizer;
     bool ded = false;
 
     void Start() {
         setUp();
-        visualizer = GetComponent<VisuleseModels>();
+        //visualizer = GetComponent<VisuleseModels>();
 
         for (int i = 0; i < sikneses.Count; i++) 
             value += sikneses[i].difecoltyAndMuny;
         PashentMan.pashents.Add(gameObject);
 
-        if (PashentMan.pashents[0] == gameObject) DisplayMedicine();
+        if (PashentMan.pashents[0] == gameObject) 
+            DisplayMedicine();
 
     }
 
@@ -36,11 +39,13 @@ public class Patient : MonoBehaviour
         for (int i = 1; i < sik.Count; i++)
             if (Random.Range(0, 5 * nuberOfSiknese) == 0)
                 nuberOfSiknese++;
-        Debug.Log(nuberOfSiknese);
         
         for (int i = 0; i < nuberOfSiknese; i++) {
             sikneses.Add(sik[Random.Range(0, sik.Count)]);
         }
+
+        for (int i = 0; i < Ilneses.Length; i++)
+            Ilneses[i].material = Instantiate(Ilneses[i].material);
     }
     IEnumerator GoToPont(Vector3 orgPos, Vector3 pos, float time) { 
         for (float t = time; t > 0; t -= Time.deltaTime) {
@@ -67,6 +72,7 @@ public class Patient : MonoBehaviour
 
                 if (sikneses.Count == 0)
                 {
+                    Spitshbubol.SetActive(false);
                     PashentMan.pashents.Remove(gameObject);
                     GameController.gameController.interactables.Remove(gameObject);
                     GameController.gameController.PatientHeal(this);
@@ -84,14 +90,20 @@ public class Patient : MonoBehaviour
 
     public void DisplayMedicine()
     {
-        visualizer.clerAll();
-        foreach (Siknes siknes in sikneses)
-            visualizer.addItemToColdrin(siknes.cure);
+        Spitshbubol.SetActive(true);
+        for (int i = 0; i < Ilneses.Length; i++) {
+            if (sikneses.Count > i) Ilneses[i].material.SetTexture("_BaseMap", sikneses[i].pitsher);
+            else Ilneses[i].material.SetColor("_BaseColor", Color.clear);
+        }
+
+        //visualizer.clerAll();
+        //foreach (Siknes siknes in sikneses)
+        //    visualizer.addItemToColdrin(siknes.cure);
     }
 
     void OnDestroy()
     {
-        visualizer.clerAll();
+      //  visualizer.clerAll();
         PashentMan.pashents.Remove(gameObject);
         GameController.gameController.interactables.Remove(gameObject);
         try { PashentMan.pashents[0].GetComponent<Patient>().DisplayMedicine(); } 
@@ -107,12 +119,17 @@ public class Patient : MonoBehaviour
         for (int i = 0; i < sikneses.Count; i++)
             hellf -= sikneses[i].hellfInpackt * Time.deltaTime;
 
-        if (hellf < 0) { 
-            if(!ded) GameController.gameController.PatientDie(this);
+        if (hellf < 0) {
+            if (!ded) GameController.gameController.PatientDie(this);
             transform.DOMoveY(transform.position.y - 5, 1.5f);
             transform.DORotate(new Vector3(1, 0, 0), 1.5f);
             Destroy(gameObject, 1.5f);
             ded = true;
         }
+    }
+
+    private void LateUpdate()
+    {
+         if (ded || sikneses.Count == 0) Spitshbubol.SetActive(false);
     }
 }

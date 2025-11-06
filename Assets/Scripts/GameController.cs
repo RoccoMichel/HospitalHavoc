@@ -89,7 +89,6 @@ public class GameController : MonoBehaviour
 
     public void PatientHeal(Patient patient)
     {
-        patient.visualizer.clerAll();
         AddMoney(patient.value);
         if (averageCureTime == 0) averageCureTime = levelData.GameLengthSeconds - time;
         else averageCureTime = (averageCureTime + latestCureTime) / 2;
@@ -98,7 +97,6 @@ public class GameController : MonoBehaviour
 
     public void PatientDie(Patient patient)
     {
-        patient.visualizer.clerAll();
         RemoveMoney(patient.value/2);
         deadPatientsCount++;
     }

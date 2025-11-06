@@ -16,3 +16,4 @@ MonoBehaviour:
   cure: {fileID: 11400000, guid: 31476911c01bb67428c6a2fc052c95c0, type: 2}
   difecoltyAndMuny: 100
   hellfInpackt: 0.25
+  pitsher: {fileID: 2800000, guid: 081a05305288178468cf1319ef89e340, type: 3}

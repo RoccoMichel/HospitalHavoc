@@ -6,6 +6,7 @@ public class Siknes : ScriptableObject{
     public ItemInfo cure;
     public float difecoltyAndMuny;
     public float hellfInpackt;
+    public Texture pitsher;
     // add vishol efects for siknes hear
 
 }

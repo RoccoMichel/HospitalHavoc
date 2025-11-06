@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00390d33bcd58fb42a69094842ebda51, type: 3}
-  m_Name: EyeInitus
+  m_Name: Flower
   m_EditorClassIdentifier: 
-  name: IyeIenutus
-  cure: {fileID: 11400000, guid: e6d94633a737452489a8f5f298115b5c, type: 2}
-  difecoltyAndMuny: 25
+  name: Vatencopor
+  cure: {fileID: 11400000, guid: da23cc2cd3d9f5d41a382b9479967970, type: 2}
+  difecoltyAndMuny: 125
   hellfInpackt: 0.5
-  pitsher: {fileID: 2800000, guid: 262839ff19021c140ac0bab4b6445b06, type: 3}
+  pitsher: {fileID: 2800000, guid: 54ae5e79035f44a4c82ecaf4362ca204, type: 3}
