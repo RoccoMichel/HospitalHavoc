@@ -20,5 +20,6 @@ MonoBehaviour:
   - {fileID: 6032752511132113882, guid: 0559c5a86fab11443a92fabacf1274d4, type: 3}
   - {fileID: 4480582738583006467, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
   - {fileID: 5998346186491512131, guid: dd4239a58aff7c84da44f705534f619a, type: 3}
+  - {fileID: 627686483351392167, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
   camPos: {x: 0, y: 6.25, z: -10}
   camRot: {x: 30, y: 0, z: 0}

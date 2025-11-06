@@ -50,13 +50,6 @@ public class SpawnObjects : EditorWindow
         int undoGroup = Undo.GetCurrentGroup();
         Undo.SetCurrentGroupName("Spawn Needed Objects");
 
-        Transform cam = Camera.main.transform;
-
-        Undo.RecordObject(cam, "Setting The Camera Position And Rotation");
-
-        cam.position = scriptableObject.camPos;
-        cam.rotation = Quaternion.Euler(scriptableObject.camRot);
-
         Scene currentScene = SceneManager.GetActiveScene();
         string scenePath = currentScene.path;
         string sceneName = Path.GetFileNameWithoutExtension(scenePath);
@@ -75,6 +68,24 @@ public class SpawnObjects : EditorWindow
         AssetDatabase.CreateAsset(newDataObject, folderPath + "/" + sceneName + "Data.asset");
 
         newDataObject = AssetDatabase.LoadAssetAtPath<LevelDataObject>(folderPath + "/" + sceneName + "Data.asset");
+
+        var deleteObjects = new List<GameObject>();
+
+        foreach (var root in currentScene.GetRootGameObjects())
+        {
+            foreach (var t in root.GetComponentsInChildren<Transform>(true))
+            {
+                var go = t.gameObject;
+
+                if (go.GetComponent<Camera>() != null || go.GetComponent<Light>() != null)
+                    deleteObjects.Add(go);
+            }
+        }
+
+        if(deleteObjects.Count > 0)
+            foreach (var go in deleteObjects)
+                if (go != null)
+                    Undo.DestroyObjectImmediate(go);
 
         while (timesDone < scriptableObject.toSpawn.Count)
         {
