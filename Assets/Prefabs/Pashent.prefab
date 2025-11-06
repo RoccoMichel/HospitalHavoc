@@ -5002,7 +5002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleFactor: 0.85
-  offset: {x: 0, y: 2.5, z: -1}
+  offset: {x: 0, y: 2.5, z: 0}
   objectInColdrin: []
 --- !u!136 &9130771921840506190
 CapsuleCollider:

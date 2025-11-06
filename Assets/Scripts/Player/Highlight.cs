@@ -22,7 +22,11 @@ public class Highlight : MonoBehaviour
         try 
         {
             target = player.GetClosestObject(GameController.gameController.items);
-            if (target.IsUnityNull()) target = player.GetClosestObject(GameController.gameController.interactables);
+            if (target.IsUnityNull()) {
+                transform.rotation = Quaternion.Euler(0, 0, 45);
+                target = player.GetClosestObject(GameController.gameController.interactables);
+            }
+            else transform.rotation = Quaternion.Euler(0, 0, 0);
 
             Vector3 worldPos = target.transform.position;
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
