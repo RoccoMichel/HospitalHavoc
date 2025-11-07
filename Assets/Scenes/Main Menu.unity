@@ -1252,6 +1252,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelectedOverride: {fileID: 941804913}
+  playTransitionOnStart: 0
+  transition: {fileID: 2100000, guid: 91f831ca0f03c76469ddcdc63a438c62, type: 2}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  transitionTimeElepsed: 0
+  forword: 0
+  isTransitening: 0
 --- !u!1 &941804913
 GameObject:
   m_ObjectHideFlags: 0

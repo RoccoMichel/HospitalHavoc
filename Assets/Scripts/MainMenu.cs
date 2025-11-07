@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
@@ -31,10 +32,21 @@ public class MainMenu : MonoBehaviour
         public Sprite scenePreview;
     }
 
+    public bool playTransitionOnStart = true;
+
+    public Material transition;
+    public AnimationCurve curve;
+    public float transitionTimeElepsed;
+    public bool forword;
+    public bool isTransitening;
+
     private void Start()
     {
         UpdateBoard();
         GameController.gameController.active = true;
+
+        if (playTransitionOnStart)
+            EndTransition();
     }
 
     public void IncreaseLevelIndex(int amount)
@@ -75,7 +87,7 @@ public class MainMenu : MonoBehaviour
 
     internal void LoadLevel()
     {
-        SceneManager.LoadScene(levels[levelIndex].sceneName);
+        StartTransition();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -108,6 +120,47 @@ public class MainMenu : MonoBehaviour
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         return players.Length;
+    }
+
+    public void StartTransition()
+    {
+        forword = true;
+
+        transitionTimeElepsed = -1;
+
+        isTransitening = true;
+
+        StartCoroutine(PlayTransition());
+    }
+
+    public void EndTransition()
+    {
+        forword = false;
+
+        transitionTimeElepsed = 1;
+
+        isTransitening = true;
+
+        StartCoroutine(PlayTransition());
+    }
+
+    IEnumerator PlayTransition()
+    {
+        while (isTransitening)
+        {
+            transitionTimeElepsed += Time.unscaledDeltaTime * (forword ? 1 : -1);
+
+            transition.SetFloat("_Size", curve.Evaluate(transitionTimeElepsed) * 100);
+
+            if (Mathf.Abs(transitionTimeElepsed) > 1)
+            {
+                SceneManager.LoadScene(levels[levelIndex].sceneName);
+
+                isTransitening = false;
+            }
+
+            yield return null;
+        }
     }
 
     IEnumerator TriggerFix()

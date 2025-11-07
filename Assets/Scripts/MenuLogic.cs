@@ -1,12 +1,25 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MenuLogic : MonoBehaviour
 {
     [SerializeField] GameObject firstSelectedOverride;
     private GameController gameController;
     private EventSystem eventSystem;
+
+    public bool playTransitionOnStart = true;
+
+    public Material transition;
+    public AnimationCurve curve;
+    public float transitionTimeElepsed;
+    public bool forword;
+    public bool isTransitening;
+
+    bool loadScene;
+    int sceneIndex = 0;
+    string sceneNameToLoad = "";
 
     private void Start()
     {
@@ -17,20 +30,29 @@ public class MenuLogic : MonoBehaviour
             gameObject.AddComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>(); }
 
         eventSystem.firstSelectedGameObject = firstSelectedOverride == null ? gameObject : firstSelectedOverride;
+
+        if(playTransitionOnStart)
+            EndTransition();
     }
     public void LoadSceneByString(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        sceneNameToLoad = sceneName;
+        loadScene = true;
+        StartTransition();
     }
 
     public void LoadSceneByIndex(int index)
     {
-        SceneManager.LoadScene(index);
+        sceneIndex = index;
+        loadScene = true;
+        StartTransition();
     }
 
     public void LoadSceneThis()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        loadScene = true;
+        StartTransition();
     }
 
     public void ToggleSelf()
@@ -66,5 +88,52 @@ public class MenuLogic : MonoBehaviour
     public void DestroySelf()
     {
         Destroy(gameObject);
+    }
+
+    public void StartTransition()
+    {
+        forword = true;
+
+        transitionTimeElepsed = -1;
+
+        isTransitening = true;
+
+        StartCoroutine(PlayTransition());
+    }
+
+    public void EndTransition()
+    {
+        forword = false;
+
+        transitionTimeElepsed = 1;
+
+        isTransitening = true;
+
+        StartCoroutine(PlayTransition());
+    }
+
+    IEnumerator PlayTransition()
+    {
+        while (isTransitening)
+        {
+            transitionTimeElepsed += Time.unscaledDeltaTime * (forword ? 1 : -1);
+
+            transition.SetFloat("_Size", curve.Evaluate(transitionTimeElepsed) * 100);
+
+            if (Mathf.Abs(transitionTimeElepsed) > 1)
+            {
+                if (loadScene)
+                {
+                    if (sceneNameToLoad != "")
+                        SceneManager.LoadScene(sceneNameToLoad);
+                    else
+                        SceneManager.LoadScene(sceneIndex);
+                }
+
+                isTransitening = false;
+            }
+
+            yield return null;
+        }
     }
 }

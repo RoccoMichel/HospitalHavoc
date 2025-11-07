@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     public float time;
     public bool active = false;
 
+    public bool playTransitionOnStart = true;
+
     public Material transition;
     public AnimationCurve curve;
     public float transitionTimeElepsed;
@@ -51,6 +53,9 @@ public class GameController : MonoBehaviour
         money = levelData.startMoney;
         time = levelData.GameLengthSeconds;
         nextPatientSpawnTime = time;
+
+        if (playTransitionOnStart)
+            EndTransition();
     }
 
     private void Update()
