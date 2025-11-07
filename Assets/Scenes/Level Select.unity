@@ -2446,7 +2446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 1
-  progressIncreaseSpeed: 0.2
+  progressIncreaseSpeed: 0.3
   progressDecreaseSpeed: 1
   waitingPlayers: 0
   progressSlider: {fileID: 1762655315}

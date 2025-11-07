@@ -28,15 +28,17 @@ public class Interact : MonoBehaviour
     }
 
     public void TryCure(PlayerController player) {
-        if(player.currentHeldItem != null)
-            GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
-
+        if (player.currentHeldItem == null) return;
+        
+        GetComponent<Patient>().TyrCure(player.currentHeldItem.itemInfo);
         GameController.gameController.items.Remove(player.currentHeldItem.gameObject);
         Destroy(player.currentHeldItem.gameObject);
         player.currentHeldItem = null;
     }
 
     public void TrowAwayItem(PlayerController player) {
+        if (player.currentHeldItem == null) return;
+
         Destroy(player.currentHeldItem.gameObject);
         player.currentHeldItem = null;
         GetComponent<Animator>().SetTrigger("TroweItem");
@@ -75,7 +77,7 @@ public class Interact : MonoBehaviour
         }
     }
 
-    void Awake()
+    void Start()
     {
         if (GameController.gameController != null)
         {
