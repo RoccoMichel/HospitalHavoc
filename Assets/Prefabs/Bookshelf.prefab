@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8214596569230262772
 Transform:
@@ -110,6 +110,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5804611111594084842, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -5662010918026093672, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000875
@@ -142,6 +146,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: -3592420646564268378, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -1985402480176465775, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -1338639913996933403, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -158,9 +170,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.000098
       objectReference: {fileID: 0}
+    - target: {fileID: -956982965246322631, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
       propertyPath: m_Name
       value: bokhylla
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bacc1e3181ceb5046957a0edb2bd28d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

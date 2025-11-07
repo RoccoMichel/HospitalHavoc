@@ -31,7 +31,6 @@ public class RecipeBook : MonoBehaviour
 
     public void CloseBook()
     {
-        print("triggered!");
         GameController.gameController.active = true;
         Destroy(gameObject);
     }
