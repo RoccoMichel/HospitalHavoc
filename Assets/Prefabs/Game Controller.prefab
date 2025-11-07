@@ -46,13 +46,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pashenst: {fileID: 4565465082035426404, guid: a856e3b93e889b4409a36ae7ed75f415, type: 3}
-  levelData: {fileID: 11400000, guid: 54522dc32211b854abcf81b98bda5506, type: 2}
+  levelData: {fileID: 11400000, guid: 655696d3bb737e5439bc92ab6d749849, type: 2}
   money: 0
   time: 0
   active: 1
+  transition: {fileID: 2100000, guid: 91f831ca0f03c76469ddcdc63a438c62, type: 2}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  transitionTimeElepsed: 0
+  forword: 0
+  isTransitening: 0
   items: []
   interactables: []
-  sikneses: []
+  sikneses:
+  - {fileID: 11400000, guid: a3a422b30a8e5734880f3508365500f7, type: 2}
+  - {fileID: 11400000, guid: 61d2e12236535b14a8255deb844b99bf, type: 2}
   deadPatientsCount: 0
   averageCureTime: 0
   debug: 0
