@@ -14,6 +14,12 @@ public class GameController : MonoBehaviour
     public float time;
     public bool active = false;
 
+    public Material transition;
+    public AnimationCurve curve;
+    public float transitionTimeElepsed;
+    public bool forword;
+    public bool isTransitening;
+
     [Header("Backend stats")]
     public List<GameObject> items;
     public List<GameObject> interactables;
@@ -68,6 +74,8 @@ public class GameController : MonoBehaviour
             nextPatientSpawnTime = time - 1 / levelData.newPatientRate;
         }
     }
+
+
 
     public static void PauseMenu()
     {
@@ -171,6 +179,47 @@ public class GameController : MonoBehaviour
         {
             if (rankChar == char.Parse(bestRank)) PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
             else if (rankChar == char.Parse(rank)) return;
+        }
+    }
+
+    [Button]
+    public void StartTransition()
+    {
+        forword = true;
+
+        transitionTimeElepsed = -1;
+
+        isTransitening = true;
+
+        StartCoroutine(PlayTransition());
+    }
+
+    [Button]
+    public void EndTransition()
+    {
+        forword = false;
+
+        transitionTimeElepsed = 1;
+
+        isTransitening = true;
+
+        StartCoroutine(PlayTransition());
+    }
+
+    IEnumerator PlayTransition()
+    {
+        while (isTransitening)
+        {
+            transitionTimeElepsed += Time.unscaledDeltaTime * (forword ? 1 : -1);
+
+            transition.SetFloat("_Size", curve.Evaluate(transitionTimeElepsed) * 100);
+
+            if (Mathf.Abs(transitionTimeElepsed) > 1)
+            {
+                isTransitening = false;
+            }
+
+            yield return null;
         }
     }
 
