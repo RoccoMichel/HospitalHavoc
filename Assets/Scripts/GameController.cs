@@ -137,7 +137,7 @@ public class GameController : MonoBehaviour
 
         // Calculate score
         if (averageCureTime <= 0) averageCureTime = levelData.GameLengthSeconds;
-        float score = (money / averageCureTime) - (deadPatientsCount * levelData.DeadPatientScorePenalty);
+        float score = (money) - (deadPatientsCount * levelData.DeadPatientScorePenalty);
         score *= 10;
 
         GameObject menu = Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
