@@ -86,6 +86,93 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &861266364950453259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720996341736375545}
+  - component: {fileID: 4954682792656822376}
+  m_Layer: 0
+  m_Name: Extras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &720996341736375545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861266364950453259}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8345140188748334884}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &4954682792656822376
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861266364950453259}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1417378145712176075
 GameObject:
   m_ObjectHideFlags: 0
@@ -5644,6 +5731,7 @@ Transform:
   - {fileID: 380962404677989609}
   - {fileID: 6640371287082141096}
   - {fileID: 3691978631854959173}
+  - {fileID: 720996341736375545}
   m_Father: {fileID: 6430418519950547142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8093130741460265344
@@ -5716,11 +5804,13 @@ MonoBehaviour:
   Skin:
   - {fileID: 21300000, guid: c86b3d9ab5334da41b17acce1b702871, type: 3}
   - {fileID: 21300000, guid: 972bfa8d669bfb241b3634dba8e0d8fd, type: 3}
+  - {fileID: 21300000, guid: 114e3c3a54c82ec4babee4c2796d2174, type: 3}
   UperBody:
   - {fileID: 21300000, guid: 582c658722c46214287b7e9419624c20, type: 3}
   - {fileID: 21300000, guid: b2a0581bbf4d008419573b8f01619ee9, type: 3}
   - {fileID: 21300000, guid: c8a944fe3f18ac942a9b1249ab8b7623, type: 3}
   - {fileID: 21300000, guid: 9c7cea5b354f34a4d964697a40662938, type: 3}
+  - {fileID: 21300000, guid: 6d2d3ff9d84f90047b4e4d1b9ea1dbfe, type: 3}
   Fase:
   - {fileID: 21300000, guid: db4afbfc6d9bb3c428fa76830484f51f, type: 3}
   - {fileID: 21300000, guid: a11faf929d0ab6d43a1a40f2e23fbff9, type: 3}
@@ -5735,8 +5825,12 @@ MonoBehaviour:
   Pants:
   - {fileID: 21300000, guid: ae4d9c24541468848b5c407babb05535, type: 3}
   - {fileID: 21300000, guid: 188a5e1049b9aea4b87f55e4968b529b, type: 3}
+  - {fileID: 21300000, guid: 4a8ceb1a8907f7249aab8dee97c013eb, type: 3}
   Shose:
   - {fileID: 21300000, guid: 6544832eaddaf9642ad572153da5e8c6, type: 3}
+  - {fileID: 21300000, guid: 6a8050829ab84fa48a6f9203fb520551, type: 3}
+  Extras:
+  - {fileID: 21300000, guid: 274c46ded8f4ac741b959bfaf69a7174, type: 3}
   Renderers:
   - {fileID: 7131225855475412991}
   - {fileID: 7612328387765401511}
@@ -5744,6 +5838,7 @@ MonoBehaviour:
   - {fileID: 9133360971885081966}
   - {fileID: 3550048981693641382}
   - {fileID: 949089994511597747}
+  - {fileID: 4954682792656822376}
 --- !u!95 &5647509081600367612
 Animator:
   serializedVersion: 7
