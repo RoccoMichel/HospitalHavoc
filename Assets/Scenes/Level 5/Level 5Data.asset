@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameLengthSeconds: 300
   startMoney: 500
-  moneyDrainRate: 5
+  moneyDrainRate: 3
   newPatientRate: 0.025
   DeadPatientScorePenalty: 5
   rankRequirements: 000000003200000096000000c80000002c010000
