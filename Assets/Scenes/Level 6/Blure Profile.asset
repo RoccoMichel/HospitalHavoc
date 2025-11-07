@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878d482835656c34ebae33c9e05783fc, type: 3}
-  m_Name: Herbs
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Blure Profile
   m_EditorClassIdentifier: 
-  itemTag: Herbs
-  item: {fileID: 7464195979451714372, guid: 5e9c87cead7d0cc498a6753a69f0c4a4, type: 3}
-  mixTime: 5
-  ingrediants: []
+  components: []
