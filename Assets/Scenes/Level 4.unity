@@ -11383,6 +11383,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 37ddc5bd6f44e67498fed34b6ce4e1e9, type: 2}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: deadPatientsCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: sikneses.Array.size
       value: 3
       objectReference: {fileID: 0}
