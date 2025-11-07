@@ -4138,6 +4138,8 @@ MonoBehaviour:
     scenePreview: {fileID: 21300000, guid: c3f9bb642df1a8642bd9cd2088d870fc, type: 3}
   - sceneName: Level 5
     scenePreview: {fileID: 21300000, guid: 7414edb644d415045a24c273eaf1d0e6, type: 3}
+  - sceneName: Level 6
+    scenePreview: {fileID: 21300000, guid: fe8096d01f6880d489893730447e93d2, type: 3}
   progressIncreaseSpeed: 0.4
   progressDecreaseSpeed: 1
   waitingPlayers: 0
