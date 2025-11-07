@@ -40,6 +40,7 @@ public class Interact : MonoBehaviour
         Destroy(player.currentHeldItem.gameObject);
         player.currentHeldItem = null;
         GetComponent<Animator>().SetTrigger("TroweItem");
+        GetComponentInChildren<ParticleSystem>().Play();
     }
 
     public void Bench(PlayerController player)
