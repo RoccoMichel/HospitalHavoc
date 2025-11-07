@@ -15,6 +15,6 @@ MonoBehaviour:
   GameLengthSeconds: 120
   startMoney: 150
   moneyDrainRate: 0.5
-  newPatientRate: 0.05
+  newPatientRate: 0.025
   DeadPatientScorePenalty: 50
-  rankRequirements: 00000000f4010000d0070000b80b000088130000
+  rankRequirements: 0000000032000000500000007800000096000000

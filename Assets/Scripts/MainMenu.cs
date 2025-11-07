@@ -105,16 +105,15 @@ public class MainMenu : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        print("EXIT1");
-        waitingPlayers --;
+        if (other.CompareTag("Player"))
+        {
+            waitingPlayers--;
             playerCount = GetPlayerCount();
 
             StartCoroutine(TriggerFix());
 
             print("EXIT");
-
-        if (other.gameObject.CompareTag("Player"))
-            print("wtf");
+        }
     }
 
     private int GetPlayerCount()
@@ -168,7 +167,7 @@ public class MainMenu : MonoBehaviour
     {
         Collider collider = gameObject.GetComponent<Collider>();
         collider.enabled = false;
-      //  waitingPlayers = 0;
+        waitingPlayers = 0;
 
         yield return new Unity.VisualScripting.WaitForNextFrameUnit();
 
