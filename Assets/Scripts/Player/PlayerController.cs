@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     CharacterController cc;
+    AnimationController ac;
 
     public int playerInt = 0;
 
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // Works even if you’re not using a CharacterController
+            // Works even if youï¿½re not using a CharacterController
             Vector3 pos = transform.position;
             pos.y = 1;
             transform.position = pos;
@@ -102,12 +103,16 @@ public class PlayerController : MonoBehaviour
             moveDir = Vector2.ClampMagnitude(moveDir, 1);
 
             if (dir.sqrMagnitude < deadZone * deadZone)
+            {
+                ac.StopAni(GetCurrentActiveDirObj());
                 return;
+            }
 
             dir.Normalize();
             lastDir = dir;
 
             RotatePlayer(lastDir);
+            ac.PlayAni(GetCurrentActiveDirObj());
         }
     }
 
@@ -131,6 +136,17 @@ public class PlayerController : MonoBehaviour
     public void ActivateDirObj(int index, bool active)
     {
         if(moveDirObjects[index].activeSelf != active) moveDirObjects[index].SetActive(active);
+    }
+
+    public GameObject GetCurrentActiveDirObj()
+    {
+        foreach (GameObject obj in moveDirObjects)
+        {
+            if (obj.activeSelf)
+                return obj;
+        }
+
+        return null;
     }
 
     public void Interact(InputAction.CallbackContext obj)
@@ -218,6 +234,8 @@ public class PlayerController : MonoBehaviour
             canMove = false;
             canDash = false;
 
+            ac.StopAni(GetCurrentActiveDirObj());
+
             StartCoroutine(StopDashing());
         }
     }
@@ -242,6 +260,7 @@ public class PlayerController : MonoBehaviour
             GameController.gameController.canvasManager.RequestPlayerHighlight(this);
 
         cc = GetComponent<CharacterController>();
+        ac = GetComponent<AnimationController>();
     }
 
     public void SetPlayerModel()
