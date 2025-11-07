@@ -2446,12 +2446,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939587076}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-=======
->>>>>>> parent of fec4ed7 ("balancing")
-=======
->>>>>>> parent of fec4ed7 ("balancing")
-=======
->>>>>>> parent of fec4ed7 ("balancing")
+ 
 --- !u!1001 &951035189
 PrefabInstance:
   m_ObjectHideFlags: 0
