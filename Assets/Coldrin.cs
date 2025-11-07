@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -23,6 +24,7 @@ public class Coldrin : MonoBehaviour
     public List<ItemInfo> AllPosibolItems; // list of all posibol items
     public List<ItemInfo> Ingerdens = new List<ItemInfo>(); // all the items curenty in the coldrin
     public Animator mixiMisxi;
+    public UnityEvent onSuccessfulMix = new();
 
     // adds an igedent to the coldrin
     public void AddIngedent(ItemInfo info) {
@@ -66,6 +68,7 @@ public class Coldrin : MonoBehaviour
                     hasValiedItems = true;
                     timeToWait = AllPosibolItems[i].mixTime;
                     StartCoroutine(MixAllItems(true, i));
+                    onSuccessfulMix.Invoke();
 
                     break;
                 }

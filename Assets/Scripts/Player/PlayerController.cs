@@ -237,7 +237,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        if(SceneManager.GetActiveScene().buildIndex != 0)
+        
+        if (SceneManager.GetActiveScene().buildIndex != 1)
             GameController.gameController.canvasManager.RequestPlayerHighlight(this);
 
         cc = GetComponent<CharacterController>();

@@ -3,7 +3,12 @@ guid: bcdc9241135f4da46a7fd2f23e6b2585
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vines
+    second: {fileID: 2100000, guid: bd935a123b99613448b94f63b9f789a0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -11,7 +11,7 @@ public class TutorialManager : MonoBehaviour
     [System.Serializable]
     public struct TutorialElement
     {
-        public Vector3 arrowLocation;
+        public Transform arrowLocation;
         [TextArea] public string explanation;
     }
 
@@ -28,7 +28,14 @@ public class TutorialManager : MonoBehaviour
     public void RefreshTutorial()
     {
         if (indicator == null) indicator = Instantiate((GameObject)Resources.Load("Indicator"));
-        indicator.transform.position = tutorial[tutorialStage].arrowLocation;
+        indicator.transform.position = tutorial[tutorialStage].arrowLocation.position;
         explanationDisplay.text = tutorial[tutorialStage].explanation;
+    }
+
+    public bool CanAdvance(int currentStage) { return currentStage == tutorialStage; }
+
+    public void SetGameTime(float newTime)
+    {
+        GameController.gameController.time = newTime;
     }
 }

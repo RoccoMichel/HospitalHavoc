@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -13,10 +14,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private float progressIncreaseSpeed = 0.3f;
     [SerializeField] private float progressDecreaseSpeed = 0.5f;
     private float loadProgress;
-    private int waitingPlayers;
+    [SerializeField] private int waitingPlayers;
     private int levelIndex;
 
     [Header("References")]
+    [SerializeField] private TMP_Text levelNameDisplay;
     [SerializeField] private Image previewDisplay;
     [SerializeField] private Image rankDisplay;
     [SerializeField] private Slider progressSlider;
@@ -51,13 +53,14 @@ public class MainMenu : MonoBehaviour
 
     private void UpdateBoard()
     {
+        boardAnimator.Play("Bounce");
+
         string bestRank = PlayerPrefs.GetString($"{levels[levelIndex].sceneName}_score", string.Empty);
         rankDisplay.enabled = bestRank == string.Empty ? false : true;
 
         if (rankDisplay.enabled) rankDisplay.sprite = Resources.Load<Sprite>("Ranks/" + bestRank);
         previewDisplay.sprite = levels[levelIndex].scenePreview;
-
-        boardAnimator.Play("Bounce");
+        levelNameDisplay.text = levels[levelIndex].sceneName;
     }
 
     private void Update()
@@ -77,16 +80,28 @@ public class MainMenu : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) waitingPlayers++;
-        playerCount = GetPlayerCount();
+        if (other.CompareTag("Player"))
+        {
+            waitingPlayers++;
+            print(other.gameObject.name);
+
+            playerCount = GetPlayerCount();
+
+            print("ENTER");
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) waitingPlayers--;
-        playerCount = GetPlayerCount();
+        if (other.CompareTag("Player"))
+        {
+            waitingPlayers--;
+            playerCount = GetPlayerCount();
 
-        StartCoroutine(TriggerFix());
+            StartCoroutine(TriggerFix());
+
+            print("EXIT");
+        }
     }
 
     private int GetPlayerCount()

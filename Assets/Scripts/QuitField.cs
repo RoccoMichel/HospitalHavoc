@@ -8,7 +8,7 @@ public class QuitField : MonoBehaviour
     [SerializeField] private float progressIncreaseSpeed = 0.3f;
     [SerializeField] private float progressDecreaseSpeed = 0.5f;
     private float loadProgress;
-    private int waitingPlayers;
+    [SerializeField] private int waitingPlayers;
 
     [Header("References")]
     [SerializeField] private Slider progressSlider;
@@ -29,16 +29,22 @@ public class QuitField : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) waitingPlayers++;
-        playerCount = GetPlayerCount();
+        if (other.CompareTag("Player"))
+        {
+            waitingPlayers++;
+            playerCount = GetPlayerCount();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) waitingPlayers--;
-        playerCount = GetPlayerCount();
+        if (other.CompareTag("Player"))
+        {
+            waitingPlayers--;
+            playerCount = GetPlayerCount();
 
-        StartCoroutine(TriggerFix());
+            StartCoroutine(TriggerFix());
+        }
     }
 
     private int GetPlayerCount()

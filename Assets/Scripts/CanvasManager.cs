@@ -32,6 +32,12 @@ public class CanvasManager : MonoBehaviour
         if (recipeBook != null) return;
         recipeBook = Instantiate((GameObject)Resources.Load("UI/Recipe Book"), GameController.gameController.canvasManager.transform);
     }
+    public static void InstantiateRecipeBook(AvailableRecipes includedRecipes)
+    {
+        if (recipeBook != null) return;
+        recipeBook = Instantiate((GameObject)Resources.Load("UI/Recipe Book"), GameController.gameController.canvasManager.transform);
+        recipeBook.GetComponent<RecipeBook>().availableRecipes = includedRecipes;
+    }
 
     public Highlight RequestPlayerHighlight(PlayerController player)
     {

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class RecipeBook : MonoBehaviour
 {
     public int activePage = 0;
-    [SerializeField] private Sprite[] pages;
     [SerializeField] private Image pageDisplay;
+    public AvailableRecipes availableRecipes;
     private bool fired;
     private InputAction navigate;
     private InputAction cancel;
@@ -31,6 +31,7 @@ public class RecipeBook : MonoBehaviour
 
     public void CloseBook()
     {
+        print("triggered!");
         GameController.gameController.active = true;
         Destroy(gameObject);
     }
@@ -38,7 +39,7 @@ public class RecipeBook : MonoBehaviour
     public void NextPage()
     {
         if (fired) return;
-        activePage = Mathf.Clamp(activePage + 1, 0, pages.Length - 1);
+        activePage = Mathf.Clamp(activePage + 1, 0, availableRecipes.pages.Length - 1);
         DisplayPage(activePage);
         fired = true;
     }
@@ -46,14 +47,14 @@ public class RecipeBook : MonoBehaviour
     public void PreviousPage()
     {
         if (fired) return;
-        activePage = Mathf.Clamp(activePage - 1, 0, pages.Length - 1);
+        activePage = Mathf.Clamp(activePage - 1, 0, availableRecipes.pages.Length - 1);
         DisplayPage(activePage);
         fired = true;
     }
 
     private void DisplayPage(int index)
     {
-        if (index > pages.Length) { Debug.LogWarning("Target Recipe Book index exceeds array Length!"); return; }
-        pageDisplay.sprite = pages[index];
+        if (index > availableRecipes.pages.Length) { Debug.LogWarning("Target Recipe Book index exceeds array Length!"); return; }
+        pageDisplay.sprite = availableRecipes.pages[index];
     }
 }
