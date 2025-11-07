@@ -17,4 +17,8 @@ MonoBehaviour:
   moneyDrainRate: 2
   newPatientRate: 0.05
   DeadPatientScorePenalty: 50
+<<<<<<< Updated upstream
   rankRequirements: 0000000032000000430000005800000064000000
+=======
+  rankRequirements: 00000000320000004b0000002c01000058020000
+>>>>>>> Stashed changes
