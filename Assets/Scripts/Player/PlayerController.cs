@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
             DashColdown.gameObject.SetActive(false);
 
         if (canMove)
-            cc.Move(new Vector3(moveDir.x, 0, moveDir.y) * movementSpeed * Time.deltaTime);
+            cc.Move(new Vector3(moveDir.x, -2, moveDir.y) * movementSpeed * Time.deltaTime);
         else
             cc.Move(lastDir * dashForce * Time.deltaTime);
 
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         {
             moveDir = obj.ReadValue<Vector2>();
 
-            Vector3 dir = new Vector3(moveDir.x, 0, moveDir.y).normalized;
+            Vector3 dir = new Vector3(moveDir.x, -2, moveDir.y).normalized;
 
             moveDir = Vector2.ClampMagnitude(moveDir, 1);
 
