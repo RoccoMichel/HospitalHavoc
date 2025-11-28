@@ -39,6 +39,9 @@ public class MainMenu : MonoBehaviour
 
     public void IncreaseLevelIndex(int amount)
     {
+        // Avoid Spamming
+        if (boardAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash == Animator.StringToHash("Bounce")) return;
+
         levelIndex += amount;
 
         if (loopingSelection)
@@ -83,11 +86,8 @@ public class MainMenu : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             waitingPlayers++;
-            print(other.gameObject.name);
 
             playerCount = GetPlayerCount();
-
-            print("ENTER");
         }
     }
 
@@ -99,8 +99,6 @@ public class MainMenu : MonoBehaviour
             playerCount = GetPlayerCount();
 
             StartCoroutine(TriggerFix());
-
-            print("EXIT");
         }
     }
 

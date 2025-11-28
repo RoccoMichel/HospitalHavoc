@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    public bool showStartMenu = true;
     public Color[] highlightColorPerPlayer;
     [Header("References")]
     [SerializeField] private TMP_Text moneyDisplay;
@@ -18,13 +19,13 @@ public class CanvasManager : MonoBehaviour
         if ( gameController == null ) { Debug.LogError("No GameController in Scene!"); Debug.Break(); }
         gameController.canvasManager = this;
 
-        Instantiate((GameObject)Resources.Load("UI/Start Level Menu"), transform);
+        if (showStartMenu) Instantiate((GameObject)Resources.Load("UI/Start Level Menu"), transform);
     }
 
     void Update()
     {
-        timeDisplay.text = GetTimerText(gameController.time);
-        moneyDisplay.text = '$' + Mathf.Ceil(gameController.money).ToString();
+        if (timeDisplay != null) timeDisplay.text = GetTimerText(gameController.time);
+        if (moneyDisplay != null) moneyDisplay.text = '$' + Mathf.Ceil(gameController.money).ToString();
     }
 
     public static void InstantiateRecipeBook()

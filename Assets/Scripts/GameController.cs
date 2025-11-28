@@ -57,6 +57,8 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F3)) debug = !debug;
 
+        Cursor.lockState = active ? CursorLockMode.Locked : CursorLockMode.Confined;
+
         if (!active || canvasManager == null) return;
 
         if (pauseAction.WasPressedThisFrame() && canvasManager.pauseMenu == null)
@@ -120,7 +122,7 @@ public class GameController : MonoBehaviour
 
     public void SetPlayerCanJoin()
     {
-        OnPlayerJoin.intance.GetComponent<PlayerInputManager>().joiningEnabled.Equals(true);
+        OnPlayerJoin.instance.GetComponent<PlayerInputManager>().joiningEnabled.Equals(true);
     }
 
     /// <summary>
@@ -148,6 +150,7 @@ public class GameController : MonoBehaviour
         float score = (money) - (deadPatientsCount * levelData.DeadPatientScorePenalty);
         score *= 10;
 
+        // Show result to player(s)
         GameObject menu = Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
 
         if (ranks.Length != levelData.rankRequirements.Length) {
@@ -167,7 +170,7 @@ public class GameController : MonoBehaviour
         Debug.Log($"Player(s) achieved {rank} rank with a score of: {score}!");
 
 
-        // Setting High-scores |     DO NOT WRITE CODE BELOW ALWAYS ABOVE!
+        // Save new high-scores |    /!\   >  /!\   >  /!\   >  /!\   >  /!\   >  /!\   >  DO NOT WRITE CODE BELOW ALWAYS ABOVE  /!\
         string bestRank = PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_score", string.Empty);
         if (bestRank == string.Empty || bestRank == "F") 
         { 
@@ -255,13 +258,8 @@ public class GameController : MonoBehaviour
     {
         if (!debug) return;
 
-        GUIStyle style = new()
-        {
-            fontSize = 24,
-            fontStyle = FontStyle.Bold,
-        };
         // Text
-        GUI.Label(new Rect(10, 10, 100, 20), $"ms per frame: {System.Decimal.Round((decimal)(Time.deltaTime * 1000), 2)} ", style);
+        GUI.Label(new Rect(10, 10, 100, 20), $"ms per frame: {System.Decimal.Round((decimal)(Time.deltaTime * 1000), 2)} ");
 
         // Buttons
         if (GUI.Button(new Rect(10, 40, 100, 20), "Reload")) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -281,6 +279,8 @@ public class GameController : MonoBehaviour
     private void Reset()
     {
         gameObject.tag = "GameController";
+        gameObject.name = "Game Controller";
+        gameObject.transform.position = Vector3.zero;
     }
 
     void OnValidate()

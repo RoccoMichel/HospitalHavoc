@@ -139,30 +139,82 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5982627458063161422, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a31742a4038eb6d45aaba6c62a70f744, type: 2}
+    - target: {fileID: 5982627458063161422, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982627458063161422, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3268200042692144348, guid: a31742a4038eb6d45aaba6c62a70f744, type: 2}
+    - target: {fileID: 5982627458063161422, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982627458063161422, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6094954965673366682, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_text
       value: Game Info
       objectReference: {fileID: 0}
+    - target: {fileID: 6094954965673366682, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7953888182838642314, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
       propertyPath: m_text
       value: GO!
       objectReference: {fileID: 0}
+    - target: {fileID: 7953888182838642314, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    - target: {fileID: 7953888182838642314, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    - target: {fileID: 7953888182838642314, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5180980884684023573, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7997983855327333409}
   m_SourcePrefab: {fileID: 100100000, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
 --- !u!114 &5155708573662129273 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7176388408602029691, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
   m_PrefabInstance: {fileID: 2601786038433432066}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7205174703484003607}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd810d9a29e9f0c448ded6b416df076a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7205174703484003607 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5180980884684023573, guid: 6d624e80ba42e184ea47226b40c133c1, type: 3}
+  m_PrefabInstance: {fileID: 2601786038433432066}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7997983855327333409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7205174703484003607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e631e20917fd6f4b8bd6583cb013cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

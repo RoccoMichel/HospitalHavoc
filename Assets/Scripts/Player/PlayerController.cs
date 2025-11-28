@@ -259,9 +259,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-            GameController.gameController.canvasManager.RequestPlayerHighlight(this);
+        GameController.gameController.canvasManager.RequestPlayerHighlight(this);
 
         cc = GetComponent<CharacterController>();
         ac = GetComponent<AnimationController>();
@@ -302,7 +300,7 @@ public class PlayerController : MonoBehaviour
     {
         print("Player: <color=red>" + (obj.playerIndex + 1) + "</color> Has Disconnected");
 
-        OnPlayerJoin.intance.OnPlayerLeave(obj);
+        OnPlayerJoin.instance.OnPlayerLeave(obj);
 
         Destroy(gameObject);
     }
