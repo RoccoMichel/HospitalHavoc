@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74dc0c03e9b6014599d9c95a6fd90b4, type: 3}
+  m_Name: TestNewStuffData
+  m_EditorClassIdentifier: 
+  GameLengthSeconds: 120
+  startMoney: 100
+  moneyDrainRate: 0.5
+  newPatientRate: 0.05
+  DeadPatientScorePenalty: 50
+  rankRequirements: 0000000032000000500000007800000096000000

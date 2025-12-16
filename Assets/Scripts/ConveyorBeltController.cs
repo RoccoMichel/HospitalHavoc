@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ConveyorBeltController : MonoBehaviour
+{
+    public Transform startPos;
+    public float forceToGive;
+
+    public List<Rigidbody> itemsOnBelt;
+
+    void Update()
+    {
+        for (int i = 0; i < itemsOnBelt.Count; i++)
+        {
+            if(itemsOnBelt[i] != null)
+                itemsOnBelt[i].linearVelocity = transform.forward * forceToGive;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Rigidbody>() != null)
+        {
+            itemsOnBelt.Add(other.GetComponent<Rigidbody>());
+            other.transform.position = startPos.position;
+            other.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Rigidbody>() != null)
+        { itemsOnBelt.Remove(other.GetComponent<Rigidbody>()); }
+    }
+
+    void OnDrawGizmos()
+    {
+        if (startPos != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(startPos.position, startPos.position + (transform.forward * 2));
+            Gizmos.DrawSphere(startPos.position + (transform.forward * 2), 0.2f);
+        }
+    }
+}
