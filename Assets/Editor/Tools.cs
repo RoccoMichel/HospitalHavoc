@@ -45,7 +45,7 @@ public class SpawnRoad : EditorWindow
 
     int index;
 
-   [MenuItem("Tools/Spawn Road")]
+     [MenuItem("Tools/BoltsTools/Spawn Road")]
     public static void OpenWidow()
     {
         GetWindow(typeof(SpawnRoad));
@@ -304,7 +304,7 @@ public class SettPositionOfGameObject : EditorWindow
 
     Vector3 dir = new Vector3(1, 0, 0);
 
-    [MenuItem("Tools/Sett Position Of Game Object")]
+      [MenuItem("Tools/BoltsTools/Sett Position Of Game Object")]
     public static void OpenWidow()
     {
         GetWindow(typeof(SettPositionOfGameObject));
@@ -358,7 +358,7 @@ public class SelectAllChildrenWithComponent : EditorWindow
     string[] componetsName = new string[0];
     int slectedIndex = 0;
 
-    [MenuItem("Tools/Select All Children With Component")]
+      [MenuItem("Tools/BoltsTools/Select All Children With Component")]
     public static void OpenWindow()
     {
         GetWindow(typeof(SelectAllChildrenWithComponent));
@@ -433,7 +433,7 @@ public class SelectAllWithComponentOrName : EditorWindow
     bool selectName;
     string objectName = "";
 
-    [MenuItem("Tools/Select All Objects With Component")]
+      [MenuItem("Tools/BoltsTools/Select All Objects With Component")]
     public static void OpenWidow()
     {
         GetWindow(typeof(SelectAllWithComponentOrName));
@@ -547,7 +547,7 @@ public class SetNewPlayerPrefs : EditorWindow
     int selectionIndex = 0;
 
     // Adds It To The Tools Menu
-    [MenuItem("Tools/Set New Value On PlayerPrefs")]
+      [MenuItem("Tools/BoltsTools/PlayerPref/Set New Value On PlayerPrefs")]
     public static void ShowWidow()
     {
         // Creats A Custom Window
@@ -595,7 +595,7 @@ public class SeePlayerPrefs : EditorWindow
     bool exist;
 
     // Adds It To The Tools Menu
-    [MenuItem("Tools/See PlayerPrefs")]
+      [MenuItem("Tools/BoltsTools/PlayerPref/See PlayerPrefs")]
     public static void ShowWidow()
     {
         // Creats A Custom Window
@@ -658,7 +658,7 @@ public class ResetPlayerPrefs : EditorWindow
     bool showText;
     bool exits;
 
-    [MenuItem("Tools/Reset PlayerPrefs")]
+      [MenuItem("Tools/BoltsTools/PlayerPref/Reset PlayerPrefs")]
     public static void ShowWidow()
     {
         GetWindow(typeof(ResetPlayerPrefs));
@@ -706,7 +706,7 @@ public class ResetAllPlayerPrefs : EditorWindow
 {
     bool showText;
 
-    [MenuItem("Tools/Reset All PlayerPrefs")]
+      [MenuItem("Tools/BoltsTools/PlayerPref/Reset All PlayerPrefs")]
     public static void ShowWidow()
     {
         GetWindow(typeof(ResetAllPlayerPrefs));
@@ -733,7 +733,7 @@ public class TakeScreanshot : EditorWindow
 {
     string path = "Assets/Name";
 
-    [MenuItem("Tools/Screanshot")]
+      [MenuItem("Tools/BoltsTools/Screanshot")]
     public static void OpenWindow()
     {
         GetWindow(typeof(TakeScreanshot));
@@ -743,7 +743,7 @@ public class TakeScreanshot : EditorWindow
     {
         path = EditorGUILayout.TextField("File Name", path);
 
-        if (GUILayout.Button("Take Screanshot"))
+        if (GUILayout.Button("Take Screenshot"))
             TakeIt();
     }
 
