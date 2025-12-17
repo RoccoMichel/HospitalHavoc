@@ -122,7 +122,7 @@ public class GameController : MonoBehaviour
 
     public void SetPlayerCanJoin()
     {
-        OnPlayerJoin.instance.GetComponent<PlayerInputManager>().joiningEnabled.Equals(true);
+        OnPlayerJoin.instance.GetComponent<PlayerInputManager>().EnableJoining();
     }
 
     /// <summary>

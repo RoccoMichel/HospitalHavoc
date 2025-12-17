@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
     public Transform hand;
     public Items currentHeldItem;
 
-    public MovingPlatform mp;
-    public Vector3 platformMove;
+    MovingPlatform mp;
+    Vector3 platformMove;
 
     void Update()
     {

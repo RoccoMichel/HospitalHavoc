@@ -36,7 +36,5 @@ public class OnPlayerJoin : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-        GetComponent<PlayerInputManager>().joiningEnabled.Equals(false);
     }
 }
