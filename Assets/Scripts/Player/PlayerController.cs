@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float movementSpeed;
     public bool canMove = true;
+    public LayerMask movingPlatformMask;
+    public float maxPlatformDist;
     Vector2 moveDir;
     Vector3 lastDir;
     float deadZone = 0.05f;
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public bool canDash = true;
     public ParticleSystem dashEfect;
     public Image DashColdown;
+    float timeTillDash = 0;
 
     [Header("Item Settings")]
     public float pickUpFOV;
@@ -39,8 +43,9 @@ public class PlayerController : MonoBehaviour
     public Transform hand;
     public Items currentHeldItem;
 
+    public MovingPlatform mp;
+    public Vector3 platformMove;
 
-    float timeTillDash = 0;
     void Update()
     {
         //SnapY();
@@ -64,18 +69,47 @@ public class PlayerController : MonoBehaviour
         else
             cc.Move(lastDir * dashForce * Time.deltaTime);
 
-        GameObject clossestItem = GetClosestObject(GameController.gameController.interactables);
-        if (GameController.gameController.items.Count > 0)
-            clossestItem = GetClosestObject(GameController.gameController.items);
+        CheckForPlatform();
 
-        GameObject clossestInteractable = GetClosestObject(GameController.gameController.interactables);
-        GameObject clossest = null;
-        if(clossestItem && clossestInteractable)
-            clossest = Vector3.Distance(transform.position, clossestItem.transform.position) <
-                       Vector3.Distance(transform.position, clossestInteractable.transform.position)
-                           ? clossestItem
-                           : clossestInteractable;
+        if (mp != null)
+            cc.Move(platformMove);
+
+        // GameObject clossestItem = GetClosestObject(GameController.gameController.interactables);
+        // if (GameController.gameController.items.Count > 0)
+        //     clossestItem = GetClosestObject(GameController.gameController.items);
+        //
+        // GameObject clossestInteractable = GetClosestObject(GameController.gameController.interactables);
+        // GameObject clossest = null;
+        // if(clossestItem && clossestInteractable)
+        //     clossest = Vector3.Distance(transform.position, clossestItem.transform.position) <
+        //                Vector3.Distance(transform.position, clossestInteractable.transform.position)
+        //                    ? clossestItem
+        //                    : clossestInteractable;
     }
+
+    void CheckForPlatform()
+    {
+        platformMove = Vector3.zero;
+        mp = null;
+
+        if (cc.isGrounded)
+        {
+            RaycastHit hit;
+            Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
+
+            if (Physics.Raycast(rayOrigin, Vector3.down, out hit, maxPlatformDist, movingPlatformMask))
+            {
+                MovingPlatform newMP = hit.collider.GetComponent<MovingPlatform>();
+
+                if (newMP != null)
+                {
+                    mp = newMP;
+                    platformMove = mp.GetPlatformMovement();
+                }
+            }
+        }
+    }
+
     public void SnapY()
     {
         if (cc != null)

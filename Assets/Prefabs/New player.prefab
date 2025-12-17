@@ -5178,6 +5178,10 @@ MonoBehaviour:
   playerInt: 0
   movementSpeed: 8
   canMove: 1
+  movingPlatformMask:
+    serializedVersion: 2
+    m_Bits: 256
+  maxPlatformDist: 1.5
   moveDirObjects:
   - {fileID: 6648209221667298226}
   - {fileID: 7663942810065241718}
@@ -5200,6 +5204,8 @@ MonoBehaviour:
   throwForce: 50
   hand: {fileID: 5251872066316229118}
   currentHeldItem: {fileID: 0}
+  mp: {fileID: 0}
+  platformMove: {x: 0, y: 0, z: 0}
 --- !u!114 &7603984563978097799
 MonoBehaviour:
   m_ObjectHideFlags: 0
