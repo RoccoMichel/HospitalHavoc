@@ -9,7 +9,7 @@ public class LevelStartMenu : MonoBehaviour
     }
     private void DestroySelf()
     {
-        OnPlayerJoin.instance.joinEvent.RemoveListener(DestroySelf);
         Destroy(gameObject);
+        OnPlayerJoin.instance.joinEvent.RemoveListener(DestroySelf);
     }
 }

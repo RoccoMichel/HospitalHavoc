@@ -18,3 +18,7 @@ MonoBehaviour:
   newPatientRate: 0.05
   DeadPatientScorePenalty: 50
   rankRequirements: 000000000a0000000f0000001400000064000000
+  isInitialized: 1
+  data:
+    level: 4
+    players: 0

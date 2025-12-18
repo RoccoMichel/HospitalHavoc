@@ -2357,6 +2357,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f898233b4fae1db4c95e0012d5230ed6, type: 2}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: spawnPatients
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: interactables.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -4844,18 +4848,25 @@ MonoBehaviour:
   levels:
   - sceneName: Tutorial
     scenePreview: {fileID: 21300000, guid: 3db18a3faaba24d45ac66abf44042538, type: 3}
+    ldo: {fileID: 11400000, guid: f898233b4fae1db4c95e0012d5230ed6, type: 2}
   - sceneName: Level 1
     scenePreview: {fileID: 21300000, guid: 34ee49f5254a7f74cb4e89e9070964ee, type: 3}
+    ldo: {fileID: 11400000, guid: 22c1d0310ea3f8b4ca38456ae7c185df, type: 2}
   - sceneName: Level 2
     scenePreview: {fileID: 21300000, guid: 813e334120a2c4e46bcd822c0a0bfc6b, type: 3}
+    ldo: {fileID: 11400000, guid: 655696d3bb737e5439bc92ab6d749849, type: 2}
   - sceneName: Level 3
     scenePreview: {fileID: 21300000, guid: 1c356f42fdc4b3c4eb11c53ed8928fe9, type: 3}
+    ldo: {fileID: 11400000, guid: 8c279e99e877a594b9d9b3861ca9bc4c, type: 2}
   - sceneName: Level 4
     scenePreview: {fileID: 21300000, guid: c3f9bb642df1a8642bd9cd2088d870fc, type: 3}
+    ldo: {fileID: 11400000, guid: 37ddc5bd6f44e67498fed34b6ce4e1e9, type: 2}
   - sceneName: Level 5
     scenePreview: {fileID: 21300000, guid: 7414edb644d415045a24c273eaf1d0e6, type: 3}
+    ldo: {fileID: 11400000, guid: 33a6342749c3bf84ba1cd17578a5ce16, type: 2}
   - sceneName: Level 6
     scenePreview: {fileID: 21300000, guid: fe8096d01f6880d489893730447e93d2, type: 3}
+    ldo: {fileID: 11400000, guid: 76754bd8dbdced8438f2bf9c2eb2d06a, type: 2}
   progressIncreaseSpeed: 0.4
   progressDecreaseSpeed: 1
   waitingPlayers: 0

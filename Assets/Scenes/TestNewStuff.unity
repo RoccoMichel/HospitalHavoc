@@ -140,6 +140,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6ffe7c900cb116547b06cfad76980c61, type: 2}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: data.level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: data.players
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: items.Array.size
       value: 0
       objectReference: {fileID: 0}

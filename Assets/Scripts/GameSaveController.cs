@@ -2,22 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine.AddressableAssets;
-
-public class SaveSettings : ScriptableObject
-{
-    public string folderName, fileName;
-
-    public bool isReadable = true;
-
-    public string GetFullPath()
-    {
-        var folder = Path.Combine(Application.persistentDataPath, folderName);
-
-        return Path.Combine(folder, fileName + ".json");
-    }
-}
 
 public static class GameSaveController
 {
@@ -75,7 +62,7 @@ public static class GameSaveController
         if(_settings == null)
             Debug.LogError($"SaveSettings failed to load. Check Addressables address: {SETTINGS_ADDRESS}");
         else
-            Debug.Log($"SaveSettings loaded. Check Addressables address: {SETTINGS_ADDRESS}");
+            Debug.Log("SaveSettings loaded.");
 
         _isLoading = false;
     }
@@ -121,7 +108,7 @@ public static class GameSaveController
 [Serializable]
 public class SaveData
 {
-    public List<LevelData> levelSave=new();
+    public List<LevelData> levelSave = new();
 }
 
 [Serializable]
@@ -130,6 +117,9 @@ public class LevelData
     public int level;
     public int players;
 
+    public string rank = String.Empty;
+
+    public float score;
 }
 
 public class ResetAllSaveData

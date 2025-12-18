@@ -29,6 +29,7 @@ public class MainMenu : MonoBehaviour
     {
         public string sceneName;
         public Sprite scenePreview;
+        public LevelDataObject ldo;
     }
 
     private void Start()
@@ -58,7 +59,8 @@ public class MainMenu : MonoBehaviour
     {
         boardAnimator.Play("Bounce");
 
-        string bestRank = PlayerPrefs.GetString($"{levels[levelIndex].sceneName}_score", string.Empty);
+        // string bestRank = PlayerPrefs.GetString($"{levels[levelIndex].sceneName}_score", string.Empty);
+        string bestRank = levels[levelIndex].ldo.data.rank;
         rankDisplay.enabled = bestRank == string.Empty ? false : true;
 
         if (rankDisplay.enabled) rankDisplay.sprite = Resources.Load<Sprite>("Ranks/" + bestRank);

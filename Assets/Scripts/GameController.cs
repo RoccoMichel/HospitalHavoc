@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public LevelData data;
-
     public GameObject pashenst;
     [Expandable]
     public LevelDataObject levelData;
@@ -40,6 +38,8 @@ public class GameController : MonoBehaviour
     internal CanvasManager canvasManager;
     private float nextPatientSpawnTime = 0;
 
+    public bool spawnPatients = true;
+
     private void Awake()
     {
         GameSaveController.Initialize();
@@ -56,6 +56,9 @@ public class GameController : MonoBehaviour
         money = levelData.startMoney;
         time = levelData.GameLengthSeconds;
         nextPatientSpawnTime = time;
+
+        if(!spawnPatients)
+            SetPlayerCanJoin();
     }
 
     private void Update()
@@ -75,10 +78,14 @@ public class GameController : MonoBehaviour
         if (money < 0) LevelFail();
         if (time < 0) LevelClear();
 
-        // Spawn a Patient "X" times a sec
-        if (time < nextPatientSpawnTime || PashentMan.pashents.Count == 0) {
-            Instantiate(pashenst);
-            nextPatientSpawnTime = time - 1 / levelData.newPatientRate;
+        if (spawnPatients)
+        {
+            // Spawn a Patient "X" times a sec
+            if (time < nextPatientSpawnTime || PashentMan.pashents.Count == 0)
+            {
+                Instantiate(pashenst);
+                nextPatientSpawnTime = time - 1 / levelData.newPatientRate;
+            }
         }
     }
 
@@ -136,8 +143,15 @@ public class GameController : MonoBehaviour
     internal void LevelFail()
     {
         LevelEnd();
-        if (PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_score", string.Empty) == string.Empty)
-            PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", "F");
+        if (levelData.data.rank == string.Empty || levelData.data.rank == "")
+        {
+            levelData.data.rank = "F";
+
+            int playerCount = OnPlayerJoin.instance.players.Count + 1;
+            levelData.data.players = playerCount;
+
+            GameSaveController.Save(levelData.data);
+        }
         Instantiate((GameObject)Resources.Load("UI/Level End Menu"), canvasManager.gameObject.transform);
     }
     /// <summary>
@@ -153,6 +167,8 @@ public class GameController : MonoBehaviour
         // Calculate score
         if (averageCureTime <= 0) averageCureTime = levelData.GameLengthSeconds;
         float score = money;
+
+        levelData.data.score = score;
 
         // Show result to player(s)
         GameObject menu = Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
@@ -175,26 +191,32 @@ public class GameController : MonoBehaviour
 
 
         // Save new high-scores |    /!\   >  /!\   >  /!\   >  /!\   >  /!\   >  /!\   >  DO NOT WRITE CODE BELOW ALWAYS ABOVE  /!\
-        string bestRank = PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_score", string.Empty);
+        string bestRank = levelData.data.rank;
         if (bestRank == string.Empty || bestRank == "F") 
         { 
-            PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank); 
+            levelData.data.rank = rank;
             return; 
         }
 
         foreach (char rankChar in ranks)
         {
-            if (rankChar == char.Parse(bestRank)) PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
+            if (rankChar == char.Parse(bestRank))
+            {
+                levelData.data.rank = rank;
+
+                int playerCount = OnPlayerJoin.instance.players.Count + 1;
+                levelData.data.players = playerCount;
+            }
             else if (rankChar == char.Parse(rank)) return;
         }
 
-        GameSaveController.Save(data);
+        GameSaveController.Save(levelData.data);
     }
 
     [Button]
     void testSave()
     {
-        GameSaveController.Save(data);
+        GameSaveController.Save(levelData.data);
     }
 
     [Button]
