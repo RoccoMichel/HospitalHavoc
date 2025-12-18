@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ConveyorBeltController : MonoBehaviour
 {
+    public List<ConveyorBeltMaterialClass> shaderSettings;
+
     public Transform startPos;
     public float forceToGive;
 
@@ -11,6 +13,15 @@ public class ConveyorBeltController : MonoBehaviour
 
     void Update()
     {
+        foreach (var shader in shaderSettings)
+        {
+            if (shader.bodyRend != null)
+            {
+                shader.currentPos += shader.rotateSpeed * Time.deltaTime;
+                shader.bodyRend.materials[shader.matIndex].SetFloat(shader.testName, shader.currentPos);
+            }
+        }
+
         for (int i = 0; i < itemsOnBelt.Count; i++)
         {
             if(itemsOnBelt[i] != null)
@@ -43,4 +54,18 @@ public class ConveyorBeltController : MonoBehaviour
             Gizmos.DrawSphere(startPos.position + (transform.forward * 2), 0.2f);
         }
     }
+}
+
+[Serializable]
+public class ConveyorBeltMaterialClass
+{
+    public Renderer bodyRend;
+    public int matIndex;
+    public float rotateSpeed;
+    public Material mat;
+
+    [BoltsShaderProperty("mat")]
+    public string testName;
+
+    public float currentPos = 0;
 }
