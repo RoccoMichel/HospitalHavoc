@@ -57,8 +57,8 @@ public class Patient : MonoBehaviour
     IEnumerator RunAway() {
         Transform[] quePonts = PashentMan.instance.queuePonts;
         for (int i = 1; i < quePonts.Length; i++) { 
-            StartCoroutine(GoToPont(quePonts[i].position, quePonts[i-1].position, (PashentMan.instance.whakeTime / quePonts.Length)));
-            yield return new WaitForSeconds((PashentMan.instance.whakeTime / quePonts.Length));
+            StartCoroutine(GoToPont(quePonts[i].position, quePonts[i-1].position, (PashentMan.instance.whakeTime / quePonts.Length) *0.5f));
+            yield return new WaitForSeconds((PashentMan.instance.whakeTime / quePonts.Length)*0.5f);
         }
       
     }
