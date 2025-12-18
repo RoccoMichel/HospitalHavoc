@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public LevelData data;
+
     public GameObject pashenst;
     [Expandable]
     public LevelDataObject levelData;
@@ -40,6 +42,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        GameSaveController.Initialize();
+
         gameController = this;
         active = false;
     }
@@ -66,7 +70,7 @@ public class GameController : MonoBehaviour
             PauseMenu();
 
         time -= Time.deltaTime;
-        money -= levelData.moneyDrainRate * Time.deltaTime;
+        // money -= levelData.moneyDrainRate * Time.deltaTime;
 
         if (money < 0) LevelFail();
         if (time < 0) LevelClear();
@@ -183,6 +187,14 @@ public class GameController : MonoBehaviour
             if (rankChar == char.Parse(bestRank)) PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_score", rank);
             else if (rankChar == char.Parse(rank)) return;
         }
+
+        GameSaveController.Save(data);
+    }
+
+    [Button]
+    void testSave()
+    {
+        GameSaveController.Save(data);
     }
 
     [Button]
