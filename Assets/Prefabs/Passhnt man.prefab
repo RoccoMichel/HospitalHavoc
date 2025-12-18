@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbdc72bc3cb8f542a320013b881cd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whakeTime: 10
   queuePonts:
   - {fileID: 3407891702033082840}
   - {fileID: 1286918130277799666}

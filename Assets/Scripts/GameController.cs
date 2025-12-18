@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -71,7 +72,7 @@ public class GameController : MonoBehaviour
         if (time < 0) LevelClear();
 
         // Spawn a Patient "X" times a sec
-        if (time < nextPatientSpawnTime) {
+        if (time < nextPatientSpawnTime || PashentMan.pashents.Count == 0) {
             Instantiate(pashenst);
             nextPatientSpawnTime = time - 1 / levelData.newPatientRate;
         }
@@ -147,8 +148,7 @@ public class GameController : MonoBehaviour
 
         // Calculate score
         if (averageCureTime <= 0) averageCureTime = levelData.GameLengthSeconds;
-        float score = (money) - (deadPatientsCount * levelData.DeadPatientScorePenalty);
-        score *= 10;
+        float score = money;
 
         // Show result to player(s)
         GameObject menu = Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);

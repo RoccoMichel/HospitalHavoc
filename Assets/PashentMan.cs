@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PashentMan : MonoBehaviour {
+    public float whakeTime;
     public Transform[] queuePonts;
     public static PashentMan instance;
     public Gradient queueColor;
@@ -21,9 +23,9 @@ public class PashentMan : MonoBehaviour {
         }
     }
     void Update() {
-        for (int i = 0; i < pashents.Count; i++) {
-            pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts[i >= queuePonts.Length ? queuePonts.Length-1 : i].position, Time.deltaTime * 25);
-        }
+        //for (int i = 0; i < pashents.Count; i++) {
+        //    pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts[i >= queuePonts.Length ? queuePonts.Length-1 : i].position, Time.deltaTime * 60 / whakeTime);
+        //}
 
         if (pashents.Count != 0) 
             pashents[0].GetComponent<Interact>().enabled = true;

@@ -16,9 +16,10 @@ public class Patient : MonoBehaviour
     public Image Hellfbar;
     public MeshRenderer[] Ilneses;
     public GameObject Spitshbubol;
+    public int qerentQupont;
     //internal VisuleseModels visualizer;
     bool ded = false;
-
+    bool haseRitshFrontofQue = false;
     void Start() {
         setUp();
         //visualizer = GetComponent<VisuleseModels>();
@@ -35,7 +36,7 @@ public class Patient : MonoBehaviour
     public void setUp() {
         int nuberOfSiknese = 1;
         List<Siknes> sik = GameController.gameController.sikneses;
-
+        qerentQupont = PashentMan.instance.queuePonts.Length-1;
         for (int i = 1; i < sik.Count; i++)
             if (Random.Range(0, 5 * nuberOfSiknese) == 0)
                 nuberOfSiknese++;
@@ -55,9 +56,9 @@ public class Patient : MonoBehaviour
     }
     IEnumerator RunAway() {
         Transform[] quePonts = PashentMan.instance.queuePonts;
-        for (int i = 1; i < quePonts.Length; i++) {
-            StartCoroutine(GoToPont(quePonts[i].position, quePonts[i-1].position, 1.5f / quePonts.Length));
-            yield return new WaitForSeconds(1.5f/ quePonts.Length);
+        for (int i = 1; i < quePonts.Length; i++) { 
+            StartCoroutine(GoToPont(quePonts[i].position, quePonts[i-1].position, (PashentMan.instance.whakeTime / quePonts.Length)));
+            yield return new WaitForSeconds((PashentMan.instance.whakeTime / quePonts.Length));
         }
       
     }
@@ -76,7 +77,7 @@ public class Patient : MonoBehaviour
                     PashentMan.pashents.Remove(gameObject);
                     GameController.gameController.interactables.Remove(gameObject);
                     GameController.gameController.PatientHeal(this);
-                    Destroy(gameObject, 1.5f);
+                    Destroy(gameObject, PashentMan.instance.whakeTime);
                     StartCoroutine(RunAway());
                 }
                 munyRane.Play();
@@ -113,6 +114,15 @@ public class Patient : MonoBehaviour
     private void Update()
     {
         Hellfbar.fillAmount = hellf/100; // hellf/maxhellf
+
+        if (PashentMan.pashents.Count <= qerentQupont && Vector3.Distance(transform.position, PashentMan.instance.queuePonts[qerentQupont].position) < 1f)
+            qerentQupont--;
+        if (qerentQupont == 0 && Vector3.Distance(transform.position, PashentMan.instance.queuePonts[qerentQupont].position) < 0.1f) 
+            haseRitshFrontofQue = true;
+
+        if (!ded && !haseRitshFrontofQue) 
+            transform.position = Vector3.Lerp(transform.position, PashentMan.instance.queuePonts[qerentQupont].position, Time.deltaTime * 60 / PashentMan.instance.whakeTime);
+
 
         if (!GameController.gameController.active) return; // Freeze when game is Paused
 
