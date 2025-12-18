@@ -1,23 +1,10 @@
 using System;
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 
 public class ConveyorBeltController : MonoBehaviour
 {
-    [Foldout("Material Settings")]
-    public Renderer bodyRend;
-    [Foldout("Material Settings")]
-    public int matIndex;
-    [Foldout("Material Settings")]
-    public float rotateSpeed;
-    [Foldout("Material Settings")]
-    public Material mat;
-    [Foldout("Material Settings")]
-    [BoltsShaderProperty("mat")]
-    public string vectorName;
-    [Foldout("Material Settings")]
-    public Vector3 dirToRotate;
+    public List<ConveyorBeltMaterialClass> shaderSettings;
 
     public Transform startPos;
     public float forceToGive;
@@ -26,10 +13,13 @@ public class ConveyorBeltController : MonoBehaviour
 
     void Update()
     {
-        if (bodyRend != null)
+        foreach (var shader in shaderSettings)
         {
-            dirToRotate += new Vector3(Time.deltaTime * rotateSpeed, Time.deltaTime * rotateSpeed, Time.deltaTime * rotateSpeed);
-            bodyRend.materials[matIndex].SetVector(vectorName, dirToRotate);
+            if (shader.bodyRend != null)
+            {
+                shader.currentPos += shader.rotateSpeed * Time.deltaTime;
+                shader.bodyRend.materials[shader.matIndex].SetFloat(shader.testName, shader.currentPos);
+            }
         }
 
         for (int i = 0; i < itemsOnBelt.Count; i++)
@@ -64,4 +54,18 @@ public class ConveyorBeltController : MonoBehaviour
             Gizmos.DrawSphere(startPos.position + (transform.forward * 2), 0.2f);
         }
     }
+}
+
+[Serializable]
+public class ConveyorBeltMaterialClass
+{
+    public Renderer bodyRend;
+    public int matIndex;
+    public float rotateSpeed;
+    public Material mat;
+
+    [BoltsShaderProperty("mat")]
+    public string testName;
+
+    public float currentPos = 0;
 }

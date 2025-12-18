@@ -448,7 +448,7 @@ public class BoltsShaderPropertyDrawer : PropertyDrawer
             return;
         }
 
-        var matProp = property.serializedObject.FindProperty(attr.materialField);
+        var matProp = FindSiblingProperty(property, attr.materialField);
 
         if (matProp == null || matProp.objectReferenceValue == null)
         {
@@ -488,5 +488,27 @@ public class BoltsShaderPropertyDrawer : PropertyDrawer
         property.stringValue = propNames[newIndex];
 
         EditorGUI.EndProperty();
+    }
+
+    private static SerializedProperty FindSiblingProperty(SerializedProperty property, string siblingName)
+    {
+        var direct = property.FindPropertyRelative(siblingName);
+
+        if (direct != null)
+            return direct;
+
+        string path = property.propertyPath;
+        int lastDot = path.LastIndexOf(".");
+
+        if (lastDot < 0)
+            return property.serializedObject.FindProperty(siblingName);
+
+        string parentPath = path.Substring(0, lastDot);
+        var parent = property.serializedObject.FindProperty(parentPath);
+
+        if (parent == null)
+            return null;
+
+        return parent.FindPropertyRelative(siblingName);
     }
 }
