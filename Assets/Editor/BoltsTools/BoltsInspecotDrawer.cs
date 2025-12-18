@@ -431,3 +431,62 @@ public class BoltsInputActionDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
+
+[CustomPropertyDrawer(typeof(BoltsShaderPropertyAttribute))]
+public class BoltsShaderPropertyDrawer : PropertyDrawer
+{
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        var attr = (BoltsShaderPropertyAttribute)attribute;
+
+        EditorGUI.BeginProperty(position, label, property);
+
+        if (property.propertyType != SerializedPropertyType.String)
+        {
+            EditorGUI.LabelField(position, label.text, "Use [ShaderProperty] on a string field.");
+            EditorGUI.EndProperty();
+            return;
+        }
+
+        var matProp = property.serializedObject.FindProperty(attr.materialField);
+
+        if (matProp == null || matProp.objectReferenceValue == null)
+        {
+            EditorGUI.LabelField(position, label.text, "Assign a Material first.");
+            EditorGUI.EndProperty();
+            return;
+        }
+
+        var mat = matProp.objectReferenceValue as Material;
+
+        if (mat == null || mat.shader == null)
+        {
+            EditorGUI.LabelField(position, label.text, "Invalid Material or Shader.");
+            EditorGUI.EndProperty();
+            return;
+        }
+
+        var shader = mat.shader;
+        int count = shader.GetPropertyCount();
+
+        if (count == 0)
+        {
+            EditorGUI.LabelField(position, label.text, "Shader has no properties.");
+            EditorGUI.EndProperty();
+            return;
+        }
+
+        List<string> propNames = new List<string>(count);
+
+        for (int i = 0; i < count; i++)
+            propNames.Add(shader.GetPropertyName(i));
+
+        int index = Mathf.Max(0, propNames.IndexOf(property.stringValue));
+        if (index >= propNames.Count) index = 0;
+
+        int newIndex = EditorGUI.Popup(position, label.text, index, propNames.ToArray());
+        property.stringValue = propNames[newIndex];
+
+        EditorGUI.EndProperty();
+    }
+}
