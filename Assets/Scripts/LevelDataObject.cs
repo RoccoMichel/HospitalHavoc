@@ -36,6 +36,7 @@ public class LevelDataObject : ScriptableObject
         {
             data.players = 0;
             data.score = new List<float>();
+            data.bestScore = 0;
             data.rank = String.Empty;
         }
     }

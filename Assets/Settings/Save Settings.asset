@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408366078109e1c45a7928fb465bfffa, type: 3}
   m_Name: Save Settings
   m_EditorClassIdentifier: 
-  folderName: 
-  fileName: 
+  folderName: Save Folder
+  fileName: Save Data
   isReadable: 1
