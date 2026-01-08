@@ -363,8 +363,6 @@ public class BoltsCommentDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        BoltsCommentAttribute comment = (BoltsCommentAttribute)attribute;
-
         float commentHeight = EditorGUIUtility.singleLineHeight * 1.3f;
         float fieldHeight = EditorGUI.GetPropertyHeight(property, label, true);
 

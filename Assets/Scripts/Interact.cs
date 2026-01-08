@@ -6,7 +6,7 @@ public class Interact : MonoBehaviour
 {
     public UnityEvent<PlayerController> onInteract;
 
-    public bool needsEmptyHand = true, itemCanInteract = false;
+    public bool canInteract = true, needsEmptyHand = true, itemCanInteract, needsItem;
 
     public void ColdrinInteract(PlayerController player) {
         if (!GetComponent<Coldrin>().isMixing) {

@@ -74,17 +74,41 @@ public class PlayerController : MonoBehaviour
         if (mp != null)
             cc.Move(platformMove);
 
-        // GameObject clossestItem = GetClosestObject(GameController.gameController.interactables);
-        // if (GameController.gameController.items.Count > 0)
-        //     clossestItem = GetClosestObject(GameController.gameController.items);
-        //
-        // GameObject clossestInteractable = GetClosestObject(GameController.gameController.interactables);
-        // GameObject clossest = null;
-        // if(clossestItem && clossestInteractable)
-        //     clossest = Vector3.Distance(transform.position, clossestItem.transform.position) <
-        //                Vector3.Distance(transform.position, clossestInteractable.transform.position)
-        //                    ? clossestItem
-        //                    : clossestInteractable;
+        GameObject clossestItem = GetClosestObject(GameController.gameController.interactables);
+        if (GameController.gameController.items.Count > 0)
+            clossestItem = GetClosestObject(GameController.gameController.items);
+
+        GameObject clossestInteractable = GetClosestObject(GameController.gameController.interactables, false);
+        GameObject clossest = null;
+        if(clossestItem && clossestInteractable)
+            clossest = Vector3.Distance(transform.position, clossestItem.transform.position) <
+                       Vector3.Distance(transform.position, clossestInteractable.transform.position)
+                           ? clossestItem
+                           : clossestInteractable;
+
+        if (clossestInteractable)
+        {
+            Interact interactable = clossestInteractable.GetComponent<Interact>();
+
+            if (interactable != null)
+            {
+                if (interactable.needsEmptyHand)
+                {
+                    if (currentHeldItem == null)
+                        interactable.canInteract = true;
+                    else
+                        interactable.canInteract = false;
+                }
+
+                if (interactable.needsItem)
+                {
+                    if (currentHeldItem != null)
+                        interactable.canInteract = true;
+                    else
+                        interactable.canInteract = false;
+                }
+            }
+        }
     }
 
     void CheckForPlatform()
@@ -191,14 +215,14 @@ public class PlayerController : MonoBehaviour
     {
         if (obj.started)
         {
-            bool pickUpItem = false;
-            bool interacted = false;
+            GameObject itemToPickUp = GetClosestObject(GameController.gameController.items);
+            GameObject interactable = GetClosestObject(GameController.gameController.interactables);
+
+            bool pickedUpAnItem = false;
 
             //Pick Up Item
             if (currentHeldItem == null)
             {
-                GameObject itemToPickUp = GetClosestObject(GameController.gameController.items);
-
                 if (itemToPickUp != null)
                 {
                     itemToPickUp.transform.parent = hand;
@@ -208,17 +232,15 @@ public class PlayerController : MonoBehaviour
 
                     GameController.gameController.items.Remove(itemToPickUp);
 
-                    pickUpItem = true;
+                    pickedUpAnItem = true;
                 }
             }
 
-            //Interact
-            if (!pickUpItem)
+            if (!pickedUpAnItem)
             {
-                GameObject interactable = GetClosestObject(GameController.gameController.interactables);
-
                 if (interactable != null)
                 {
+                    //Interact
                     Interact theObject = interactable.GetComponent<Interact>();
 
                     if (theObject.needsEmptyHand)
@@ -226,27 +248,27 @@ public class PlayerController : MonoBehaviour
                         if (currentHeldItem == null)
                         {
                             theObject.onInteract.Invoke(this);
-                            interacted = true;
                         }
                     }
-                    else
+                    else if (theObject.needsItem)
                     {
-                        theObject.onInteract.Invoke(this);
-                        interacted = true;
+                        if (currentHeldItem != null)
+                            theObject.onInteract.Invoke(this);
                     }
+                    else
+                        theObject.onInteract.Invoke(this);
                 }
-            }
-
-            //Throw Item
-            if (!interacted && !pickUpItem)
-            {
-                if (currentHeldItem != null)
+                else
                 {
-                    currentHeldItem.transform.SetParent(null);
-                    currentHeldItem.rb.isKinematic = false;
-                    currentHeldItem.rb.AddForce(transform.forward * throwForce);
-                    GameController.gameController.items.Add(currentHeldItem.gameObject);
-                    currentHeldItem = null;
+                    //Throw Item
+                    if (currentHeldItem != null)
+                    {
+                        currentHeldItem.transform.SetParent(null);
+                        currentHeldItem.rb.isKinematic = false;
+                        currentHeldItem.rb.AddForce(transform.forward * throwForce);
+                        GameController.gameController.items.Add(currentHeldItem.gameObject);
+                        currentHeldItem = null;
+                    }
                 }
             }
         }
@@ -310,7 +332,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public GameObject GetClosestObject(List<GameObject> search)
+    public GameObject GetClosestObject(List<GameObject> search, bool needCanInteract = true)
     {
         GameObject closest = null;
         float closestDist = pickUpRange;
@@ -321,6 +343,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, item.transform.position) < closestDist)
                 {
+                    if (needCanInteract && item.GetComponent<Interact>() != null)
+                        if(!item.GetComponent<Interact>().canInteract)
+                            continue;
+
                     closest = item;
                     closestDist = Vector3.Distance(transform.position, item.transform.position);
                 }

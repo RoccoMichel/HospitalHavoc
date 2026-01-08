@@ -5095,6 +5095,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2b4ac42a47281dd4293279ba3cfc44b2, type: 2}
   Ingerdens: []
   mixiMisxi: {fileID: 5928425495752271325}
+  onSuccessfulMix:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2787402074652138179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5122,8 +5125,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  canInteract: 1
   needsEmptyHand: 0
   itemCanInteract: 0
+  needsItem: 1
 --- !u!1 &3540239997241888382
 GameObject:
   m_ObjectHideFlags: 0

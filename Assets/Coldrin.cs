@@ -129,5 +129,10 @@ public class Coldrin : MonoBehaviour
             timeWaited += Time.deltaTime;
             loadingImage.fillAmount = Mathf.Lerp(0, 1, timeWaited / timeToWait);
         }
+
+        if (Ingerdens.Count == 0)
+            GetComponent<Interact>().needsItem = true;
+        else
+            GetComponent<Interact>().needsItem = false;
     }
 }

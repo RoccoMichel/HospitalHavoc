@@ -228,8 +228,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  canInteract: 1
   needsEmptyHand: 0
-  itemCanInteract: 0
+  itemCanInteract: 1
+  needsItem: 1
 --- !u!1001 &8388170188941186817
 PrefabInstance:
   m_ObjectHideFlags: 0
