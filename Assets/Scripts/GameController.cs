@@ -165,7 +165,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     internal void LevelClear()
     {
-        char[] ranks = { 'D', 'C', 'B', 'A', 'S' };
+        char[] ranks = {'D', 'C', 'B', 'A', 'S' };
         string rank = string.Empty;
 
         LevelEnd();
@@ -302,7 +302,27 @@ public class GameController : MonoBehaviour
 
         // Text
         GUI.Label(new Rect(10, 10, 100, 20), $"ms per frame: {System.Decimal.Round((decimal)(Time.deltaTime * 1000), 2)} ");
+        
+        // Grafe
+        List<float> values = new();
+        values.AddRange(scors().ToList());
+        values.Add(money);
+        if (values.Count > 0)
+        {
+            float maxValue = values.Max();
+            Rect graphRect = new Rect(100, 100, 300, 150);
+            GUI.Box(graphRect, $"{maxValue}");
+            for (int i = 0; i < values.Count - 1; i++)
+            {
+                float x1 = graphRect.x + i * graphRect.width / (values.Count - 1);
+                float y1 = graphRect.yMax - (values[i] / maxValue) * graphRect.height;
 
+                float x2 = graphRect.x + (i + 1) * graphRect.width / (values.Count - 1);
+                float y2 = graphRect.yMax - (values[i + 1] / maxValue) * graphRect.height;
+
+                Drawing.DrawLine(new Vector2(x1, y1), new Vector2(x2, y2), Color.green, 2f);
+            }
+        }
         // Buttons
         if (GUI.Button(new Rect(10, 40, 100, 20), "Reload")) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         if (GUI.Button(new Rect(10, 70, 100, 20), "Exit")) Application.Quit(); ;

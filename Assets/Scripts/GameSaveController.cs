@@ -119,7 +119,7 @@ public class LevelData
 
     public string rank = String.Empty;
 
-    public List <float> score;
+    public List <float> score = new List<float>();
     public float bestScore;
 }
 

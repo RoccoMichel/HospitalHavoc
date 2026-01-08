@@ -13,14 +13,22 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   GameLengthSeconds: 120
-  startMoney: 100
+  startMoney: 0
   moneyDrainRate: 2
   newPatientRate: 0.05
   DeadPatientScorePenalty: 50
-  rankRequirements: 0000000032000000430000005800000064000000
+  rankRequirements: fa0000005e010000f4010000ee020000ee020000
   isInitialized: 1
   data:
     level: 3
-    players: 0
-    rank: 
-    score: 0
+    players: 2
+    rank: S
+    score:
+    - 450
+    - 450
+    - 625
+    - 475
+    - 525
+    - 525
+    - 650
+    bestScore: 625
