@@ -18,7 +18,7 @@ public class ConveyorBeltController : MonoBehaviour
             if (shader.bodyRend != null)
             {
                 shader.currentPos += shader.rotateSpeed * Time.deltaTime;
-                shader.bodyRend.materials[shader.matIndex].SetFloat(shader.testName, shader.currentPos);
+                shader.bodyRend.materials[shader.matIndex].SetFloat(shader.positionName, shader.currentPos);
             }
         }
 
@@ -65,7 +65,7 @@ public class ConveyorBeltMaterialClass
     public Material mat;
 
     [BoltsShaderProperty("mat")]
-    public string testName;
+    public string positionName;
 
     public float currentPos = 0;
 }
