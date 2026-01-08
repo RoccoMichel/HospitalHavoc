@@ -61,6 +61,11 @@ public class GameController : MonoBehaviour
             SetPlayerCanJoin();
     }
 
+    float scors() {
+        LevelData data = GameSaveController.LoadData(levelData.data.level);
+
+        return data.score;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F3)) debug = !debug;
@@ -130,6 +135,7 @@ public class GameController : MonoBehaviour
     private void LevelEnd()
     {
         active = false;
+       
     }
 
     public void SetPlayerCanJoin()
