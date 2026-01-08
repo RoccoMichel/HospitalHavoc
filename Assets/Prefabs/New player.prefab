@@ -5176,7 +5176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInt: 0
-  movementSpeed: 8
+  movementSpeed: 7
   canMove: 1
   movingPlatformMask:
     serializedVersion: 2
@@ -5193,19 +5193,17 @@ MonoBehaviour:
   - {fileID: 6746167483854900954}
   - {fileID: 324832894383031499}
   wakingpartiols: {fileID: 0}
-  dashForce: 30
+  dashForce: 25
   dashDuration: 0.05
   dashCooldown: 0.5
   canDash: 1
   dashEfect: {fileID: 2295767503208547424}
   DashColdown: {fileID: 98226076967240295}
-  pickUpFOV: 200
+  pickUpFOV: 150
   pickUpRange: 4
   throwForce: 50
   hand: {fileID: 5251872066316229118}
   currentHeldItem: {fileID: 0}
-  mp: {fileID: 0}
-  platformMove: {x: 0, y: 0, z: 0}
 --- !u!114 &7603984563978097799
 MonoBehaviour:
   m_ObjectHideFlags: 0

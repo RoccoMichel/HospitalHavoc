@@ -307,6 +307,7 @@ public class GameController : MonoBehaviour
         List<float> values = new();
         values.AddRange(scors().ToList());
         values.Add(money);
+        Debug.Log(scors().ToList().Count);
         if (values.Count > 0)
         {
             float maxValue = values.Max();
