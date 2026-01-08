@@ -61,10 +61,9 @@ public class GameController : MonoBehaviour
             SetPlayerCanJoin();
     }
 
-    float[] scors() {
-        LevelData data = GameSaveController.LoadData(levelData.data.level);
-
-        return data.score.ToArray();
+    float[] scors()
+    {
+        return levelData.data.score.ToArray();
     }
     private void Update()
     {

@@ -30,7 +30,7 @@ public class LevelDataObject : ScriptableObject
     }
 
     [Button]
-    void Reset()
+    void ResetSavedData()
     {
         if (data != null)
         {
