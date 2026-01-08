@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     AnimationController ac;
 
     public int playerInt = 0;
-
+    public Transform DireksenPonter;
     [Header("Movement Settings")]
     public float movementSpeed;
     public bool canMove = true;
@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
 
     MovingPlatform mp;
     Vector3 platformMove;
-
     void Update()
     {
         //SnapY();
@@ -109,6 +108,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        DireksenPonter.forward = move;
     }
 
     void CheckForPlatform()
