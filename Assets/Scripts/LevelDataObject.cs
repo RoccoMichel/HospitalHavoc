@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,7 +35,7 @@ public class LevelDataObject : ScriptableObject
         if (data != null)
         {
             data.players = 0;
-            data.score = 0;
+            data.score = new List<float>();
             data.rank = String.Empty;
         }
     }

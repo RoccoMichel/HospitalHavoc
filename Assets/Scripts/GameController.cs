@@ -61,10 +61,10 @@ public class GameController : MonoBehaviour
             SetPlayerCanJoin();
     }
 
-    float scors() {
+    float[] scors() {
         LevelData data = GameSaveController.LoadData(levelData.data.level);
 
-        return data.score;
+        return data.score.ToArray();
     }
     private void Update()
     {
@@ -174,7 +174,7 @@ public class GameController : MonoBehaviour
         if (averageCureTime <= 0) averageCureTime = levelData.GameLengthSeconds;
         float score = money;
 
-        levelData.data.score = score;
+        levelData.data.score.Add(score);
 
         // Show result to player(s)
         GameObject menu = Instantiate((GameObject)Resources.Load("UI/Level Clear Menu"), canvasManager.gameObject.transform);
@@ -209,6 +209,8 @@ public class GameController : MonoBehaviour
             if (rankChar == char.Parse(bestRank))
             {
                 levelData.data.rank = rank;
+
+                levelData.data.bestScore = score;
 
                 int playerCount = OnPlayerJoin.instance.players.Count + 1;
                 levelData.data.players = playerCount;
