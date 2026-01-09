@@ -312,6 +312,14 @@ public class PlayerController : MonoBehaviour
         DashColdown.fillAmount = 0;
     }
 
+    public void StopMoveing(InputAction.CallbackContext obj)
+    {
+        if (obj.started)
+        {
+            moveDir = Vector2.zero;
+        }
+    }
+
     void Awake()
     {
         GameController.gameController.canvasManager.RequestPlayerHighlight(this);
