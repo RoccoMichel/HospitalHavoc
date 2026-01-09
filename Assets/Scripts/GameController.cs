@@ -164,6 +164,13 @@ public class GameController : MonoBehaviour
     /// </summary>
     internal void LevelClear()
     {
+        float score = money;
+
+        if (score < levelData.rankRequirements[0]) {
+            LevelFail();
+            return;
+        }
+
         char[] ranks = {'D', 'C', 'B', 'A', 'S' };
         string rank = string.Empty;
 
@@ -171,7 +178,6 @@ public class GameController : MonoBehaviour
 
         // Calculate score
         if (averageCureTime <= 0) averageCureTime = levelData.GameLengthSeconds;
-        float score = money;
 
         levelData.data.score.Add(score);
 
