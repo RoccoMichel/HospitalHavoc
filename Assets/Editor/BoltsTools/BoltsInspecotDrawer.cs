@@ -510,3 +510,12 @@ public class BoltsShaderPropertyDrawer : PropertyDrawer
         return parent.FindPropertyRelative(siblingName);
     }
 }
+
+public class OpenDocuments
+{
+    [MenuItem("Tools/BoltsTools/Documentation")]
+    public static void OpenURL()
+    {
+        Application.OpenURL("https://docs.google.com/document/d/1xaQ9wJ4AUBwIX4THLpGPQA2GjIwiSZUjYudO5D1CTm8/edit?usp=sharing");
+    }
+}
