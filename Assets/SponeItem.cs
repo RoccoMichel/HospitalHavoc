@@ -29,6 +29,6 @@ public class SponeItem : MonoBehaviour {
             closetPos = pl[i].transform.position;
 
         float efect = 0.1f;
-        ItemShocse.localScale = Vector3.one * Mathf.Lerp(2, 0, Mathf.Pow(Mathf.Clamp01(Vector3.Distance(closetPos, transform.position) * efect),2));
+        ItemShocse.localScale = Vector3.one * Mathf.Lerp(3, 0, Mathf.Pow(Mathf.Clamp01(Vector3.Distance(closetPos, transform.position) * efect),2));
     }
 }

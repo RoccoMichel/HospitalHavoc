@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -85,30 +86,28 @@ public class PlayerController : MonoBehaviour
                            ? clossestItem
                            : clossestInteractable;
 
-        if (clossestInteractable)
-        {
+        if (clossestInteractable) {
             Interact interactable = clossestInteractable.GetComponent<Interact>();
 
-            if (interactable != null)
-            {
-                if (interactable.needsEmptyHand)
-                {
-                    if (currentHeldItem == null)
+            if (interactable != null) {
+                if (interactable.needsEmptyHand) {
+                    if (currentHeldItem == null) 
                         interactable.canInteract = true;
-                    else
-                        interactable.canInteract = false;
+                    else interactable.canInteract = false;
                 }
 
-                if (interactable.needsItem)
-                {
-                    if (currentHeldItem != null)
+                if (interactable.needsItem) {
+                    if (currentHeldItem != null) 
                         interactable.canInteract = true;
-                    else
-                        interactable.canInteract = false;
+                    else interactable.canInteract = false;
                 }
             }
         }
-        DireksenPonter.forward = move;
+        if (moveDir.magnitude == 0) DireksenPonter.gameObject.active = false;
+        else  {
+            DireksenPonter.gameObject.active = true;
+            DireksenPonter.forward = -transform.forward; 
+        }
     }
 
     void CheckForPlatform()

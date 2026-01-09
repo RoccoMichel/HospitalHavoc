@@ -79,6 +79,8 @@ public class Patient : MonoBehaviour
                     GameController.gameController.PatientHeal(this);
                     Destroy(gameObject, PashentMan.instance.whakeTime);
                     StartCoroutine(RunAway());
+                    try { PashentMan.pashents[0].GetComponent<Patient>().DisplayMedicine(); }
+                    catch { /*No other patients queue*/ };
                 }
                 munyRane.Play();
 
@@ -107,8 +109,7 @@ public class Patient : MonoBehaviour
       //  visualizer.clerAll();
         PashentMan.pashents.Remove(gameObject);
         GameController.gameController.interactables.Remove(gameObject);
-        try { PashentMan.pashents[0].GetComponent<Patient>().DisplayMedicine(); } 
-        catch { /*No other patients queue*/ };
+       
     }
 
     private void Update()
