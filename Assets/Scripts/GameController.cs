@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class GameController : MonoBehaviour
 {
@@ -226,6 +228,38 @@ public class GameController : MonoBehaviour
         GameSaveController.Save(levelData.data);
     }
 
+    string serverURL = "https://website-test-y9ps.onrender.com/api/unity-data";
+
+    void SendDataToServer(float score)
+    {
+        DataToSend data = new DataToSend() { level = levelData.data.level, score = score };
+
+        StartCoroutine(PostData(data));
+    }
+
+    public IEnumerator PostData(DataToSend data)
+    {
+        string jsonData = JsonUtility.ToJson(data);
+
+        using (UnityWebRequest request = UnityWebRequest.PostWwwForm(serverURL, ""))
+        {
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("✅ Data sent successfully!");
+                Debug.Log("Server response: " + request.downloadHandler.text);
+            }
+            else
+                Debug.LogError("Error: " + request.error);
+        }
+    }
+
     [Button]
     void testSave()
     {
@@ -355,4 +389,11 @@ public class GameController : MonoBehaviour
     {
         gameController = this;
     }
+}
+
+[Serializable]
+public class DataToSend
+{
+    public float score;
+    public int level;
 }
