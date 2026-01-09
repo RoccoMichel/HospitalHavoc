@@ -343,7 +343,7 @@ public class PlayerController : MonoBehaviour
                 if (Vector3.Distance(transform.position, item.transform.position) < closestDist)
                 {
                     if (needCanInteract && item.GetComponent<Interact>() != null)
-                        if(!item.GetComponent<Interact>().canInteract)
+                        if(!item.GetComponent<Interact>().canInteract || !item.GetComponent<Interact>().overrideInteract)
                             continue;
 
                     closest = item;

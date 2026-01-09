@@ -126,9 +126,13 @@ public class Coldrin : MonoBehaviour
 
         if (isMixing)
         {
+            GetComponent<Interact>().overrideInteract = false;
+
             timeWaited += Time.deltaTime;
             loadingImage.fillAmount = Mathf.Lerp(0, 1, timeWaited / timeToWait);
         }
+        else
+            GetComponent<Interact>().overrideInteract = true;
 
         if (Ingerdens.Count == 0)
             GetComponent<Interact>().needsItem = true;
