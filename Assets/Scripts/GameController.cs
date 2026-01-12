@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
     private float latestCureTime;
 
     [Space(40)] public bool debug;
+    public bool sendDataToServer;
 
     public static GameController gameController;
     private InputAction pauseAction;
@@ -42,9 +43,18 @@ public class GameController : MonoBehaviour
 
     public bool spawnPatients = true;
 
+    bool serverIsUp;
+
+    int dataPlayed = 0;
+    float[] dataScores = new float[] { };
+    float dataTotalScore = 0;
+    float dataAvgScore = 0;
+
     private void Awake()
     {
         GameSaveController.Initialize();
+
+        StartCoroutine(CheckServer());
 
         gameController = this;
         active = false;
@@ -225,10 +235,16 @@ public class GameController : MonoBehaviour
             else if (rankChar == char.Parse(rank)) return;
         }
 
+        if(!Application.isEditor || sendDataToServer)
+            SendDataToServer(score);
+
         GameSaveController.Save(levelData.data);
     }
 
-    string serverURL = "https://website-test-y9ps.onrender.com/api/unity-data";
+    string serverURL = "https://website-test-y9ps.onrender.com";
+    int maxRetries = 3;
+    float retryDelay = 5f;
+    int currentRetry = 0;
 
     void SendDataToServer(float score)
     {
@@ -241,7 +257,7 @@ public class GameController : MonoBehaviour
     {
         string jsonData = JsonUtility.ToJson(data);
 
-        using (UnityWebRequest request = UnityWebRequest.PostWwwForm(serverURL, ""))
+        using (UnityWebRequest request = UnityWebRequest.PostWwwForm(serverURL + "/api/unity-data", ""))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -257,6 +273,53 @@ public class GameController : MonoBehaviour
             }
             else
                 Debug.LogError("Error: " + request.error);
+        }
+    }
+
+    IEnumerator CheckServer()
+    {
+        while (currentRetry < maxRetries)
+        {
+            Debug.Log($"Checking Server... (Attempt {currentRetry + 1}/{maxRetries}");
+
+            using (UnityWebRequest request = UnityWebRequest.Get(serverURL))
+            {
+                request.timeout = 10;
+
+                yield return request.SendWebRequest();
+
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    Debug.Log("Server Is Up");
+
+                    serverIsUp = true;
+
+                    DataToResive resivedData = JsonUtility.FromJson<DataToResive>(request.downloadHandler.text);
+
+                    dataPlayed = resivedData.dataPlayed;
+                    dataScores = resivedData.dataScores;
+                    dataAvgScore = resivedData.dataAvgScore;
+                    dataTotalScore = resivedData.dataTotalScore;
+
+                    yield break;
+                }
+                else
+                {
+                    Debug.LogWarning($"❌ Attempt {currentRetry + 1} failed: {request.error}");
+                    currentRetry++;
+
+                    if (currentRetry < maxRetries)
+                    {
+                        Debug.Log($"Retrying in {retryDelay} seconds...");
+
+                        yield return new WaitForSeconds(retryDelay);
+                    }
+                    else
+                    {
+                        Debug.LogError("❌ Server is unreachable after all retries!");
+                    }
+                }
+            }
         }
     }
 
@@ -344,6 +407,10 @@ public class GameController : MonoBehaviour
         
         // Grafe
         List<float> values = new();
+
+        if (serverIsUp)
+            values = dataScores.ToList();
+
         values.AddRange(scors().ToList());
         values.Add(money);
         Debug.Log(scors().ToList().Count);
@@ -366,7 +433,15 @@ public class GameController : MonoBehaviour
         // Buttons
         if (GUI.Button(new Rect(10, 40, 100, 20), "Reload")) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         if (GUI.Button(new Rect(10, 70, 100, 20), "Exit")) Application.Quit(); ;
+
+        // Level Data
+        if (serverIsUp)
+        {
+
+        }
     }
+
+
 
     public void Pause()
     {
@@ -396,4 +471,13 @@ public class DataToSend
 {
     public float score;
     public int level;
+}
+
+[Serializable]
+public class DataToResive
+{
+    public int dataPlayed = 0;
+    public float[] dataScores = new float[] { };
+    public float dataTotalScore = 0;
+    public float dataAvgScore = 0;
 }
