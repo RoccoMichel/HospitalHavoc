@@ -248,7 +248,7 @@ public class GameController : MonoBehaviour
 
     void SendDataToServer(float score)
     {
-        DataToSend data = new DataToSend() { level = levelData.data.level, score = score };
+        DataToSend data = new DataToSend() { level = levelData.data.level - 2, score = score };
 
         StartCoroutine(PostData(data));
     }
@@ -326,9 +326,22 @@ public class GameController : MonoBehaviour
     }
 
     [Button]
-    void testSave()
+    void CallResetSave()
     {
-        GameSaveController.Save(levelData.data);
+        StartCoroutine(ResetSave());
+    }
+
+    IEnumerator ResetSave()
+    {
+        using (UnityWebRequest request = UnityWebRequest.Delete(serverURL + "/api/data"))
+        {
+            yield return request.SendWebRequest();
+
+            if(request.result == UnityWebRequest.Result.Success)
+                Debug.Log("Reset Save For All Levels");
+            else
+                Debug.LogError("Error: " + request.error);
+        }
     }
 
     [Button]
