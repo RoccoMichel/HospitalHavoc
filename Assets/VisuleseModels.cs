@@ -20,8 +20,13 @@ public class VisuleseModels : MonoBehaviour
     void Update() {
         Vector3 finalOffset = offset + transform.position;
         for (int i = 0; i < objectInColdrin.Count; i++) {
-            objectInColdrin[i].transform.position = Vector3.right * 0.5f * ((i+1) - objectInColdrin.Count/2f) + finalOffset;
+            float bobelStref = 0.15f;
+            float bobleSped = 4;
+            objectInColdrin[i].transform.position = Vector3.right * 0.5f * ((i+1) - objectInColdrin.Count/2f) + finalOffset 
+                + Vector3.up * Mathf.Sin(i + Time.time * bobleSped) * bobelStref; // Animate the items
             objectInColdrin[i].transform.LookAt(Camera.main.transform);
         }
+
+
     }
 }
