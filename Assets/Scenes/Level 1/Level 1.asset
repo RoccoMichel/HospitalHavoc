@@ -22,7 +22,7 @@ MonoBehaviour:
   data:
     level: 3
     players: 2
-    rank: F
+    rank: A
     score:
     - 450
     - 450
@@ -34,4 +34,7 @@ MonoBehaviour:
     - 575
     - 425
     - 450
-    bestScore: 625
+    - 500
+    - 500
+    - 500
+    bestScore: 500

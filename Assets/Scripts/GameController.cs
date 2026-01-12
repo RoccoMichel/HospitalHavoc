@@ -326,25 +326,6 @@ public class GameController : MonoBehaviour
     }
 
     [Button]
-    void CallResetSave()
-    {
-        StartCoroutine(ResetSave());
-    }
-
-    IEnumerator ResetSave()
-    {
-        using (UnityWebRequest request = UnityWebRequest.Delete(serverURL + "/api/data"))
-        {
-            yield return request.SendWebRequest();
-
-            if(request.result == UnityWebRequest.Result.Success)
-                Debug.Log("Reset Save For All Levels");
-            else
-                Debug.LogError("Error: " + request.error);
-        }
-    }
-
-    [Button]
     public void StartTransition()
     {
         forword = true;

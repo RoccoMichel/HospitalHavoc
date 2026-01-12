@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
+using Unity.EditorCoroutines.Editor;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class SpawnRoad : EditorWindow
 {
@@ -748,5 +751,43 @@ public class TakeScreanshot : EditorWindow
     void TakeIt()
     {
         ScreenCapture.CaptureScreenshot(path + ".png");
+    }
+}
+
+public class ResetSave : EditorWindow
+{
+    string serverURL = "https://website-test-y9ps.onrender.com";
+
+    [MenuItem("Tools/BoltsTools/Clear Save Data On Server")]
+    public static void CallResetSave()
+    {
+        GetWindow<ResetSave>();
+    }
+
+    void OnGUI()
+    {
+        bool confirm = EditorUtility.DisplayDialog(
+            "WARNING!",
+            "This Will Reset ALL Data On The Server\nAre You Sure You Wanna Do It?",
+            "Yes, Reset All Data",
+            "Oh Shit, Go Back");
+
+        if (confirm)
+            EditorCoroutineUtility.StartCoroutineOwnerless(ResetTheSave());
+
+        Close();
+    }
+
+    IEnumerator ResetTheSave()
+    {
+        using (UnityWebRequest request = UnityWebRequest.Delete(serverURL + "/api/data"))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+                Debug.Log("Reset Save For All Levels");
+            else
+                Debug.LogError("Error: " + request.error);
+        }
     }
 }
