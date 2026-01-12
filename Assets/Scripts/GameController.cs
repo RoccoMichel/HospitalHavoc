@@ -235,7 +235,7 @@ public class GameController : MonoBehaviour
             else if (rankChar == char.Parse(rank)) return;
         }
 
-        if(!Application.isEditor || sendDataToServer)
+        if(sendDataToServer || !Application.isEditor)
             SendDataToServer(score);
 
         GameSaveController.Save(levelData.data);
@@ -256,6 +256,8 @@ public class GameController : MonoBehaviour
     public IEnumerator PostData(DataToSend data)
     {
         string jsonData = JsonUtility.ToJson(data);
+
+        Debug.Log("Sending Data To Server...");
 
         using (UnityWebRequest request = UnityWebRequest.PostWwwForm(serverURL + "/api/unity-data", ""))
         {
