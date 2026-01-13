@@ -4,18 +4,37 @@ using UnityEngine;
 public class CamraMovment : MonoBehaviour {
     public float turnStregf;
     public Transform lutAt, CeterOfmap;
+    public float radius = 5;
     Vector3 camOridenPos = new();
     void Start() {
         camOridenPos = transform.position;
     }
     void Update() {
-        lutAt.position = CeterOfmap.position;
+
         List<PlayerController> pl = OnPlayerJoin.instance.players;
-        for (int i = 0; i < OnPlayerJoin.instance.players.Count; i++) {
+
+        //Vector3 plPos = Vector3.zero;
+        //for (int i = 0; i < OnPlayerJoin.instance.players.Count; i++) {
+        //    plPos += pl[i].transform.position;
+        //}
+        //plPos *= 1f / OnPlayerJoin.instance.players.Count;
+
+        //Vector3 dis = new Vector3(plPos.x, camOridenPos.y, plPos.z) - camOridenPos;
+        //if (dis.magnitude > radius) transform.position = plPos - dis.normalized * radius;
+        //else transform.position = camOridenPos;
+        //transform.position = new Vector3(transform.position.x, camOridenPos.y, transform.position.z);
+       
+        lutAt.position = CeterOfmap.position;
+
+        for (int i = 0; i < OnPlayerJoin.instance.players.Count; i++){
             lutAt.position = Vector3.Lerp(lutAt.position, pl[i].transform.position, turnStregf);
         }
-
-       // transform.position = Vector3.LerpUnclamped(camOridenPos, new Vector3(camOridenPos.x, camOridenPos.y, Mathf.Min(0, lutAt.position.z - camOridenPos.z)), 0.15f);
         transform.LookAt(lutAt);
+
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(camOridenPos, radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

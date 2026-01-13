@@ -1,30 +1,34 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EviermentalMan : MonoBehaviour {
 
     public Light[] flicker;
+    List<float> orBritnes;
     public float flickerTime;
     public float flickerFrekensy;
     public AnimationCurve flickerOnOf;
     IEnumerator FlickerLite(int lite) {
-        float time = flickerTime;
-        float britnes = flicker[lite].intensity;
 
-        while ((time -= Time.deltaTime) > 0) {
-            yield return new WaitForEndOfFrame();
-            flicker[lite].intensity = britnes * flickerOnOf.Evaluate(time / flickerTime);
+        while (true)
+        {
+            float time = flickerTime * Random.Range(0.8f, 1.2f);
+            float totolTime = time;
+            while ((time -= Time.deltaTime) > -1)
+            {
+                yield return new WaitForEndOfFrame();
+                flicker[lite].intensity = orBritnes[lite] * flickerOnOf.Evaluate(time / totolTime);
+            }
+
+            flicker[lite].intensity = orBritnes[lite];
         }
-
-        while ((time += Time.deltaTime) < flickerTime) {
-            yield return new WaitForEndOfFrame();
-            flicker[lite].intensity = britnes * flickerOnOf.Evaluate(time / flickerTime);
+    }
+    void Start() {
+        for (int i = 0; i < flicker.Length; i++) {
+            orBritnes.Add(flicker[i].intensity);
+            StartCoroutine(FlickerLite(i));
         }
-
-        flicker[lite].intensity = britnes;
     }
-    private void FixedUpdate() { 
-        if (Random.Range(0f, 1f) < flickerFrekensy)
-            StartCoroutine(FlickerLite(Random.Range(0, flicker.Length)));
-    }
+   
 }
