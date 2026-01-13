@@ -44,13 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ac4c21bb229174ea6a5126091e52b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flicker:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  flicker: []
   flickerTime: 0.25
-  flickerFrekensy: 0.05
   flickerOnOf:
     serializedVersion: 2
     m_Curve:
@@ -75,3 +70,7 @@ MonoBehaviour:
     m_PreInfinity: 0
     m_PostInfinity: 0
     m_RotationOrder: 4
+  prefabsToCheckFor:
+  - {fileID: 919132149155446097, guid: e8dc036719083fa4b907ae2dddebcc97, type: 3}
+  - {fileID: 919132149155446097, guid: 8476b39e19cbd894c8648620ff5f89c1, type: 3}
+  - {fileID: 919132149155446097, guid: b9625dcbe5ad8be4fbcbf781f3e49c7f, type: 3}

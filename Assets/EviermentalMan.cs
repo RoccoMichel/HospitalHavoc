@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using NaughtyAttributes;
+using UnityEditor;
 using UnityEngine;
 
 public class EviermentalMan : MonoBehaviour {
@@ -28,5 +31,37 @@ public class EviermentalMan : MonoBehaviour {
             StartCoroutine(FlickerLite(i));
         }
     }
-   
+
+    public List<GameObject> prefabsToCheckFor;
+
+    [Button]
+    void AddAllLights()
+    {
+        GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+
+        List<Light> foundLights = new();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (PrefabUtility.IsPartOfPrefabInstance(obj))
+            {
+                GameObject sourcePrefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+
+                foreach (var prefab in prefabsToCheckFor)
+                {
+                    if (sourcePrefab == prefab)
+                    {
+                        foundLights.Add(obj.GetComponentInChildren<Light>());
+                    }
+                }
+            }
+        }
+
+        List<Light> newArray = flicker.ToList();
+
+        foreach (var obj in foundLights)
+            newArray.Add(obj);
+
+        flicker = newArray.ToArray();
+    }
 }
