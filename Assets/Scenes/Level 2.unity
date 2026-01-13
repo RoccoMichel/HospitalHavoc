@@ -15174,6 +15174,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: flickerTime
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
       propertyPath: 'flicker.Array.data[0]'
       value: 
       objectReference: {fileID: 1391545065}

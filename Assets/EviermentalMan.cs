@@ -5,15 +5,13 @@ using UnityEngine;
 public class EviermentalMan : MonoBehaviour {
 
     public Light[] flicker;
-    List<float> orBritnes;
+    List<float> orBritnes = new();
     public float flickerTime;
-    public float flickerFrekensy;
     public AnimationCurve flickerOnOf;
     IEnumerator FlickerLite(int lite) {
 
-        while (true)
-        {
-            float time = flickerTime * Random.Range(0.8f, 1.2f);
+        while (true) {
+            float time = flickerTime * Random.Range(0.5f, 1.5f);
             float totolTime = time;
             while ((time -= Time.deltaTime) > -1)
             {
