@@ -30,6 +30,8 @@ public class TutorialManager : MonoBehaviour
         if (indicator == null) indicator = Instantiate((GameObject)Resources.Load("Indicator"));
         indicator.transform.position = tutorial[tutorialStage].arrowLocation.position;
         explanationDisplay.text = tutorial[tutorialStage].explanation;
+
+        GameController.gameController.SetPlayerCanJoin();
     }
 
     public bool CanAdvance(int currentStage) { return currentStage == tutorialStage; }

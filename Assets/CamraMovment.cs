@@ -27,15 +27,18 @@ public class CamraMovment : MonoBehaviour {
         //transform.position = new Vector3(transform.position.x, camOridenPos.y, transform.position.z);
 
 
-        float zOfset = Mathf.Min(MaxMovent, Mathf.Max(0, plPos.z - CeterOfmap.position.z));
-        lutAt.position = CeterOfmap.position + Vector3.forward * zOfset;
-
-        transform.position = camOridenPos + Vector3.forward * zOfset;
-        for (int i = 0; i < OnPlayerJoin.instance.players.Count; i++){
-            lutAt.position = Vector3.Lerp(lutAt.position, pl[i].transform.position, turnStregf);
+        try
+        {
+            float zOfset = Mathf.Min(MaxMovent, Mathf.Max(0, plPos.z - CeterOfmap.position.z));
+            lutAt.position = CeterOfmap.position + Vector3.forward * zOfset;
+       
+            transform.position = camOridenPos + Vector3.forward * zOfset;
+            for (int i = 0; i < OnPlayerJoin.instance.players.Count; i++){
+                lutAt.position = Vector3.Lerp(lutAt.position, pl[i].transform.position, turnStregf);
+            }
+            transform.LookAt(lutAt);
         }
-        transform.LookAt(lutAt);
-
+        catch { }
     }
 
     private void OnDrawGizmos() {
