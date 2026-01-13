@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -13,7 +9,7 @@ public class PlayerController : MonoBehaviour
     CharacterController cc;
     AnimationController ac;
 
-    public int playerInt = 0;
+    public int playerInt;
     public Transform DireksenPonter;
     [Header("Movement Settings")]
     public float movementSpeed;
@@ -65,9 +61,9 @@ public class PlayerController : MonoBehaviour
             move.y = -2;
 
         if (canMove)
-            cc.Move(move * movementSpeed * Time.deltaTime);
+            cc.Move(move * (movementSpeed * Time.deltaTime));
         else
-            cc.Move(lastDir * dashForce * Time.deltaTime);
+            cc.Move(lastDir * (dashForce * Time.deltaTime));
 
         CheckForPlatform();
 
@@ -103,9 +99,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if (moveDir.magnitude == 0) DireksenPonter.gameObject.active = false;
+        if (moveDir.magnitude == 0) DireksenPonter.gameObject.SetActive(false);
         else  {
-            DireksenPonter.gameObject.active = true;
+            DireksenPonter.gameObject.SetActive(true);
             DireksenPonter.forward = -transform.forward; 
         }
     }
