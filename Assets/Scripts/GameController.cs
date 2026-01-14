@@ -46,6 +46,12 @@ public class GameController : MonoBehaviour
 
     bool serverIsUp;
 
+    float totalTime;
+    int totalFrames;
+    float currentFPS;
+    float avgFPS;
+    List<float> fps = new List<float>() { };
+
     int dataPlayed = 0;
     float[] dataScores = new float[] { };
     float dataTotalScore = 0;
@@ -81,6 +87,17 @@ public class GameController : MonoBehaviour
     }
     private void Update()
     {
+        totalTime += Time.deltaTime;
+        totalFrames++;
+
+        avgFPS = totalFrames / totalTime;
+
+        currentFPS = (float)Decimal.Round((decimal)(1f / Time.deltaTime), 2);
+
+        fps.Add(currentFPS);
+        if (fps.Count > 50)
+            fps.RemoveAt(0);
+
         if (Input.GetKeyDown(KeyCode.F3)) debug = !debug;
 
         Cursor.lockState = active ? CursorLockMode.Locked : CursorLockMode.Confined;
@@ -406,8 +423,26 @@ public class GameController : MonoBehaviour
         if (!debug) return;
 
         // Text
-        GUI.Label(new Rect(10, 10, 100, 20), $"ms per frame: {System.Decimal.Round((decimal)(Time.deltaTime * 1000), 2)} ");
-        
+        GUI.Label(new Rect(10, 10, 500, 100), $" FPS : {currentFPS} ");
+
+        if (fps.Count > 0)
+        {
+            float maxValue = 120;
+            Rect graphRect = new Rect(100, 300, 300, 150);
+            GUI.Box(graphRect, $"{(int)avgFPS}");
+
+            for (int i = 0; i < fps.Count - 1; i++)
+            {
+                float x1 = graphRect.x + i * graphRect.width / (fps.Count - 1);
+                float y1 = graphRect.yMax - (fps[i] / maxValue) * graphRect.height;
+
+                float x2 = graphRect.x + (i + 1) * graphRect.width / (fps.Count - 1);
+                float y2 = graphRect.yMax - (fps[i + 1] / maxValue) * graphRect.height;
+
+                Drawing.DrawLine(new Vector2(x1, y1), new Vector2(x2, y2), Color.green, 2f);
+            }
+        }
+
         // Grafe
         List<float> values = new();
 
