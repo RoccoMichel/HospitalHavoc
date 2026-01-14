@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using static MainMenu;
 
 public class GameController : MonoBehaviour
 {
@@ -154,6 +155,9 @@ public class GameController : MonoBehaviour
     {
         OnPlayerJoin.instance.GetComponent<PlayerInputManager>().EnableJoining();
     }
+
+    public int GetScoreRikerment(int rank) => levelData.rankRequirements[rank];
+        
 
     /// <summary>
     /// Level Failed by player(s)

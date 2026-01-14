@@ -959,6 +959,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4524a44323d56c4b871d68c6519e012, type: 3}
   m_PrefabInstance: {fileID: 278311062}
   m_PrefabAsset: {fileID: 0}
+--- !u!108 &278311064 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: -7550440626349836391, guid: c4524a44323d56c4b871d68c6519e012, type: 3}
+  m_PrefabInstance: {fileID: 278311062}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &278311065 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 8912049515002365231, guid: c4524a44323d56c4b871d68c6519e012, type: 3}
+  m_PrefabInstance: {fileID: 278311062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &361025056 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 65702495048144492, guid: c4524a44323d56c4b871d68c6519e012, type: 3}
@@ -2148,6 +2158,79 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1001 &1081040014
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: flickerTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: flicker.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: 'flicker.Array.data[0]'
+      value: 
+      objectReference: {fileID: 278311065}
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: 'flicker.Array.data[1]'
+      value: 
+      objectReference: {fileID: 278311064}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 355.157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 324.25992
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 45.38722
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385767807794055607, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: m_Name
+      value: EviermentalMan
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
 --- !u!1001 &1101453176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3791,4 +3874,5 @@ SceneRoots:
   - {fileID: 1311355291}
   - {fileID: 1548197763}
   - {fileID: 1321045160}
+  - {fileID: 1081040014}
   - {fileID: 1248604208}

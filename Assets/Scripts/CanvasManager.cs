@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,8 +15,22 @@ public class CanvasManager : MonoBehaviour
     static private GameObject recipeBook;
     internal GameObject pauseMenu;
 
+    public Slider monySlider;
+    public List<RectTransform> RankRikiements;
+    public RectTransform slederStart, sliderEnd;
     void Start()
     {
+        int[] ranks = GameController.gameController.levelData.rankRequirements;
+        monySlider.maxValue = ranks.Last();
+        RankRikiements[0].position = Vector3.Lerp(slederStart.position, sliderEnd.position, (float)ranks[0] / ranks.Last());
+        for (int i = 1; i < ranks.Length; i++) {
+            RankRikiements.Add(Instantiate(RankRikiements[0].gameObject).GetComponent<RectTransform>());
+            RankRikiements.Last().SetParent(monySlider.transform);
+            RankRikiements.Last().localScale = Vector3.one;
+            RankRikiements[i].position = Vector3.Lerp(slederStart.position, sliderEnd.position, (float)ranks[i] / ranks.Last());
+        }
+
+
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         if ( gameController == null ) { Debug.LogError("No GameController in Scene!"); Debug.Break(); }
         gameController.canvasManager = this;
@@ -24,6 +40,8 @@ public class CanvasManager : MonoBehaviour
 
     void Update()
     {
+        monySlider.value = Mathf.Lerp(monySlider.value, GameController.gameController.money, Time.deltaTime * 5);
+
         if (timeDisplay != null) timeDisplay.text = GetTimerText(gameController.time);
         if (moneyDisplay != null) moneyDisplay.text = '$' + Mathf.Ceil(gameController.money).ToString();
     }
