@@ -19,7 +19,6 @@ public class Patient : MonoBehaviour
     public int qerentQupont;
     //internal VisuleseModels visualizer;
     bool ded = false;
-    bool haseRitshFrontofQue = false;
     void Start() {
         setUp();
         //visualizer = GetComponent<VisuleseModels>();
@@ -120,10 +119,9 @@ public class Patient : MonoBehaviour
         //if (PashentMan.pashents.Count <= qerentQupont && Vector3.Distance(transform.position, PashentMan.instance.queuePonts[qerentQupont].position) < 1f)
         //    qerentQupont--;
 
-        if (qerentQupont == 0) 
-            haseRitshFrontofQue = true;
+       
 
-        if (!ded && !haseRitshFrontofQue) 
+        if (!ded && sikneses.Count != 0) 
             transform.position = Vector3.Lerp(transform.position, PashentMan.instance.queuePonts[qerentQupont].position, Time.deltaTime * 60 / PashentMan.instance.whakeTime);
 
 
