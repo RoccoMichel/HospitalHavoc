@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    public static CanvasManager instens;
     public bool showStartMenu = true;
     public Color[] highlightColorPerPlayer;
     [Header("References")]
@@ -18,8 +20,19 @@ public class CanvasManager : MonoBehaviour
     public Slider monySlider;
     public List<RectTransform> RankRikiements;
     public RectTransform slederStart, sliderEnd;
+
+    public void BonseMany() {
+
+        Vector3 orgPos = moneyDisplay.rectTransform.position;
+        Vector3 orgScale = moneyDisplay.rectTransform.localScale;
+        float stegf = 50, time = 0.15f, stetsh = 0.9f;
+
+        moneyDisplay.rectTransform.DOMove(orgPos + Vector3.up * stegf, time).OnComplete(() => moneyDisplay.rectTransform.DOMove(orgPos, time/2));
+        moneyDisplay.rectTransform.DOScale(orgScale * stetsh, time).OnComplete(() => moneyDisplay.rectTransform.DOScale(orgScale, time/2));
+    }
     void Start()
     {
+        instens = this;
         int[] ranks = GameController.gameController.levelData.rankRequirements;
         monySlider.maxValue = ranks.Last();
         RankRikiements[0].position = Vector3.Lerp(slederStart.position, sliderEnd.position, (float)ranks[0] / ranks.Last());
