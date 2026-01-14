@@ -119,6 +119,7 @@ public class GameController : MonoBehaviour
 
     public void AddMoney(float amount)
     {
+        CanvasManager.instens.BonseMany();
         money += amount;
     }
 

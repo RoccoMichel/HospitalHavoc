@@ -17,11 +17,12 @@ MonoBehaviour:
   moneyDrainRate: 0.5
   newPatientRate: 0.025
   DeadPatientScorePenalty: 50
-  rankRequirements: 0000000032000000500000007800000096000000
+  rankRequirements: fa00000077010000f4010000ee020000ee020000
   isInitialized: 1
   data:
     level: 5
     players: 0
-    rank: 
-    score: []
+    rank: S
+    score:
+    - 675
     bestScore: 0
