@@ -33,6 +33,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 6.unity
     guid: 97c6edb8aa167a64888810f6db96e22c
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 028cab97426add84988bb1b5d0d18707, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 369ae5ceeee01f94d92ca35e065853f0, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 8f92baac09c49c548bf09fd89bd7060f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
