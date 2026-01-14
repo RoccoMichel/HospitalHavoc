@@ -513,9 +513,17 @@ PrefabInstance:
       value: Game Controller
       objectReference: {fileID: 0}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: forword
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: levelData
       value: 
       objectReference: {fileID: 11400000, guid: 22c1d0310ea3f8b4ca38456ae7c185df, type: 2}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: isTransitening
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: sendDataToServer
       value: 0
@@ -523,6 +531,10 @@ PrefabInstance:
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: sikneses.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
+      propertyPath: transitionTimeElepsed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4725853922182272828, guid: 159e8b2b8c18e314b8d6ea241a558133, type: 3}
       propertyPath: 'sikneses.Array.data[0]'

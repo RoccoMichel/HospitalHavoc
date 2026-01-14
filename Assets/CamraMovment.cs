@@ -32,7 +32,7 @@ public class CamraMovment : MonoBehaviour {
             float zOfset = Mathf.Min(MaxMovent, Mathf.Max(0, plPos.z - CeterOfmap.position.z));
             lutAt.position = CeterOfmap.position + Vector3.forward * zOfset;
        
-            transform.position = camOridenPos + Vector3.forward * zOfset;
+            transform.position = Vector3.Lerp(transform.position, camOridenPos + Vector3.forward * zOfset, 100*Time.deltaTime);
             for (int i = 0; i < OnPlayerJoin.instance.players.Count; i++){
                 lutAt.position = Vector3.Lerp(lutAt.position, pl[i].transform.position, turnStregf);
             }

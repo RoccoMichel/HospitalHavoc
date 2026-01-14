@@ -118,8 +118,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  canInteract: 1
+  overrideInteract: 1
   needsEmptyHand: 0
   itemCanInteract: 0
+  needsItem: 1
 --- !u!95 &4618668204761049557
 Animator:
   serializedVersion: 7

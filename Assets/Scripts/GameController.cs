@@ -50,14 +50,14 @@ public class GameController : MonoBehaviour
     float dataTotalScore = 0;
     float dataAvgScore = 0;
 
-    private void Awake()
-    {
+    private void Awake() {
         GameSaveController.Initialize();
 
         StartCoroutine(CheckServer());
 
         gameController = this;
         active = false;
+        EndTransition();
     }
 
     private void Start()
@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
 
         if(!spawnPatients)
             SetPlayerCanJoin();
+
     }
 
     float[] scors()
@@ -351,9 +352,10 @@ public class GameController : MonoBehaviour
 
     IEnumerator PlayTransition()
     {
+        float trsansisenSpeed = 0.5f;
         while (isTransitening)
         {
-            transitionTimeElepsed += Time.unscaledDeltaTime * (forword ? 1 : -1);
+            transitionTimeElepsed += Time.unscaledDeltaTime * (forword ? 1 : -1)* trsansisenSpeed;
 
             transition.SetFloat("_Size", curve.Evaluate(transitionTimeElepsed) * 100);
 

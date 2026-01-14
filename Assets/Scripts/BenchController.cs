@@ -15,11 +15,6 @@ public class BenchController : MonoBehaviour
             GetComponent<Interact>().needsEmptyHand = true;
             return;
         }
-        else
-        {
-            GetComponent<Interact>().needsItem = true;
-            GetComponent<Interact>().needsEmptyHand = false;
-        }
 
         if (itemsOnBench.Count > 0)
             GetComponent<Interact>().needsItem = false;
