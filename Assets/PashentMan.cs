@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PashentMan : MonoBehaviour {
@@ -23,9 +24,9 @@ public class PashentMan : MonoBehaviour {
         }
     }
     void Update() {
-        //for (int i = 0; i < pashents.Count; i++) {
-        //    pashents[i].transform.position = Vector3.Lerp(pashents[i].transform.position, queuePonts[i >= queuePonts.Length ? queuePonts.Length-1 : i].position, Time.deltaTime * 60 / whakeTime);
-        //}
+        for (int i = 0; i < pashents.Count; i++) {
+            if (pashents[i].IsUnityNull()) pashents.RemoveAt(i);
+        }
 
         if (pashents.Count != 0) 
             pashents[0].GetComponent<Interact>().enabled = true;

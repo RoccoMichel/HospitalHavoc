@@ -112,13 +112,15 @@ public class Patient : MonoBehaviour
        
     }
 
-    private void Update()
+    void Update()
     {
+        qerentQupont = PashentMan.pashents.IndexOf(gameObject);
         Hellfbar.fillAmount = hellf/100; // hellf/maxhellf
 
-        if (PashentMan.pashents.Count <= qerentQupont && Vector3.Distance(transform.position, PashentMan.instance.queuePonts[qerentQupont].position) < 1f)
-            qerentQupont--;
-        if (qerentQupont == 0 && Vector3.Distance(transform.position, PashentMan.instance.queuePonts[qerentQupont].position) < 0.1f) 
+        //if (PashentMan.pashents.Count <= qerentQupont && Vector3.Distance(transform.position, PashentMan.instance.queuePonts[qerentQupont].position) < 1f)
+        //    qerentQupont--;
+
+        if (qerentQupont == 0) 
             haseRitshFrontofQue = true;
 
         if (!ded && !haseRitshFrontofQue) 

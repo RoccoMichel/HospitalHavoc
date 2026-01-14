@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 4Data
   m_EditorClassIdentifier: 
   GameLengthSeconds: 120
-  startMoney: 100
+  startMoney: 0
   moneyDrainRate: 0.5
   newPatientRate: 0.1
   DeadPatientScorePenalty: 50
@@ -25,4 +25,5 @@ MonoBehaviour:
     rank: S
     score:
     - 350
+    - 400
     bestScore: 0
