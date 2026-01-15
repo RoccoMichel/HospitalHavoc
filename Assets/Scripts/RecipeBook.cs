@@ -1,15 +1,20 @@
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class RecipeBook : MonoBehaviour
 {
-    public int activePage = 0;
+    public List<Transform> seleksen;
+    public RectTransform seleksenBackrond;
+    public static int activePage = 0;
     [SerializeField] private Image pageDisplay;
     public AvailableRecipes availableRecipes;
-    private bool fired;
-    private InputAction navigate;
-    private InputAction cancel;
+    bool fired;
+    InputAction navigate;
+    InputAction cancel;
 
 
     private void Start()
@@ -18,6 +23,15 @@ public class RecipeBook : MonoBehaviour
         navigate = InputSystem.actions.FindAction("Navigate");
         cancel = InputSystem.actions.FindAction("Cancel");
         DisplayPage(activePage);
+
+        for (int i = 1; i < availableRecipes.pages.Length; i++) {
+            seleksen.Add(Instantiate(seleksen[0]));
+            seleksen.Last().SetParent(seleksen[0].parent);
+            seleksen.Last().localScale = Vector3.one;
+            seleksen.Last().GetComponentInChildren<TextMeshProUGUI>().text = $"{i+1}";
+        }
+
+        seleksenBackrond.sizeDelta = new Vector2(availableRecipes.pages.Length * 75, 60);
     }
 
     private void Update()
@@ -47,6 +61,15 @@ public class RecipeBook : MonoBehaviour
     {
         if (fired) return;
         activePage = Mathf.Clamp(activePage - 1, 0, availableRecipes.pages.Length - 1);
+        DisplayPage(activePage);
+        fired = true;
+    }
+
+    public void SetPage(Transform aktivButen)
+    {
+        int i = aktivButen.GetSiblingIndex();
+        if (fired) return;
+        activePage = Mathf.Clamp(i, 0, availableRecipes.pages.Length - 1);
         DisplayPage(activePage);
         fired = true;
     }
