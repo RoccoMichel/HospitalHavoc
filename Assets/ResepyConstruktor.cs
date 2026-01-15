@@ -24,18 +24,21 @@ public class ResepyConstruktor : MonoBehaviour
     public bool regenerate; 
 
     public void DrawNewGraf(int i) {
-        foreach (Transform node in allnodes) {
-            Destroy(node.gameObject);
+        if (nodes.Count != 0)
+        {
+            foreach (Transform node in allnodes)
+            {
+                Destroy(node.gameObject);
+            }
+            allnodes.Clear();
+            nodes.Clear();
         }
-        allnodes.Clear();
-        nodes.Clear();
-
         sped = 1.5f;
         nodes.Add(new node {
             transform = generikNode,
             item = i
         });
-        SponIngredents(AllResepys[i], i);
+        SponIngredents(AllResepys[i], 0);
         regenerate = false;
     }
     void Update() {
@@ -60,16 +63,17 @@ public class ResepyConstruktor : MonoBehaviour
             nodes[i].transform.position = new Vector3(nodes[i].transform.position.x, nodes[i].transform.position.y, 10);
         }
 
-        //if (regenerate) {
-        //    sped = 1.5f;
-        //    nodes.Add(new node
-        //    {
-        //        transform = generikNode,
-        //        item = 0
-        //    });
-        //    SponIngredents(AllResepys[0], 0);
-        //    regenerate = false;
-        //}
+        if (regenerate)
+        {
+            sped = 1.5f;
+            nodes.Add(new node
+            {
+                transform = generikNode,
+                item = 0
+            });
+            SponIngredents(AllResepys[0], 0);
+            regenerate = false;
+        }
     }
 
    
