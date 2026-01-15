@@ -20,14 +20,36 @@ public class ResepyConstruktor : MonoBehaviour
     public float sped = 0.01f;
 
     List<node> nodes = new();
+    List<Transform> allnodes = new();
     public bool regenerate; 
+
+    public void DrawNewGraf(int i) {
+        foreach (Transform node in allnodes) {
+            Destroy(node.gameObject);
+        }
+        allnodes.Clear();
+        nodes.Clear();
+
+        sped = 1.5f;
+        nodes.Add(new node {
+            transform = generikNode,
+            item = i
+        });
+        SponIngredents(AllResepys[i], i);
+        regenerate = false;
+    }
     void Update() {
+        sped = Math.Max(0, sped - Time.deltaTime);
         for (int i = 0; i < nodes.Count; i++)
         {
             for (int j = 0; j < nodes.Count; j++)
             {
-                if (i != j && i != 0) 
-                    nodes[i].transform.position += (nodes[i].transform.position - nodes[j].transform.position) * Time.deltaTime * sped;
+                float dis = Vector3.Distance(nodes[i].transform.position, nodes[j].transform.position);
+                if (i != 0 && i != j && dis < 1) 
+                    nodes[i].transform.position += 
+                        (nodes[i].transform.position - nodes[j].transform.position).normalized
+                        / dis
+                        * Time.deltaTime * sped;
 
                 if (nodes[j].transform == nodes[i].ConektedTranform)
                 {
@@ -38,15 +60,16 @@ public class ResepyConstruktor : MonoBehaviour
             nodes[i].transform.position = new Vector3(nodes[i].transform.position.x, nodes[i].transform.position.y, 10);
         }
 
-        if (regenerate) {
-            nodes.Add(new node
-            {
-                transform = generikNode,
-                item = 0
-            });
-            SponIngredents(AllResepys[0], 0);
-            regenerate = false;
-        }
+        //if (regenerate) {
+        //    sped = 1.5f;
+        //    nodes.Add(new node
+        //    {
+        //        transform = generikNode,
+        //        item = 0
+        //    });
+        //    SponIngredents(AllResepys[0], 0);
+        //    regenerate = false;
+        //}
     }
 
    
@@ -60,6 +83,7 @@ public class ResepyConstruktor : MonoBehaviour
             nodes.Last().ConektedTranform = nodes[node].transform;
             nodes.Last().transform.position = nodes[node].transform.position + Vector3.left + Vector3.up * i;
             nodes.Last().item = AllResepys.IndexOf(ingerd[i]);
+            allnodes.Add(nodes.Last().transform);
             SponIngredents(AllResepys[nodes.Last().item], nodes.Count-1);
         }
     }

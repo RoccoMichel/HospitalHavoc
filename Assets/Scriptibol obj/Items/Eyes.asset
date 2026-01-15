@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: Eys
   item: {fileID: 5899841149099875144, guid: 2dd344daa326d614a8635db28bf30dca, type: 3}
+  mixTime: 5
   ingrediants: []
