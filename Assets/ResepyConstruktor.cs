@@ -55,6 +55,8 @@ public class ResepyConstruktor : MonoBehaviour
         nodes.Last().transform = Instantiate(AllResepys[i].item.transform, generikNode.position, generikNode.rotation);
         nodes.Last().transform.GetComponent<Items>().rb.isKinematic = true;
         nodes.Last().transform.GetComponent<Items>().enabled = false;
+        GameController.gameController.items.Remove(nodes.Last().transform.gameObject);
+        nodes.Last().transform.rotation *= Quaternion.Euler(0, 180, 0);
         allnodes.Add(nodes.Last().transform);
         SponIngredents(AllResepys[i], 0);
         regenerate = false;
@@ -78,7 +80,7 @@ public class ResepyConstruktor : MonoBehaviour
                     Debug.DrawLine(nodes[i].transform.position, nodes[j].transform.position);
                 }
             }
-            nodes[i].transform.position = new Vector3(nodes[i].transform.position.x, nodes[i].transform.position.y, 10);
+            nodes[i].transform.position = new Vector3(nodes[i].transform.position.x, nodes[i].transform.position.y, generikNode.position.z);
         }
 
         if (regenerate)
@@ -105,7 +107,10 @@ public class ResepyConstruktor : MonoBehaviour
             nodes.Last().transform.GetComponent<Items>().enabled = false;
             nodes.Last().ConektedTranform = nodes[node].transform;
             nodes.Last().transform.position = nodes[node].transform.position + Vector3.left + Vector3.up * i;
+            nodes.Last().transform.rotation *= Quaternion.Euler(0, 180, 0);
             nodes.Last().item = AllResepys.IndexOf(ingerd[i]);
+            GameController.gameController.items.Remove(nodes.Last().transform.gameObject);
+
 
             SetUpUINode(nodes.Last().transform, nodes[node].transform);
             allnodes.Add(nodes.Last().transform);

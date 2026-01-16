@@ -15,3 +15,6 @@ MonoBehaviour:
   pages:
   - {fileID: 21300000, guid: a79ca7c84ed1a95409645e0ec39ef8c6, type: 3}
   - {fileID: 21300000, guid: 9fdf61c16b71adc4ea8a4f1de39b99cb, type: 3}
+  caftibols:
+  - {fileID: 11400000, guid: e6d94633a737452489a8f5f298115b5c, type: 2}
+  - {fileID: 11400000, guid: e638c86b1255a6d44a33910ed814ba2e, type: 2}

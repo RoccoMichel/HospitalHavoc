@@ -1050,6 +1050,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!20 &130431315 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1361489713479460320, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
+  m_PrefabInstance: {fileID: 270531218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &148319517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1842096027761626365, guid: 5f189da64ba506a44a4fde928e487494, type: 3}
@@ -1727,6 +1732,26 @@ PrefabInstance:
     - target: {fileID: 1147424080598636252, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842309122111161808, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842309122111161808, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8971752839079579765, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
       propertyPath: m_Pivot.x
@@ -3932,6 +3957,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 5856822557011697692, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856822557011697692, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
+      propertyPath: 'm_Cameras.Array.data[0]'
+      value: 
+      objectReference: {fileID: 130431315}
     - target: {fileID: 8343740716143671130, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.25

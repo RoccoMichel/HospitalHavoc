@@ -798,6 +798,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 5856822557011697692, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856822557011697692, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
+      propertyPath: 'm_Cameras.Array.data[0]'
+      value: 
+      objectReference: {fileID: 212797113}
     - target: {fileID: 8343740716143671130, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1854,6 +1862,10 @@ PrefabInstance:
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: 636897260c0de5442b1e1eeaf023d9d1, type: 2}
+    - target: {fileID: 7568499666606134587, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
+      propertyPath: resepys
+      value: 
+      objectReference: {fileID: 11400000, guid: 636897260c0de5442b1e1eeaf023d9d1, type: 2}
     - target: {fileID: 7936608960550321328, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1911,6 +1923,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
+--- !u!20 &212797113 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1361489713479460320, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
+  m_PrefabInstance: {fileID: 212797112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &255172239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14396,6 +14413,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.1737976
       objectReference: {fileID: 0}
+    - target: {fileID: 6842309122111161808, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842309122111161808, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8971752839079579765, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -15178,9 +15215,13 @@ PrefabInstance:
       value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: flicker.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
       propertyPath: 'flicker.Array.data[0]'
       value: 
-      objectReference: {fileID: 1391545065}
+      objectReference: {fileID: 1836337047}
     - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
       propertyPath: 'flicker.Array.data[1]'
       value: 
@@ -15188,11 +15229,15 @@ PrefabInstance:
     - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
       propertyPath: 'flicker.Array.data[2]'
       value: 
-      objectReference: {fileID: 1836337047}
+      objectReference: {fileID: 740859020}
     - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
       propertyPath: 'flicker.Array.data[3]'
       value: 
-      objectReference: {fileID: 740859020}
+      objectReference: {fileID: 1391545065}
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: 'flicker.Array.data[4]'
+      value: 
+      objectReference: {fileID: 722958120}
     - target: {fileID: 1038497836359227611, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.8429637
