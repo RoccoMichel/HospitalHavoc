@@ -5,4 +5,5 @@ public class AvailableRecipes : ScriptableObject
 {
     [Header("Available Recipes")]
     public Sprite[] pages;
+    public ItemInfo[] caftibols;
 }
