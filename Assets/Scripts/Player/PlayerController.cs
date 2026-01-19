@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     CharacterController cc;
     AnimationController ac;
-
+    public Animator tempAnimasn;
     public int playerInt;
     public Transform DireksenPonter;
     [Header("Movement Settings")]
@@ -57,8 +57,12 @@ public class PlayerController : MonoBehaviour
             DashColdown.gameObject.SetActive(false);
 
         Vector3 move = new Vector3(moveDir.x, 0, moveDir.y);
+        tempAnimasn.SetBool("Run", canMove && move.magnitude > 0);
+
         if (!cc.isGrounded)
             move.y = -2;
+
+
 
         if (canMove)
             cc.Move(move * (movementSpeed * Time.deltaTime));

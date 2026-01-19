@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flicker: []
-  flickerTime: 0.25
+  flickerTime: 0.1
   flickerOnOf:
     serializedVersion: 2
     m_Curve:
