@@ -13,6 +13,8 @@ public class RepyBookMan : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.localScale = Vector3.one / transform.lossyScale.y;
         r = this;
+        GameController.gameController.Pause();
+
         for (int i = 0; i < resepyButens.Length; i++) {
            resepyButens[i].gameObject.SetActive(resepys.caftibols.Contains(ResepyConstruktor.resepyConstruktor.AllResepys[i]));
         }
@@ -24,7 +26,9 @@ public class RepyBookMan : MonoBehaviour
     }
 
     public static void Exit() {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.Locked;
+        GameController.gameController.UnPause();
         r.gameObject.SetActive(false);
     }
 }

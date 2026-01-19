@@ -10872,9 +10872,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3862105503675056004, guid: 4646bd7abaaea7b4b9537292c183cede, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468238543707815258, guid: 4646bd7abaaea7b4b9537292c183cede, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6250274680333498720, guid: 4646bd7abaaea7b4b9537292c183cede, type: 3}
       propertyPath: m_Name
       value: Trashcan
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250274680333498720, guid: 4646bd7abaaea7b4b9537292c183cede, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7514898188840254106, guid: 4646bd7abaaea7b4b9537292c183cede, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8387507050561868455, guid: 4646bd7abaaea7b4b9537292c183cede, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13614,6 +13630,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
+      propertyPath: flickerTime
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 174463411688250695, guid: f5806f6d9ac9cc54cbbd50bb91c6559e, type: 3}
       propertyPath: flicker.Array.size
       value: 5
