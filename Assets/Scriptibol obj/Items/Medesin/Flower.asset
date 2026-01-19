@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: Posen 1
   item: {fileID: 5675503155611057444, guid: a82cb7a2983a4954e88cade6398e1ffc, type: 3}
-  mixTime: 5
+  mixTime: 2
   ingrediants:
   - {fileID: 11400000, guid: 31476911c01bb67428c6a2fc052c95c0, type: 2}

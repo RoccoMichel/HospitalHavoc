@@ -5388,6 +5388,7 @@ MonoBehaviour:
   - {fileID: 1270133714714359333}
   - {fileID: 539587036839422970}
   Spitshbubol: {fileID: 6186711045329998124}
+  qerentQupont: 0
 --- !u!114 &842589115628789611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5427,8 +5428,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  canInteract: 1
+  overrideInteract: 1
   needsEmptyHand: 0
   itemCanInteract: 0
+  needsItem: 0
 --- !u!114 &3834694779590130114
 MonoBehaviour:
   m_ObjectHideFlags: 0

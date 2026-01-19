@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     AnimationController ac;
     public Animator tempAnimasn;
     public int playerInt;
-    public Transform DireksenPonter;
+  //  public Transform DireksenPonter;
     [Header("Movement Settings")]
     public float movementSpeed;
     public bool canMove = true;
@@ -103,11 +103,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if (moveDir.magnitude == 0) DireksenPonter.gameObject.SetActive(false);
-        else  {
-            DireksenPonter.gameObject.SetActive(true);
-            DireksenPonter.forward = -transform.forward; 
-        }
+        //if (moveDir.magnitude == 0) DireksenPonter.gameObject.SetActive(false);
+        //else  {
+        //    DireksenPonter.gameObject.SetActive(true);
+        //    DireksenPonter.forward = -transform.forward; 
+        //}
     }
 
     void CheckForPlatform()

@@ -5062,7 +5062,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.2
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -5123,8 +5123,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  canInteract: 1
+  overrideInteract: 1
   needsEmptyHand: 0
   itemCanInteract: 0
+  needsItem: 0
 --- !u!1 &3540239997241888382
 GameObject:
   m_ObjectHideFlags: 0

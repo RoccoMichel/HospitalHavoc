@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: Pllerbs
   item: {fileID: 5675503155611057444, guid: ec79419f1fc863043936396bb4440749, type: 3}
-  mixTime: 5
+  mixTime: 2
   ingrediants:
   - {fileID: 11400000, guid: 56e64d019b859484cb55bee2d2344394, type: 2}
   - {fileID: 11400000, guid: 2223cba45bea92a488fc895a2196fa6e, type: 2}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: Ink
   item: {fileID: 7628469929452083731, guid: d20e98b01563e6a409feb70cff99ed34, type: 3}
-  mixTime: 2
+  mixTime: 1.5
   ingrediants:
   - {fileID: 11400000, guid: 93340de0d062f20479bd681966249e96, type: 2}

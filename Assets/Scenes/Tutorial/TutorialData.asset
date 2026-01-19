@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: TutorialData
   m_EditorClassIdentifier: 
   GameLengthSeconds: 120
-  startMoney: 100
+  startMoney: 0
   moneyDrainRate: 0.5
   newPatientRate: 0.05
   DeadPatientScorePenalty: 50
-  rankRequirements: 0000000032000000500000007800000096000000
+  rankRequirements: 0000000032000000640000007d0000007d000000
+  isInitialized: 1
+  data:
+    level: 0
+    players: 0
+    rank: S
+    score:
+    - 175
+    bestScore: 0

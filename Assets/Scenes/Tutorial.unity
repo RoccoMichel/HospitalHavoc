@@ -3482,6 +3482,10 @@ PrefabInstance:
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7568499666606134587, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
+      propertyPath: resepys
+      value: 
+      objectReference: {fileID: 11400000, guid: f0f605bedd4daf841b0533591fd19e00, type: 2}
     - target: {fileID: 8214596569230262772, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.41
@@ -4358,6 +4362,26 @@ PrefabInstance:
       propertyPath: showStartMenu
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6842309122111161808, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842309122111161808, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469650400800357097, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8971752839079579765, guid: c9092e32ab2a0fc4186e3635aea25620, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4663,6 +4687,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1554200423 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1361489713479460320, guid: e73e016fb173f3041ba5ff66153ec8be, type: 3}
+  m_PrefabInstance: {fileID: 1098380766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1558565364
 Mesh:
   m_ObjectHideFlags: 0
@@ -5149,7 +5178,7 @@ MonoBehaviour:
   - arrowLocation: {fileID: 279577156}
     explanation: Wait, and deliever it to the Customer
   - arrowLocation: {fileID: 1745527085}
-    explanation: Keep your Money up until the Timer runs out!
+    explanation: Gat asmusth money ass posibol befor time runs out !
   explanationDisplay: {fileID: 251663470}
 --- !u!4 &1762504760
 Transform:
@@ -6161,6 +6190,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cam
       objectReference: {fileID: 0}
+    - target: {fileID: 5856822557011697692, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856822557011697692, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
+      propertyPath: 'm_Cameras.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1554200423}
     - target: {fileID: 8343740716143671130, guid: cb3d9a0c254eee44397e015e29bbf640, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

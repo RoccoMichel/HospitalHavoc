@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: v
   item: {fileID: 8274634750848284492, guid: 670a632006c71a14ba36846dd60e742e, type: 3}
-  mixTime: 0.5
+  mixTime: 0.25
   ingrediants: []

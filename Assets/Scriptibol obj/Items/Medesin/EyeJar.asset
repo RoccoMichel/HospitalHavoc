@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: Eyejar
   item: {fileID: 1768184484462043254, guid: f3f60f0706be71d4bb913c37e4f3c1a8, type: 3}
-  mixTime: 5
+  mixTime: 2
   ingrediants:
   - {fileID: 11400000, guid: fadd1fbef385b6542986c33e0419b010, type: 2}
   - {fileID: 11400000, guid: fadd1fbef385b6542986c33e0419b010, type: 2}
