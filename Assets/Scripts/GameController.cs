@@ -102,10 +102,27 @@ public class GameController : MonoBehaviour
 
         Cursor.lockState = active ? CursorLockMode.Locked : CursorLockMode.Confined;
 
-        if (!active || canvasManager == null) return;
+        if(canvasManager == null) return;
 
-        if (pauseAction.WasPressedThisFrame() && canvasManager.pauseMenu == null)
-            PauseMenu();
+        if (pauseAction.WasPressedThisFrame())
+        {
+            if (RepyBookMan.repyBookOpen)
+            {
+                active = true;
+                RepyBookMan.repyBookOpen = false;
+                RepyBookMan.Exit();
+            }
+            else
+            {
+                if (canvasManager.pauseMenu == null)
+                    PauseMenu();
+            }
+        }
+
+        if (!active) return;
+
+
+
 
         time -= Time.deltaTime;
         // money -= levelData.moneyDrainRate * Time.deltaTime;

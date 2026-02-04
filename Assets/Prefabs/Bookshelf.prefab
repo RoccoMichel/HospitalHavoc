@@ -61,9 +61,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 7568499666606134587}
+        m_TargetAssemblyTypeName: RepyBookMan, Assembly-CSharp
+        m_MethodName: OpenBook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   canInteract: 1
   overrideInteract: 1
-  needsEmptyHand: 1
+  needsEmptyHand: 0
   itemCanInteract: 0
   needsItem: 0
 --- !u!1001 &7615242486804765531
@@ -419,6 +431,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7765153607915571077, guid: 0dd9fa82daa06994e98e412b2165c4cf, type: 3}
   m_PrefabInstance: {fileID: 8445170227370275641}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7568499666606134587 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2034487710171047426, guid: 0dd9fa82daa06994e98e412b2165c4cf, type: 3}
+  m_PrefabInstance: {fileID: 8445170227370275641}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593915904555237739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412d7f255d90a4f43b66163367c5ddc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8593915904555237739 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 175919010171613778, guid: 0dd9fa82daa06994e98e412b2165c4cf, type: 3}

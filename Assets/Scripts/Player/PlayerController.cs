@@ -172,8 +172,11 @@ public class PlayerController : MonoBehaviour
             dir.Normalize();
             lastDir = dir;
 
-            RotatePlayer(lastDir);
-            ac.PlayAni(GetCurrentActiveDirObj());
+            if(GameController.gameController.active)
+            {
+                RotatePlayer(lastDir);
+                ac.PlayAni(GetCurrentActiveDirObj());
+            }
         }
     }
 
