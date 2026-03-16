@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BoltsTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class MainMenu : MonoBehaviour
 {
     public bool loopingSelection = true;
     public int playerCount = 1;
-    public List<LevelData> levels = new();
+    public List<AllLevelData> levels = new();
 
     [SerializeField] private float progressIncreaseSpeed = 0.3f;
     [SerializeField] private float progressDecreaseSpeed = 0.5f;
@@ -25,7 +26,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Animator boardAnimator;
 
     [System.Serializable]
-    public struct LevelData
+    public struct AllLevelData
     {
         public string sceneName;
         public Sprite scenePreview;
@@ -60,6 +61,11 @@ public class MainMenu : MonoBehaviour
         boardAnimator.Play("Bounce");
 
         // string bestRank = PlayerPrefs.GetString($"{levels[levelIndex].sceneName}_score", string.Empty);
+        
+        LevelData data = BoltsSave.LoadClass<LevelData>($"Level: {levelIndex + 2}");
+        if(data.level != 0)
+            levels[levelIndex].ldo.data = data;
+        
         string bestRank = levels[levelIndex].ldo.data.rank;
         rankDisplay.enabled = bestRank == string.Empty ? false : true;
 

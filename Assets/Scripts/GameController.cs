@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using BoltsTools;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -35,7 +36,6 @@ public class GameController : MonoBehaviour
     private float latestCureTime;
 
     [Space(40)] public bool debug;
-    public bool sendDataToServer;
 
     public static GameController gameController;
     private InputAction pauseAction;
@@ -58,10 +58,6 @@ public class GameController : MonoBehaviour
     float dataAvgScore = 0;
 
     private void Awake() {
-        GameSaveController.Initialize();
-
-        StartCoroutine(CheckServer());
-
         gameController = this;
         active = false;
         EndTransition();
@@ -206,8 +202,8 @@ public class GameController : MonoBehaviour
 
             int playerCount = OnPlayerJoin.instance.players.Count + 1;
             levelData.data.players = playerCount;
-
-            GameSaveController.Save(levelData.data);
+            
+            BoltsSave.SaveClassVariable($"Level: {levelData.data.level}", levelData.data);
         }
         Instantiate((GameObject)Resources.Load("UI/Level End Menu"), canvasManager.gameObject.transform);
     }
@@ -250,8 +246,11 @@ public class GameController : MonoBehaviour
 
         StartCoroutine(ScoreDisplay(menu, rank));
 
+        levelData.data.rank = rank;
+
         Debug.Log($"Player(s) achieved {rank} rank with a score of: {score}!");
 
+        BoltsSave.SaveClassVariable($"Level: {levelData.data.level}", levelData.data);
 
         // Save new high-scores |    /!\   >  /!\   >  /!\   >  /!\   >  /!\   >  /!\   >  DO NOT WRITE CODE BELOW ALWAYS ABOVE  /!\
         string bestRank = levelData.data.rank;
@@ -275,94 +274,7 @@ public class GameController : MonoBehaviour
             else if (rankChar == char.Parse(rank)) return;
         }
 
-        if(sendDataToServer || !Application.isEditor)
-            SendDataToServer(score);
-
-        GameSaveController.Save(levelData.data);
-    }
-
-    string serverURL = "https://website-test-y9ps.onrender.com";
-    int maxRetries = 3;
-    float retryDelay = 5f;
-    int currentRetry = 0;
-
-    void SendDataToServer(float score)
-    {
-        DataToSend data = new DataToSend() { level = levelData.data.level - 2, score = score };
-
-        StartCoroutine(PostData(data));
-    }
-
-    public IEnumerator PostData(DataToSend data)
-    {
-        string jsonData = JsonUtility.ToJson(data);
-
-        Debug.Log("Sending Data To Server...");
-
-        using (UnityWebRequest request = UnityWebRequest.PostWwwForm(serverURL + "/api/unity-data", ""))
-        {
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                Debug.Log("✅ Data sent successfully!");
-                Debug.Log("Server response: " + request.downloadHandler.text);
-            }
-            else
-                Debug.LogError("Error: " + request.error);
-        }
-    }
-
-    IEnumerator CheckServer()
-    {
-        while (currentRetry < maxRetries)
-        {
-            Debug.Log($"Checking Server... (Attempt {currentRetry + 1}/{maxRetries}");
-
-            using (UnityWebRequest request = UnityWebRequest.Get(serverURL))
-            {
-                request.timeout = 10;
-
-                yield return request.SendWebRequest();
-
-                if (request.result == UnityWebRequest.Result.Success)
-                {
-                    Debug.Log("Server Is Up");
-
-                    serverIsUp = true;
-
-                    DataToResive resivedData = JsonUtility.FromJson<DataToResive>(request.downloadHandler.text);
-
-                    dataPlayed = resivedData.dataPlayed;
-                    dataScores = resivedData.dataScores;
-                    dataAvgScore = resivedData.dataAvgScore;
-                    dataTotalScore = resivedData.dataTotalScore;
-
-                    yield break;
-                }
-                else
-                {
-                    Debug.LogWarning($"❌ Attempt {currentRetry + 1} failed: {request.error}");
-                    currentRetry++;
-
-                    if (currentRetry < maxRetries)
-                    {
-                        Debug.Log($"Retrying in {retryDelay} seconds...");
-
-                        yield return new WaitForSeconds(retryDelay);
-                    }
-                    else
-                    {
-                        Debug.LogError("❌ Server is unreachable after all retries!");
-                    }
-                }
-            }
-        }
+        BoltsSave.SaveClassVariable($"Level: {levelData.data.level}", levelData.data);
     }
 
     [Button]
@@ -488,12 +400,6 @@ public class GameController : MonoBehaviour
         // Buttons
         if (GUI.Button(new Rect(10, 40, 100, 20), "Reload")) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         if (GUI.Button(new Rect(10, 70, 100, 20), "Exit")) Application.Quit(); ;
-
-        // Level Data
-        if (serverIsUp)
-        {
-
-        }
     }
 
 
@@ -519,20 +425,4 @@ public class GameController : MonoBehaviour
     {
         gameController = this;
     }
-}
-
-[Serializable]
-public class DataToSend
-{
-    public float score;
-    public int level;
-}
-
-[Serializable]
-public class DataToResive
-{
-    public int dataPlayed = 0;
-    public float[] dataScores = new float[] { };
-    public float dataTotalScore = 0;
-    public float dataAvgScore = 0;
 }

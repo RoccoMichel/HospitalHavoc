@@ -20,21 +20,8 @@ MonoBehaviour:
   rankRequirements: fa0000005e010000f4010000ee020000ee020000
   isInitialized: 1
   data:
+    players: 0
+    score: []
+    bestScore: 0
+    rank: 
     level: 3
-    players: 2
-    rank: A
-    score:
-    - 450
-    - 450
-    - 625
-    - 475
-    - 525
-    - 525
-    - 650
-    - 575
-    - 425
-    - 450
-    - 500
-    - 500
-    - 500
-    bestScore: 500

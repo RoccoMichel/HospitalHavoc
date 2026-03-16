@@ -1,521 +1,434 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Reflection;
+using BoltsTools;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CustomPropertyDrawer(typeof(BoltsEvent))]
-public class BoltsEventDrawer : PropertyDrawer
+namespace Editor.BoltsTools
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(BoltsCommentAttribute))]
+    public class BoltsCommentDrawer : PropertyDrawer
     {
-        EditorGUI.BeginProperty(position, label, property);
-
-        Rect backgroundRect = new Rect(position.x - 2, position.y, position.width * 4, GetPropertyHeight(property, label));
-        EditorGUI.DrawRect(backgroundRect, new Color(0.2f, 0.2f, 0.2f, 0.9f));
-
-        property.isExpanded = EditorGUI.Foldout(
-            new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight),
-            property.isExpanded,
-            label,
-            true);
-
-        if (property.isExpanded)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.indentLevel++;
+            BoltsCommentAttribute comment = (BoltsCommentAttribute)attribute;
 
-            SerializedProperty listenersProp = property.FindPropertyRelative("persistentListeners");
+            float fieldHeight = EditorGUI.GetPropertyHeight(property, label, true);
+            float commentHeight = EditorGUIUtility.singleLineHeight * 1.3f;
 
-            float yOffset = position.y + EditorGUIUtility.singleLineHeight + 2;
+            float y = position.y;
 
-            //Draw the array size and + button
-            Rect headerRect = new Rect(position.x, yOffset, position.width - 60, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(headerRect, "Persistent Listeners");
+            Rect commentRect = new Rect(position.x, y, position.width, commentHeight);
 
-            Rect addRect = new Rect(position.x + position.width - 55, yOffset, 25, EditorGUIUtility.singleLineHeight);
-            if (GUI.Button(addRect, "+"))
-                listenersProp.arraySize++;
+            EditorGUI.HelpBox(commentRect, comment.comment, MessageType.None);
 
-            Rect removeRect = new Rect(position.x + position.width - 25, yOffset, 25, EditorGUIUtility.singleLineHeight);
-            if (GUI.Button(removeRect, "-") && listenersProp.arraySize > 0)
-                listenersProp.arraySize--;
+            Rect fieldRect = new Rect(position.x, y + commentHeight + 2, position.width, fieldHeight);
+            EditorGUI.PropertyField(fieldRect, property, label, true);
 
-            yOffset += EditorGUIUtility.singleLineHeight + 4;
+            EditorGUILayout.Space(comment.space);
+        }
 
-            //Draw each listener
-            for (int i = 0; i < listenersProp.arraySize; i++)
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            float commentHeight = EditorGUIUtility.singleLineHeight * 1.3f;
+            float fieldHeight = EditorGUI.GetPropertyHeight(property, label, true);
+
+            return fieldHeight + commentHeight + 4;
+        }
+    }
+
+    [CustomPropertyDrawer(typeof(BoltsInputActionAttribute))]
+    public class BoltsInputActionDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var attr = (BoltsInputActionAttribute)attribute;
+
+            EditorGUI.BeginProperty(position, label, property);
+
+            if (property.propertyType != SerializedPropertyType.String)
             {
-                SerializedProperty listenerProp = listenersProp.GetArrayElementAtIndex(i);
-                SerializedProperty gameObjectProp = listenerProp.FindPropertyRelative("targetGameObject");
-                SerializedProperty componentProp = listenerProp.FindPropertyRelative("targetComponent");
-                SerializedProperty methodProp = listenerProp.FindPropertyRelative("methodName");
-                SerializedProperty paramsProp = listenerProp.FindPropertyRelative("parameters");
+                EditorGUI.LabelField(position, label.text, "Use [InputActionMap] on a string field.");
+                EditorGUI.EndProperty();
 
-                float listenerStartY = yOffset;
-                float listenerHeight = EditorGUIUtility.singleLineHeight + 2;
-
-                if (gameObjectProp.objectReferenceValue != null)
-                {
-                    listenerHeight += EditorGUIUtility.singleLineHeight + 2;
-
-                    var TargetObject = componentProp.objectReferenceValue != null ?
-                                           componentProp.objectReferenceValue :
-                                           gameObjectProp.objectReferenceValue;
-
-                    if (TargetObject != null)
-                    {
-                        listenerHeight += EditorGUIUtility.singleLineHeight + 2;
-                        listenerHeight += (EditorGUIUtility.singleLineHeight + 2) * paramsProp.arraySize;
-                    }
-                }
-
-                Rect listenerBackgroundRect = new Rect(position.x + 5, listenerStartY - 2, position.width - 10, listenerHeight);
-                EditorGUI.DrawRect(listenerBackgroundRect, new Color(0.15f, 0.15f, 0.15f, 1f));
-
-                Rect gameObjectRect = new Rect(position.x, yOffset, position.width, EditorGUIUtility.singleLineHeight);
-                EditorGUI.PropertyField(gameObjectRect, gameObjectProp, new GUIContent($"GameObject {i}"));
-                yOffset += EditorGUIUtility.singleLineHeight + 2;
-
-                if (gameObjectProp.objectReferenceValue != null)
-                {
-                    GameObject targetGO = gameObjectProp.objectReferenceValue as GameObject;
-                    var components = targetGO.GetComponents<Component>();
-                    var componentsName = components.Select(c => c.GetType().Name).ToArray();
-
-                    int selectedComponentIndex = -1;
-
-                    if (componentProp.objectReferenceValue != null)
-                    {
-                        for (int c = 0; c < components.Length; c++)
-                        {
-                            if (components[c] == componentProp.objectReferenceValue)
-                            {
-                                selectedComponentIndex = c;
-                                break;
-                            }
-                        }
-                    }
-
-                    Rect componentRect = new Rect(position.x, yOffset, position.width, EditorGUIUtility.singleLineHeight);
-                    int newComponentIndex = EditorGUI.Popup(componentRect, "Component", selectedComponentIndex, componentsName);
-
-                    if (newComponentIndex >= 0 && newComponentIndex < components.Length)
-                        componentProp.objectReferenceValue = components[newComponentIndex];
-
-                    yOffset += EditorGUIUtility.singleLineHeight + 2;
-                }
-
-                var targetObject = componentProp.objectReferenceValue != null ?
-                                       componentProp.objectReferenceValue :
-                                        gameObjectProp.objectReferenceValue;
-
-                //Draw method dropdown
-                if(targetObject != null)
-                {
-                    var methodInfos = GetMethods(targetObject);
-                    var methodNames = methodInfos.Select(m => GetMethodDisplayName(m)).ToArray();
-
-                    int selectedIndex = -1;
-
-                    for (int j = 0; j < methodInfos.Count; j++)
-                    {
-                        if (methodInfos[j].Name == methodProp.stringValue)
-                        {
-                            selectedIndex = j;
-                            break;
-                        }
-                    }
-
-                    Rect methodRect = new Rect(position.x, yOffset, position.width, EditorGUIUtility.singleLineHeight);
-                    int newIndex = EditorGUI.Popup(methodRect, "Method", selectedIndex, methodNames );
-
-                    if (newIndex >= 0 && newIndex < methodInfos.Count)
-                    {
-                        var selectedMethod = methodInfos[newIndex];
-                        methodProp.stringValue = selectedMethod.Name;
-
-                        var methodParams = selectedMethod.GetParameters();
-                        paramsProp.arraySize = methodParams.Length;
-
-                        selectedIndex = newIndex;
-
-                        for (int p = 0; p < methodParams.Length; p++)
-                        {
-                            SerializedProperty paramProp = paramsProp.GetArrayElementAtIndex(p);
-                            SerializedProperty typeProp = paramProp.FindPropertyRelative("type");
-
-                            Type paramType = methodParams[p].ParameterType;
-                            if (paramType == typeof(int))
-                                typeProp.enumValueIndex = (int)BoltsEventParameter.ParameterType.Int;
-                            else if (paramType == typeof(float))
-                                typeProp.enumValueIndex = (int)BoltsEventParameter.ParameterType.Float;
-                            else if (paramType == typeof(string))
-                                typeProp.enumValueIndex = (int)BoltsEventParameter.ParameterType.String;
-                            else if (paramType == typeof(bool))
-                                typeProp.enumValueIndex = (int)BoltsEventParameter.ParameterType.Bool;
-                            else if (typeof(UnityEngine.Object).IsAssignableFrom(paramType))
-                                typeProp.enumValueIndex = (int)BoltsEventParameter.ParameterType.Object;
-                        }
-                    }
-
-                    yOffset += EditorGUIUtility.singleLineHeight + 2;
-
-                    for (int p = 0; p < paramsProp.arraySize; p++)
-                    {
-                        SerializedProperty paramProp = paramsProp.GetArrayElementAtIndex(p);
-                        SerializedProperty typeProp = paramProp.FindPropertyRelative("type");
-                        BoltsEventParameter.ParameterType paramType = (BoltsEventParameter.ParameterType)typeProp.enumValueIndex;
-
-                        string paramName =
-                            selectedIndex >= 0 && selectedIndex < methodInfos.Count ?
-                                methodInfos[selectedIndex].GetParameters()[p].Name : $"Parm {p}";
-
-                        Rect paramRect = new Rect(position.x + 15, yOffset, position.width - 15, EditorGUIUtility.singleLineHeight);
-
-                        switch (paramType)
-                        {
-                            case BoltsEventParameter.ParameterType.Int:
-                                SerializedProperty intProp = paramProp.FindPropertyRelative("intValue");
-                                EditorGUI.PropertyField(paramRect, intProp, new GUIContent(paramName));
-
-                                break;
-                            case BoltsEventParameter.ParameterType.Float:
-                                SerializedProperty floatProp = paramProp.FindPropertyRelative("floatValue");
-                                EditorGUI.PropertyField(paramRect, floatProp, new GUIContent(paramName));
-
-                                break;
-                            case BoltsEventParameter.ParameterType.String:
-                                SerializedProperty stringProp = paramProp.FindPropertyRelative("stringValue");
-                                EditorGUI.PropertyField(paramRect, stringProp, new GUIContent(paramName));
-
-                                break;
-                            case BoltsEventParameter.ParameterType.Bool:
-                                SerializedProperty boolProp = paramProp.FindPropertyRelative("boolValue");
-                                EditorGUI.PropertyField(paramRect, boolProp, new GUIContent(paramName));
-
-                                break;
-                            case BoltsEventParameter.ParameterType.Object:
-                                SerializedProperty objProp = paramProp.FindPropertyRelative("objectValue");
-                                EditorGUI.PropertyField(paramRect, objProp, new GUIContent(paramName));
-
-                                break;
-                        }
-
-                        yOffset += EditorGUIUtility.singleLineHeight + 2;
-                    }
-                }
-
-                yOffset += 14;
+                return;
             }
 
-            BoltsEvent boltsEvent = fieldInfo.GetValue(property.serializedObject.targetObject) as BoltsEvent;
-            int runtimeCount = boltsEvent != null ? boltsEvent.GetRuntimeListenerCount() : 0;
+            var assetProperty = property.serializedObject.FindProperty(attr.actionAssetField);
 
-            //Display listener count
-            Rect countRect = new Rect(position.x, yOffset, position.width - 110, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(countRect, "Runtime Listeners", $"{runtimeCount} listener(s)");
-
-            Rect clearRuntimeListenerButton = new Rect(position.x + position.width - 150, yOffset, 150, EditorGUIUtility.singleLineHeight);
-            if (GUI.Button(clearRuntimeListenerButton, "Reset Runtime Listeners"))
+            if (assetProperty == null || assetProperty.objectReferenceValue == null)
             {
-                if (boltsEvent != null)
-                {
-                    boltsEvent.RemoveAllListeners();
-                    listenersProp.ClearArray();
-                    property.serializedObject.ApplyModifiedProperties();
-                }
+                EditorGUI.PropertyField(position, property, label);
+                EditorGUI.HelpBox(position, $"BoltsInputActionAttribute '{attr.actionAssetField}' not found",
+                    MessageType.Warning);
+
+                return;
             }
 
-            EditorGUI.indentLevel--;
-        }
+            var asset = assetProperty.objectReferenceValue as InputActionAsset;
 
-        EditorGUI.EndProperty();
-    }
-
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-        if (!property.isExpanded)
-        {
-            return EditorGUIUtility.singleLineHeight;
-        }
-
-        SerializedProperty listenersProp = property.FindPropertyRelative("persistentListeners");
-
-        float height = EditorGUIUtility.singleLineHeight + 2;
-        height += EditorGUIUtility.singleLineHeight + 4;
-
-        for (int i = 0; i < listenersProp.arraySize; i++)
-        {
-            SerializedProperty listenerProp = listenersProp.GetArrayElementAtIndex(i);
-            SerializedProperty gameObjectProp = listenerProp.FindPropertyRelative("targetGameObject");
-            SerializedProperty componentProp = listenerProp.FindPropertyRelative("targetComponent");
-            SerializedProperty paramsProp = listenerProp.FindPropertyRelative("parameters");
-
-            height += EditorGUIUtility.singleLineHeight + 2;
-
-            if (gameObjectProp.objectReferenceValue != null)
+            if (asset == null)
             {
-                height += EditorGUIUtility.singleLineHeight + 2;
-                height += (EditorGUIUtility.singleLineHeight + 2) * paramsProp.arraySize;
+                EditorGUI.LabelField(position, label.text, "Field is not an BoltsInputActionAttribute.");
+                EditorGUI.EndProperty();
 
-                var targetProp = componentProp.objectReferenceValue != null ?
-                                     componentProp.objectReferenceValue :
-                                     gameObjectProp.objectReferenceValue;
-
-                if (targetProp != null)
-                {
-                    height += EditorGUIUtility.singleLineHeight + 2;
-                    height += (EditorGUIUtility.singleLineHeight + 2) * paramsProp.arraySize;
-                }
+                return;
             }
 
-            height += 4;
+            var maps = asset.actionMaps;
+
+            if (maps.Count == 0)
+            {
+                EditorGUI.LabelField(position, label.text, "No Action Maps in asset.");
+                EditorGUI.EndProperty();
+
+                return;
+            }
+
+            string[] mapNames = maps.Select(m => m.name).ToArray();
+
+            int index = Mathf.Max(0, System.Array.IndexOf(mapNames, property.stringValue));
+            if (index >= mapNames.Length)
+                index = 0;
+
+            int newIndex = EditorGUI.Popup(position, label.text, index, mapNames);
+            property.stringValue = mapNames[newIndex];
+
+            EditorGUI.EndProperty();
         }
-
-        height += EditorGUIUtility.singleLineHeight;
-
-        return height + 30;
     }
 
-    private List<MethodInfo> GetMethods(UnityEngine.Object target)
+    [CustomPropertyDrawer(typeof(BoltsShaderPropertyAttribute))]
+    public class BoltsShaderPropertyDrawer : PropertyDrawer
     {
-        if (target == null)
-            return new List<MethodInfo>();
-
-        var methods = target.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
-        List<MethodInfo> validMethods = new List<MethodInfo>();
-
-        foreach (var method in methods)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (method.ReturnType == typeof(void) &&
-                !method.Name.StartsWith("get_") &&
-                !method.Name.StartsWith("set_") &&
-                method.DeclaringType != typeof(UnityEngine.Object) &&
-                method.DeclaringType != typeof(UnityEngine.Component) &&
-                method.DeclaringType != typeof(UnityEngine.Behaviour) &&
-                method.DeclaringType != typeof(UnityEngine.MonoBehaviour))
+            var attr = (BoltsShaderPropertyAttribute)attribute;
+
+            EditorGUI.BeginProperty(position, label, property);
+
+            if (property.propertyType != SerializedPropertyType.String)
             {
-                // Only allow supported parameter types
-                bool validParams = true;
+                EditorGUI.LabelField(position, label.text, "Use [ShaderProperty] on a string field.");
+                EditorGUI.EndProperty();
+                return;
+            }
 
-                foreach (var param in method.GetParameters())
+            var matProp = FindSiblingProperty(property, attr.materialField);
+
+            if (matProp == null || matProp.objectReferenceValue == null)
+            {
+                EditorGUI.LabelField(position, label.text, "Assign a Material first.");
+                EditorGUI.EndProperty();
+                return;
+            }
+
+            var mat = matProp.objectReferenceValue as Material;
+
+            if (!mat || !mat.shader)
+            {
+                EditorGUI.LabelField(position, label.text, "Invalid Material or Shader.");
+                EditorGUI.EndProperty();
+                return;
+            }
+
+            var shader = mat.shader;
+            int count = shader.GetPropertyCount();
+
+            if (count == 0)
+            {
+                EditorGUI.LabelField(position, label.text, "Shader has no properties.");
+                EditorGUI.EndProperty();
+                return;
+            }
+
+            List<string> propNames = new List<string>(count);
+
+            for (int i = 0; i < count; i++)
+                propNames.Add(shader.GetPropertyName(i));
+
+            int index = Mathf.Max(0, propNames.IndexOf(property.stringValue));
+            if (index >= propNames.Count) index = 0;
+
+            int newIndex = EditorGUI.Popup(position, label.text, index, propNames.ToArray());
+            property.stringValue = propNames[newIndex];
+
+            EditorGUI.EndProperty();
+        }
+
+        private static SerializedProperty FindSiblingProperty(SerializedProperty property, string siblingName)
+        {
+            var direct = property.FindPropertyRelative(siblingName);
+
+            if (direct != null)
+                return direct;
+
+            string path = property.propertyPath;
+            int lastDot = path.LastIndexOf(".", StringComparison.Ordinal);
+
+            if (lastDot < 0)
+                return property.serializedObject.FindProperty(siblingName);
+
+            string parentPath = path.Substring(0, lastDot);
+            var parent = property.serializedObject.FindProperty(parentPath);
+
+            if (parent == null)
+                return null;
+
+            return parent.FindPropertyRelative(siblingName);
+        }
+    }
+
+    [CustomPropertyDrawer(typeof(BoltsSaveAttribute))]
+    public class BoltsSaveAttributeDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            if (property.propertyType != SerializedPropertyType.String)
+            {
+                EditorGUI.HelpBox(position, "[SavedVariable] Only Works On Sting Fields", MessageType.Error);
+                return;
+            }
+
+            BoltsSaveAttribute bsa = (BoltsSaveAttribute)attribute;
+            List<string> names = GetVariableNames(bsa.filterType);
+
+            EditorGUI.BeginProperty(position, label, property);
+
+            Rect labelRect = new(position.x, position.y, EditorGUIUtility.labelWidth, position.height);
+            Rect buttonRect = new(position.x + EditorGUIUtility.labelWidth, position.y,
+                position.width - EditorGUIUtility.labelWidth, position.height);
+
+            EditorGUI.LabelField(labelRect, label);
+
+            string current = property.stringValue;
+            string display = string.IsNullOrEmpty(current) ? "-- None --" : current;
+
+            if (EditorGUI.DropdownButton(buttonRect, new(display), FocusType.Keyboard))
+            {
+                GenericMenu menu = new();
+
+                if (names.Count == 0)
+                    menu.AddDisabledItem(new("No Saved Variables Found"));
+                else
                 {
-                    Type pType = param.ParameterType;
-
-                    if (pType != typeof(int) &&
-                        pType != typeof(float) &&
-                        pType != typeof(string) &&
-                        pType != typeof(bool) &&
-                        !typeof(UnityEngine.Object).IsAssignableFrom(pType))
+                    menu.AddItem(new("-- None --"), string.IsNullOrEmpty(current), () =>
                     {
-                        validParams = false;
+                        property.stringValue = "";
+                        property.serializedObject.ApplyModifiedProperties();
+                    });
 
-                        break;
+                    foreach (string name in names)
+                    {
+                        string captured = name;
+                        menu.AddItem(new(captured), current == captured, () =>
+                        {
+                            property.stringValue = captured;
+                            property.serializedObject.ApplyModifiedProperties();
+                        });
                     }
                 }
 
-                if (validParams)
-                {
-                    validMethods.Add(method);
-                }
+                menu.DropDown(buttonRect);
+            }
+
+            EditorGUI.EndProperty();
+        }
+
+        List<string> GetVariableNames(SavedVariableType filter)
+        {
+            List<string> names = new();
+
+            SavingConfigAsset settings = BoltsSave._settings;
+
+            if (settings == null)
+            {
+                string[] guids = AssetDatabase.FindAssets("t:SavingConfigAsset");
+                if (guids.Length == 0)
+                    return names;
+
+                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+                settings = AssetDatabase.LoadAssetAtPath<SavingConfigAsset>(path);
+            }
+
+            if (settings == null)
+                return names;
+
+            string fullPath = settings.GetFullPath();
+
+            if (!File.Exists(fullPath))
+                return names;
+
+            string json = File.ReadAllText(fullPath);
+            SaveData sd = JsonUtility.FromJson<SaveData>(json);
+
+            if (sd == null)
+                return names;
+
+            if ((filter == SavedVariableType.Any || filter == SavedVariableType.Float) && sd.floats != null)
+                foreach (var item in sd.floats)
+                    names.Add(item.name);
+
+            if ((filter == SavedVariableType.Any || filter == SavedVariableType.Int) && sd.ints != null)
+                foreach (var item in sd.ints)
+                    names.Add(item.name);
+
+            if ((filter == SavedVariableType.Any || filter == SavedVariableType.Vector3) && sd.Vector3s != null)
+                foreach (var item in sd.Vector3s)
+                    names.Add(item.name);
+
+            if ((filter == SavedVariableType.Any || filter == SavedVariableType.Vector2) && sd.Vector2s != null)
+                foreach (var item in sd.Vector2s)
+                    names.Add(item.name);
+
+            if ((filter == SavedVariableType.Any || filter == SavedVariableType.Bool) && sd.bools != null)
+                foreach (var item in sd.bools)
+                    names.Add(item.name);
+
+            if ((filter == SavedVariableType.Any || filter == SavedVariableType.String) && sd.strings != null)
+                foreach (var item in sd.strings)
+                    names.Add(item.name);
+
+            if ((filter == SavedVariableType.Any || filter == SavedVariableType.Class) && sd.classes != null)
+                foreach (var item in sd.classes)
+                    names.Add(item.name);
+
+            return names;
+        }
+    }
+
+    [CustomPropertyDrawer(typeof(BoltsAnimationClipAttribute))]
+    public class BoltsAnimationClipDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var attr = (BoltsAnimationClipAttribute)attribute;
+
+            EditorGUI.BeginProperty(position, label, property);
+
+            if (property.propertyType != SerializedPropertyType.String)
+            {
+                EditorGUI.LabelField(position, label.text, "Use [BoltsAnimationClip] On A string Field");
+                EditorGUI.EndProperty();
+
+                return;
+            }
+
+            var assetProperty = property.serializedObject.FindProperty(attr.animator);
+
+            if (assetProperty == null || assetProperty.objectReferenceValue == null)
+            {
+                EditorGUI.PropertyField(position, property, label);
+                EditorGUI.HelpBox(position, $"BoltsAnimationClip {attr.animator} Not Found", MessageType.Error);
+
+                return;
+            }
+
+            var asset = assetProperty.objectReferenceValue as Animator;
+
+            if (asset == null)
+            {
+                EditorGUI.LabelField(position, label.text, "Field is not an BoltsAnimationClip.");
+                EditorGUI.EndProperty();
+
+                return;
+            }
+
+            var clips = asset.runtimeAnimatorController.animationClips;
+
+            if (clips.Length == 0)
+            {
+                EditorGUI.LabelField(position, label.text, "No Clips Found In Animator.");
+                EditorGUI.EndProperty();
+
+                return;
+            }
+
+            string[] clipNames = clips.Select(m => m.name).ToArray();
+
+            int index = Mathf.Max(0, System.Array.IndexOf(clipNames, property.stringValue));
+            if (index >= clipNames.Length)
+                index = 0;
+
+            int newIndex = EditorGUI.Popup(position, label.text, index, clipNames);
+            property.stringValue = clipNames[newIndex];
+
+            EditorGUI.EndProperty();
+        }
+    }
+
+    [CustomEditor(typeof(BoltsBoxCollider))]
+    public class BoltsBoxColliderDrawer : UnityEditor.Editor
+    {
+        UnityEditor.Editor boxColliderEditor;
+
+        public override void OnInspectorGUI()
+        {
+            BoltsBoxCollider customBC = (BoltsBoxCollider)target;
+
+            DrawDefaultInspector();
+
+            SerializedProperty px = serializedObject.FindProperty("px");
+            SerializedProperty py = serializedObject.FindProperty("py");
+            SerializedProperty pz = serializedObject.FindProperty("pz");
+            SerializedProperty nx = serializedObject.FindProperty("nx");
+            SerializedProperty ny = serializedObject.FindProperty("ny");
+            SerializedProperty nz = serializedObject.FindProperty("nz");
+
+            EditorGUILayout.BeginHorizontal();
+            px.boolValue = EditorGUILayout.ToggleLeft("+X", px.boolValue, GUILayout.Width(40));
+            py.boolValue = EditorGUILayout.ToggleLeft("+Y", py.boolValue, GUILayout.Width(40));
+            pz.boolValue = EditorGUILayout.ToggleLeft("+Z", pz.boolValue, GUILayout.Width(40));
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            nx.boolValue = EditorGUILayout.ToggleLeft("-X", nx.boolValue, GUILayout.Width(40));
+            ny.boolValue = EditorGUILayout.ToggleLeft("-Y", ny.boolValue, GUILayout.Width(40));
+            nz.boolValue = EditorGUILayout.ToggleLeft("-Z", nz.boolValue, GUILayout.Width(40));
+            EditorGUILayout.EndHorizontal();
+
+            serializedObject.ApplyModifiedProperties();
+
+            if (GUILayout.Button("Set Bounds"))
+                customBC.SetBounds();
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Box Collider Settings", EditorStyles.boldLabel);
+
+            if (customBC.boxCollider != null)
+            {
+                customBC.boxCollider.hideFlags = HideFlags.HideInInspector;
+
+                if (boxColliderEditor == null)
+                    boxColliderEditor = UnityEditor.Editor.CreateEditor(customBC.boxCollider);
+
+                boxColliderEditor.DrawDefaultInspector();
             }
         }
 
-        return validMethods;
+        private void OnDisable()
+        {
+            if (boxColliderEditor != null)
+                DestroyImmediate(boxColliderEditor);
+        }
     }
-
-    private string GetMethodDisplayName(MethodInfo method)
+    
+    public class NonWindowTools
     {
-        var parameters = method.GetParameters();
-
-        if (parameters.Length == 0)
-            return method.Name + " ()";
-
-        string paramStr = String.Join(", ", parameters.Select(p => p.ParameterType.Name));
-
-        return $"{method.Name} ({paramStr})";
-    }
-}
-
-[CustomPropertyDrawer(typeof(BoltsCommentAttribute))]
-public class BoltsCommentDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        BoltsCommentAttribute comment = (BoltsCommentAttribute)attribute;
-
-        float fieldHeight = EditorGUI.GetPropertyHeight(property, label, true);
-        float commentHeight = EditorGUIUtility.singleLineHeight * 1.3f;
-
-        float y = position.y += comment.space;
-
-        Rect commentRect = new Rect(position.x, y, position.width, commentHeight);
-
-        EditorGUI.HelpBox(commentRect, comment.comment, MessageType.None);
-
-        Rect fieldRect = new Rect(position.x, y + commentHeight + 2, position.width, fieldHeight);
-        EditorGUI.PropertyField(fieldRect, property, label, true);
-
-        EditorGUILayout.Space(20);
-    }
-
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-        float commentHeight = EditorGUIUtility.singleLineHeight * 1.3f;
-        float fieldHeight = EditorGUI.GetPropertyHeight(property, label, true);
-
-        return fieldHeight + commentHeight + 4;
-    }
-}
-
-[CustomPropertyDrawer(typeof(BoltsInputActionAttribute))]
-public class BoltsInputActionDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        var attr = (BoltsInputActionAttribute)attribute;
-
-        EditorGUI.BeginProperty(position, label, property);
-
-        if (property.propertyType != SerializedPropertyType.String)
+        [MenuItem("Tools/Bolts Tools/Documentation")]
+        public static void OpenDocumentation()
         {
-            EditorGUI.LabelField(position, label.text, "Use [InputActionMap] on a string field.");
-            EditorGUI.EndProperty();
-
-            return;
+            Application.OpenURL("https://github.com/Bolt-Bug/Boolts-Tools");
         }
 
-        var assetProperty = property.serializedObject.FindProperty(attr.actionAssetField);
-
-        if (assetProperty == null || assetProperty.objectReferenceValue == null)
+        [MenuItem("Tools/Bolts Tools/Open Save Folder")]
+        public static void OpenSaveFolder()
         {
-            EditorGUI.PropertyField(position, property, label);
-            EditorGUI.HelpBox(position, $"BoltsInputActionAttribute '{attr.actionAssetField}' not found", MessageType.Warning);
-
-            return;
+            string path = Path.GetDirectoryName(BoltsSave._settings.GetFullPath());
+            Application.OpenURL(path);
         }
-
-        var asset = assetProperty.objectReferenceValue as InputActionAsset;
-
-        if (asset == null)
-        {
-            EditorGUI.LabelField(position, label.text, "Field is not an BoltsInputActionAttribute.");
-            EditorGUI.EndProperty();
-
-            return;
-        }
-
-        var maps = asset.actionMaps;
-
-        if (maps.Count == 0)
-        {
-            EditorGUI.LabelField(position, label.text, "No Action Maps in asset.");
-            EditorGUI.EndProperty();
-
-            return;
-        }
-
-        string[] mapNames = maps.Select(m => m.name).ToArray();
-
-        int index = Mathf.Max(0, System.Array.IndexOf(mapNames, property.stringValue));
-        if (index >= mapNames.Length)
-            index = 0;
-
-        int newIndex = EditorGUI.Popup(position, label.text, index, mapNames);
-        property.stringValue = mapNames[newIndex];
-
-        EditorGUI.EndProperty();
-    }
-}
-
-[CustomPropertyDrawer(typeof(BoltsShaderPropertyAttribute))]
-public class BoltsShaderPropertyDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        var attr = (BoltsShaderPropertyAttribute)attribute;
-
-        EditorGUI.BeginProperty(position, label, property);
-
-        if (property.propertyType != SerializedPropertyType.String)
-        {
-            EditorGUI.LabelField(position, label.text, "Use [ShaderProperty] on a string field.");
-            EditorGUI.EndProperty();
-            return;
-        }
-
-        var matProp = FindSiblingProperty(property, attr.materialField);
-
-        if (matProp == null || matProp.objectReferenceValue == null)
-        {
-            EditorGUI.LabelField(position, label.text, "Assign a Material first.");
-            EditorGUI.EndProperty();
-            return;
-        }
-
-        var mat = matProp.objectReferenceValue as Material;
-
-        if (mat == null || mat.shader == null)
-        {
-            EditorGUI.LabelField(position, label.text, "Invalid Material or Shader.");
-            EditorGUI.EndProperty();
-            return;
-        }
-
-        var shader = mat.shader;
-        int count = shader.GetPropertyCount();
-
-        if (count == 0)
-        {
-            EditorGUI.LabelField(position, label.text, "Shader has no properties.");
-            EditorGUI.EndProperty();
-            return;
-        }
-
-        List<string> propNames = new List<string>(count);
-
-        for (int i = 0; i < count; i++)
-            propNames.Add(shader.GetPropertyName(i));
-
-        int index = Mathf.Max(0, propNames.IndexOf(property.stringValue));
-        if (index >= propNames.Count) index = 0;
-
-        int newIndex = EditorGUI.Popup(position, label.text, index, propNames.ToArray());
-        property.stringValue = propNames[newIndex];
-
-        EditorGUI.EndProperty();
-    }
-
-    private static SerializedProperty FindSiblingProperty(SerializedProperty property, string siblingName)
-    {
-        var direct = property.FindPropertyRelative(siblingName);
-
-        if (direct != null)
-            return direct;
-
-        string path = property.propertyPath;
-        int lastDot = path.LastIndexOf(".");
-
-        if (lastDot < 0)
-            return property.serializedObject.FindProperty(siblingName);
-
-        string parentPath = path.Substring(0, lastDot);
-        var parent = property.serializedObject.FindProperty(parentPath);
-
-        if (parent == null)
-            return null;
-
-        return parent.FindPropertyRelative(siblingName);
-    }
-}
-
-public class OpenDocuments
-{
-    [MenuItem("Tools/BoltsTools/Documentation")]
-    public static void OpenURL()
-    {
-        Application.OpenURL("https://docs.google.com/document/d/1xaQ9wJ4AUBwIX4THLpGPQA2GjIwiSZUjYudO5D1CTm8/edit?usp=sharing");
     }
 }

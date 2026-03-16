@@ -20,9 +20,8 @@ MonoBehaviour:
   rankRequirements: 0000000032000000640000007d0000007d000000
   isInitialized: 1
   data:
-    level: 0
     players: 0
-    rank: S
-    score:
-    - 175
+    score: []
     bestScore: 0
+    rank: 
+    level: 2

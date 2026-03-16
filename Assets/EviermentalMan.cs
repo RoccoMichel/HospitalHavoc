@@ -34,6 +34,7 @@ public class EviermentalMan : MonoBehaviour {
 
     public List<GameObject> prefabsToCheckFor;
 
+#if UNITY_EDITOR
     [Button]
     void AddAllLights()
     {
@@ -64,4 +65,5 @@ public class EviermentalMan : MonoBehaviour {
 
         flicker = newArray.ToArray();
     }
+#endif
 }

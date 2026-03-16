@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class BoltsCommentAttribute : PropertyAttribute
+namespace BoltsTools
 {
-    public string comment;
-    public float space;
-
-    public BoltsCommentAttribute(string comment)
+    public class BoltsCommentAttribute : PropertyAttribute
     {
-        this.comment = comment;
-        this.space = 10;
-    }
+        public string comment;
+        public float space;
 
-    public BoltsCommentAttribute(string comment, float space)
-    {
-        this.comment = comment;
-        this.space = space;
+        public BoltsCommentAttribute(string comment, float space)
+        {
+            this.comment = comment;
+            this.space = space;
+        }
+
+        public BoltsCommentAttribute(string comment)
+        {
+            this.comment = comment;
+            this.space = 10;
+        }
     }
 }
